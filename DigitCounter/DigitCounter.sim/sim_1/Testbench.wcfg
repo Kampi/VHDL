@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="Testbench_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="Testbench" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="104393939395fs"></ZoomEndTime>
+      <Cursor1Time time="286845000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="144"></NameColumnWidth>
+      <ValueColumnWidth column_width="142"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="8" />
+   <wvobject type="divider" fp_name="divider38">
+      <obj_property name="label">Simulation Input</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench/SimulationClock" type="logic">
+      <obj_property name="ElementShortName">SimulationClock</obj_property>
+      <obj_property name="ObjectShortName">SimulationClock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench/SimulationResetn" type="logic">
+      <obj_property name="ElementShortName">SimulationResetn</obj_property>
+      <obj_property name="ObjectShortName">SimulationResetn</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench/Direction" type="logic">
+      <obj_property name="ElementShortName">Direction</obj_property>
+      <obj_property name="ObjectShortName">Direction</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider39">
+      <obj_property name="label">Simulation Output</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench/Out1" type="array">
+      <obj_property name="ElementShortName">Out1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Out1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench/Out2" type="array">
+      <obj_property name="ElementShortName">Out2[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Out2[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench/Out3" type="array">
+      <obj_property name="ElementShortName">Out3[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Out3[3:0]</obj_property>
+   </wvobject>
+</wave_config>

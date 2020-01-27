@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"Testbench_func_impl.vhd" \
+"../../../../../I2S_Audio.srcs/sim_2/new/Testbench.vhd" \
+
+# Do not sort compile order
+nosort

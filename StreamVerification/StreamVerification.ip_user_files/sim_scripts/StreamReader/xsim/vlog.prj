@@ -1,0 +1,11 @@
+sv xil_defaultlib --include "../../../../StreamVerification.srcs/sources_1/bd/StreamReader/ipshared/8713/hdl" \
+"../../../bd/StreamReader/ip/StreamReader_axi4stream_vip_0_0/sim/StreamReader_axi4stream_vip_0_0_pkg.sv" \
+"../../../bd/StreamReader/ip/StreamReader_axi4stream_vip_0_0/sim/StreamReader_axi4stream_vip_0_0.sv" \
+
+verilog xil_defaultlib --include "../../../../StreamVerification.srcs/sources_1/bd/StreamReader/ipshared/8713/hdl" \
+"../../../bd/StreamReader/sim/StreamReader.v" \
+"../../../bd/StreamReader/ip/StreamReader_axis_dwidth_converter_0_0/sim/StreamReader_axis_dwidth_converter_0_0.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+nosort

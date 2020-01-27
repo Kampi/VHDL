@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"I2S_TB_func_synth.vhd" \
+"../../../../../I2S_Transmitter.srcs/sim_1/new/I2S_TB.vhd" \
+
+# Do not sort compile order
+nosort

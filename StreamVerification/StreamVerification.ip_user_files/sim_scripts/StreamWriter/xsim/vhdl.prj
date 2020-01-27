@@ -1,0 +1,4 @@
+vhdl xil_defaultlib  \
+"../../../bd/StreamWriter/sim/StreamWriter.vhd" \
+
+nosort

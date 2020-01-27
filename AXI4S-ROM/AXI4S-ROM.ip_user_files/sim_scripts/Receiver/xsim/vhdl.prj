@@ -1,0 +1,4 @@
+vhdl xil_defaultlib  \
+"../../../bd/Receiver/sim/Receiver.vhd" \
+
+nosort

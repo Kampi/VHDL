@@ -1,0 +1,125 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0xDE98AD91BCB08C92",
+      "device": "xc7z010clg400-1",
+      "name": "DataROM",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2018.3",
+      "validated": "true"
+    },
+    "design_tree": {
+      "SineROM": ""
+    },
+    "ports": {
+      "ACLK": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "ASSOCIATED_RESET": {
+            "value": "ARESETN",
+            "value_src": "default"
+          },
+          "CLK_DOMAIN": {
+            "value": "DataROM_ACLK_0",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "125000000"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.000",
+            "value_src": "default"
+          }
+        }
+      },
+      "ARESETN": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_LOW",
+            "value_src": "default"
+          }
+        }
+      },
+      "TREADY": {
+        "direction": "I"
+      },
+      "TLAST": {
+        "direction": "O"
+      },
+      "TID": {
+        "direction": "O",
+        "left": "7",
+        "right": "0"
+      },
+      "TDATA": {
+        "direction": "O",
+        "left": "31",
+        "right": "0"
+      },
+      "TVALID": {
+        "direction": "O"
+      }
+    },
+    "components": {
+      "SineROM": {
+        "vlnv": "www.kampis-elektroecke.de:Kampis-Elektroecke:AXI4S_ROM:2.0",
+        "xci_name": "DataROM_AXI4S_ROM_0_1"
+      }
+    },
+    "nets": {
+      "ACLK_1": {
+        "ports": [
+          "ACLK",
+          "SineROM/ACLK"
+        ]
+      },
+      "Net": {
+        "ports": [
+          "ARESETN",
+          "SineROM/ARESETN"
+        ]
+      },
+      "SineROM_M_TDATA": {
+        "ports": [
+          "SineROM/M_TDATA",
+          "TDATA"
+        ]
+      },
+      "SineROM_M_TLAST": {
+        "ports": [
+          "SineROM/M_TLAST",
+          "TLAST"
+        ]
+      },
+      "SineROM_M_TVALID": {
+        "ports": [
+          "SineROM/M_TVALID",
+          "TVALID"
+        ]
+      },
+      "TREADY_1": {
+        "ports": [
+          "TREADY",
+          "SineROM/M_TREADY"
+        ]
+      },
+      "SineROM_M_TID": {
+        "ports": [
+          "SineROM/M_TID",
+          "TID"
+        ]
+      }
+    }
+  }
+}

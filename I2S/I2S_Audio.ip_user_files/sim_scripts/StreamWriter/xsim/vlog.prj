@@ -1,0 +1,7 @@
+sv xil_defaultlib --include "../../../../I2S_Audio.srcs/sources_1/bd/StreamWriter/ipshared/8713/hdl" \
+"../../../bd/StreamWriter/ip/StreamWriter_axi4stream_vip_0_0/sim/StreamWriter_axi4stream_vip_0_0_pkg.sv" \
+"../../../bd/StreamWriter/ip/StreamWriter_axi4stream_vip_0_0/sim/StreamWriter_axi4stream_vip_0_0.sv" \
+
+verilog xil_defaultlib "glbl.v"
+
+nosort

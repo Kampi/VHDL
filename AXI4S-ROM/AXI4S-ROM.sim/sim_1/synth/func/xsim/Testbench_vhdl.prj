@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"Testbench_func_synth.vhd" \
+"../../../../../AXI4S-ROM.srcs/sources_1/new/AXI4S_ROM.vhd" \
+
+# Do not sort compile order
+nosort
