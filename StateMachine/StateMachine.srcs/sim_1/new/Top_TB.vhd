@@ -48,6 +48,7 @@ begin
                         O => O
                         );
 
+    -- Clock generation
     process begin
         wait for (CLOCKPERIODE / 2);
         SimulationClock <= '1';
@@ -55,6 +56,7 @@ begin
         SimulationClock <= '0';
     end process;
 
+    -- Stimulus
     process begin
         E <= "01";
         wait for 50 ms;
