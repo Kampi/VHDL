@@ -1,6 +1,0 @@
-# compile verilog/system verilog design source files
-verilog xil_defaultlib  --include "../../../../../I2S_Audio.srcs/sources_1/bd/ClockGeneration/ipshared/85a3" --include "../../../../../I2S_Audio.srcs/sources_1/bd/StreamWriter/ipshared/8713/hdl" --include "D:/Xilinx/Vivado/2018.3/data/xilinx_vip/include" \
-"Testbench_time_synth.v" \
-
-# Do not sort compile order
-nosort

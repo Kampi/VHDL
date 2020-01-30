@@ -1,19 +1,19 @@
 ----------------------------------------------------------------------------------
--- Company:             www.kampis-elektroecke.de
+-- Company:             https://www.kampis-elektroecke.de
 -- Engineer:            Daniel Kampert          
 -- 
--- Create Date:         26.06.2019 15:47:52
+-- Create Date:         28.01.2020 19:54:00
 -- Design Name: 
 -- Module Name:         I2S_Transmitter - I2S_Transmitter_Arch
 -- Project Name: 
--- Target Devices: 
--- Tool Versions: 
+-- Target Devices:      XC7Z010CLG400-1
+-- Tool Versions:       Vivado 2019.2
 -- Description:         I2S transmitter protocol module.
 -- 
 -- Dependencies: 
 -- 
 -- Revision:
---      Revision 0.01 - File Created
+--  Revision            0.01 - File Created
 --
 -- Additional Comments:
 -- 
@@ -32,63 +32,79 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity I2S_Transmitter is
-    Generic ( WIDTH  : INTEGER := 16                                            -- Data width per channel
+    Generic ( WIDTH : INTEGER := 16                                            -- Data width per channel
               );
-    Port (  CLK      : in STD_LOGIC;                                            -- Input clock for the module
-            RESETn   : in STD_LOGIC;                                            -- Reset (active low)
-            Data     : in STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0);         -- Input data for both channel
-            LRCLK    : out STD_LOGIC;                                           -- L/R clock output signal
-            SCLK     : out STD_LOGIC;                                           -- I2S output clock signal
-            SD       : out STD_LOGIC;                                           -- I2S output data
-            BitCounter : out INTEGER                                            -- Bit counter output signal
+    Port (  Clock   : in STD_LOGIC;                                            -- Input clock
+            ResetN  : in STD_LOGIC;                                            -- Reset (active low)
+            
+            -- Communication bus
+            Ready   : out STD_LOGIC;                                            -- Output to signal that the display controller is ready.
+            Valid   : in STD_LOGIC;                                             -- Input to signal valid data.
+            Data    : in STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0);         -- Input data for both channels
+
+            -- I2S interface
+            LRCLK   : out STD_LOGIC;                                           -- L/R clock output signal
+            SCLK    : out STD_LOGIC;                                           -- I2S output clock signal
+            SD      : out STD_LOGIC                                            -- I2S output data
             );
 end I2S_Transmitter;
 
 architecture I2S_Transmitter_Arch of I2S_Transmitter is
 
-    signal SD_Int           : STD_LOGIC := '0';
-    signal LRCLK_Int        : STD_LOGIC := '1';
-    signal ShiftReg         : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0) := (others => '0');
-    signal BitCounter_Int   : INTEGER := 0;
+    type State_t is (Reset, Idle, Transmit);
+
+    signal Data_Int         : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0) := (others => '0');
+    
+    signal CurrentState     : State_t   := Reset; 
 
 begin
 
-    process(CLK)
+    process(Clock)
+        variable BitCounter : INTEGER := 0;
     begin
-        if(rising_edge(CLK)) then
-            if(RESETn = '0') then
-                LRCLK_Int <= '1';
-                BitCounter_Int <= 0;
-                ShiftReg <= (others => '0');
-                SD_Int <= '0';
+        if(rising_edge(Clock)) then
+            if(ResetN = '0') then
+                BitCounter := 0;
+                Data_Int <= (others => '0');
+                CurrentState <= Reset;
             else
-                if(BitCounter_Int < ((2 * WIDTH) - 1)) then
-                    BitCounter_Int <= BitCounter_Int + 1;
-                else
-                    BitCounter_Int <= 0;
-                end if;
+                case CurrentState is
 
-                -- L/R logic
-                if(BitCounter_Int < WIDTH) then
-                    LRCLK_Int <= '0';
-                else
-                    LRCLK_Int <= '1';
-                end if;
+                    when Reset =>
+                        CurrentState <= Idle;
 
-                -- Handle the shift register
-                if(BitCounter_Int = 0) then
-                    ShiftReg <= Data;
-                else
-                    ShiftReg <= ShiftReg(((2 * WIDTH) - 2) downto 0) & "0";
-                end if;
-                
-                SD_Int <= ShiftReg((2 * WIDTH) - 1);
+                    when Idle =>
+                        if(Valid = '1') then
+                            BitCounter := 0;
+                            Ready <= '0';
+                            Data_Int <= Data;
+
+                            CurrentState <= Transmit;
+                        else
+                            Ready <= '1';
+                        end if;
+
+                    when Transmit =>
+                        if(BitCounter < ((2 * WIDTH) - 1)) then
+                            BitCounter := BitCounter + 1;
+                        else
+                            CurrentState <= Idle;
+                        end if;
+
+                        -- L/R logic
+                        if(BitCounter < WIDTH) then
+                            LRCLK <= '0';
+                        else
+                            LRCLK <= '1';
+                        end if;
+
+                        -- Handle the shift register
+                        Data_Int <= Data_Int(((2 * WIDTH) - 2) downto 0) & "0";
+
+                end case;
             end if;
         end if;
     end process;
- 
-    BitCounter <= BitCounter_Int;
-    SD <= SD_Int;
-    LRCLK <= LRCLK_Int;
-    SCLK <= CLK and RESETn;
+
+    SD <= Data_Int((2 * WIDTH) - 1);
 end I2S_Transmitter_Arch;

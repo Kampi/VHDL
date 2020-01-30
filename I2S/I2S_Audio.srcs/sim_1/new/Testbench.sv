@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company:             www.kampis-elektroecke.de
+// Company:             https://www.kampis-elektroecke.de
 // Engineer:            Daniel Kampert  
 // 
 // Create Date:         10.07.2019 07:41:38
@@ -14,7 +14,7 @@
 // Dependencies: 
 // 
 // Revision:
-//      Revision 0.01 - File Created
+//  Revision            0.01 - File Created
 //
 // Additional Comments:
 // 

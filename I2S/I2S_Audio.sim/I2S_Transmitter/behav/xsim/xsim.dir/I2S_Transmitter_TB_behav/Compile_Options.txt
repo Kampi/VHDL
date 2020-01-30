@@ -1,0 +1,1 @@
+-wto "1373ad8eeec64879b2832be90845986e" --incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" -L "xpm" --snapshot "I2S_Transmitter_TB_behav" "xil_defaultlib.I2S_Transmitter_TB" -log "elaborate.log" 

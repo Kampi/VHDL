@@ -1,19 +1,19 @@
 ----------------------------------------------------------------------------------
--- Company:             www.kampis-elektroecke.de
+-- Company:             https://www.kampis-elektroecke.de
 -- Engineer:            Daniel Kampert          
 -- 
--- Create Date:         26.06.2019 20:47:35
+-- Create Date:         28.01.2020 19:54:00
 -- Design Name: 
 -- Module Name:         I2S - I2S_Arch
 -- Project Name: 
--- Target Devices: 
--- Tool Versions: 
+-- Target Devices:      XC7Z010CLG400-1
+-- Tool Versions:       Vivado 2019.2
 -- Description:         I2S transmitter top level module.
 -- 
 -- Dependencies: 
 -- 
 -- Revision:
---      Revision 0.01 - File Created
+--  Revision            0.01 - File Created
 --
 -- Additional Comments:
 -- 
@@ -65,8 +65,7 @@ architecture I2S_Arch of I2S is
     signal I2SState     : I2S_STATE_t := Reset;
     signal FIFO_0       : MEMORY_t := (others => (others => '0')); 
     signal FIFO_1       : MEMORY_t := (others => (others => '0')); 
-    
-    signal MCLK_Cnt     : INTEGER := 0;
+
     signal BitCounter   : INTEGER := 0;
     signal BytesInFIFO_0: INTEGER := 0;
     signal BytesInFIFO_1: INTEGER := 0;
@@ -107,16 +106,17 @@ begin
 
     -- I2S clock generation
     process(MCLK)
+        variable Counter : INTEGER := 0;
     begin
         if(rising_edge(MCLK)) then
             if(ARESETn = '0') then
-               MCLK_Cnt <= 0;
+               Counter := 0;
             else
-                if(MCLK_Cnt = ((RATIO / (4 * WIDTH)) - 1)) then
-                    MCLK_Cnt <= 0;
+                if(Counter = ((RATIO / (4 * WIDTH)) - 1)) then
+                    Counter := 0;
                     AudioClock <= not AudioClock;
                 else
-                    MCLK_Cnt <= MCLK_Cnt + 1;
+                    Counter := Counter + 1;
                 end if;
             end if;
         end if;
