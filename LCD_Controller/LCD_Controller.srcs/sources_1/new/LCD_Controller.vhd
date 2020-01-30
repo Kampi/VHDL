@@ -40,8 +40,8 @@ entity LCD_Controller is
 
             -- Communication bus
             Data    : in STD_LOGIC_VECTOR(7 downto 0);
-            Ready   : out STD_LOGIC;                                -- Output to signal that the display controller is ready.
-            Valid   : in STD_LOGIC;                                 -- Input to signal valid data.
+            Ready   : out STD_LOGIC;                                -- Output to signal that the display controller is ready
+            Valid   : in STD_LOGIC;                                 -- Input to signal valid data
 
             SendCommand : in STD_LOGIC;                             -- Handle the next data byte as command (High)
 
