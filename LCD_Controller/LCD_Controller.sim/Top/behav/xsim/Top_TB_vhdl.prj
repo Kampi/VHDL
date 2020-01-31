@@ -1,0 +1,8 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../LCD_Controller.srcs/sources_1/new/LCD_Controller.vhd" \
+"../../../../LCD_Controller.srcs/sources_1/new/Top.vhd" \
+"../../../../LCD_Controller.srcs/sources_1/new/Top_TB.vhd" \
+
+# Do not sort compile order
+nosort
