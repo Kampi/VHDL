@@ -65,13 +65,13 @@ architecture LCD_Controller_Arch of LCD_Controller is
     constant RESET_DELAY_3  : INTEGER   := 100;                                                     -- Delay after sending second initialization instruction in us
     constant RESET_DELAY_4  : INTEGER   := 100;                                                     -- Delay after sending third initialization instruction in us
 
-    constant Configs        : Config_t  := ((x"39", x"06", x"17", x"01", x"02", x"0F"),             -- Function set european character set
+    constant Configs        : Config_t  := ((x"39", x"06", x"17", x"0F", x"01", x"02"),             -- Function set european character set
                                                                                                     -- Entry mode set increment cursor by 1 not shifting display
                                                                                                     -- Character mode and internal power on
                                                                                                     -- Clear the display
                                                                                                     -- Return cursor to home position
                                                                                                     -- Display and blinking cursor on
-                                            (x"39", x"06", x"17", x"01", x"02", x"0C")              -- Function set european character set
+                                            (x"39", x"06", x"17", x"0C", x"01", x"02")              -- Function set european character set
                                                                                                     -- Entry mode set increment cursor by 1 not shifting display
                                                                                                     -- Character mode and internal power on
                                                                                                     -- Clear the display
@@ -83,7 +83,6 @@ architecture LCD_Controller_Arch of LCD_Controller is
 
     signal CurrentState     : State_t   := Reset;
 
-    signal SendCommand_Int  : STD_LOGIC := '0';
     signal Data_Int         : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
 
 begin
@@ -203,11 +202,16 @@ begin
                         if(Valid = '1') then
                             Ready <= '0';
                             Data_Int <= Data;
-                            SendCommand_Int <= SendCommand;
+                            if(SendCommand = '1') then
+                                LCD_RS <= '0';
+                            else
+                                LCD_RS <= '1';
+                            end if;
 
                             CurrentState <= Transmit;
                         else
                             Ready <= '1';
+                            CurrentState <= Idle;
                         end if;
 
                     -- Write the data into the display controller.
@@ -215,12 +219,6 @@ begin
                         usCounter := usCounter + 1;
 
                         if(usCounter < (10 * CLOCK_FREQ)) then
-                            if(SendCommand_Int = '1') then
-                                LCD_RS <= '0';
-                            else
-                                LCD_RS <= '1';
-                            end if;
-
                             LCD_RW <= '0';
                             LCD_E <= '1';
                             LCD_Data <= Data_Int;
