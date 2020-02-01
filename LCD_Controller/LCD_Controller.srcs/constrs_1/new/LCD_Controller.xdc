@@ -49,3 +49,12 @@ set_property IOSTANDARD LVCMOS33 [get_ports {LED[2]}]
 
 set_property PACKAGE_PIN D18 [get_ports {LED[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {LED[3]}]
+
+# PS/2
+set_property PACKAGE_PIN Y18 [get_ports PS2_Clock]
+set_property IOSTANDARD LVCMOS33 [get_ports PS2_Clock]
+set_property PULLUP true [get_ports PS2_Clock]
+
+set_property PACKAGE_PIN Y19 [get_ports PS2_Data]
+set_property IOSTANDARD LVCMOS33 [get_ports PS2_Data]
+set_property PULLUP true [get_ports PS2_Data]

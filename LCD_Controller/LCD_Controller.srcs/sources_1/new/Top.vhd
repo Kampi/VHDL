@@ -32,17 +32,21 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity Top is
-    Port (  Clock   : in STD_LOGIC;
-            ResetN  : in STD_LOGIC;
+    Port (  Clock       : in STD_LOGIC;
+            ResetN      : in STD_LOGIC;
 
             -- Output the current state machine state
-            LED     : out STD_LOGIC_VECTOR(3 downto 0);
+            LED         : out STD_LOGIC_VECTOR(3 downto 0);
+
+            -- PS/2 interface
+            PS2_Data    : in STD_LOGIC;
+            PS2_Clock   : in STD_LOGIC;
 
             -- LCD bus
-            LCD_RS  : out STD_LOGIC;
-            LCD_E   : out STD_LOGIC;
-            LCD_RW  : out STD_LOGIC;
-            LCD_Data: inout STD_LOGIC_VECTOR(7 downto 0)
+            LCD_RS      : out STD_LOGIC;
+            LCD_E       : out STD_LOGIC;
+            LCD_RW      : out STD_LOGIC;
+            LCD_Data    : inout STD_LOGIC_VECTOR(7 downto 0)
             ); 
 end Top;
 
