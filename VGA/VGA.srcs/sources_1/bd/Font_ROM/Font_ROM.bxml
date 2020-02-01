@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root MajorVersion="0" MinorVersion="39">
+  <CompositeFile CompositeFileTopName="Font_ROM" CanBeSetAsTop="true" CanDisplayChildGraph="true">
+    <Description>Composite Fileset</Description>
+    <Generation Name="SYNTHESIS" State="RESET" Timestamp="1580074304"/>
+    <Generation Name="IMPLEMENTATION" State="RESET" Timestamp="1580074304"/>
+    <Generation Name="SIMULATION" State="RESET" Timestamp="1580074304"/>
+    <Generation Name="HW_HANDOFF" State="RESET" Timestamp="1580074304"/>
+    <FileCollection Name="SOURCES" Type="SOURCES">
+      <File Name="ip\Font_ROM_blk_mem_gen_0_0_1\Font_ROM_blk_mem_gen_0_0.xci" Type="IP">
+        <Instance HierarchyPath="Font_ROM"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+    </FileCollection>
+  </CompositeFile>
+</Root>
