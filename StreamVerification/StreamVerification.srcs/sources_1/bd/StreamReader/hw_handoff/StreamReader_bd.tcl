@@ -20,7 +20,7 @@ set script_folder [_tcl::get_script_folder]
 ################################################################
 # Check if script is running in correct Vivado version.
 ################################################################
-set scripts_vivado_version 2018.3
+set scripts_vivado_version 2019.2
 set current_vivado_version [version -short]
 
 if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
@@ -157,41 +157,27 @@ proc create_root_design { parentCell } {
   # Create interface ports
 
   # Create ports
-  set ACLK [ create_bd_port -dir I -type clk ACLK ]
-  set_property -dict [ list \
-   CONFIG.FREQ_HZ {125000000} \
- ] $ACLK
+  set ACLK [ create_bd_port -dir I -type clk -freq_hz 125000000 ACLK ]
   set ARESETN [ create_bd_port -dir I -type rst ARESETN ]
   set TDATA [ create_bd_port -dir I -from 31 -to 0 TDATA ]
   set TLAST [ create_bd_port -dir I -from 0 -to 0 TLAST ]
   set TREADY [ create_bd_port -dir O -from 0 -to 0 TREADY ]
   set TVALID [ create_bd_port -dir I -from 0 -to 0 TVALID ]
 
-  # Create instance: DataWidthConverter, and set properties
-  set DataWidthConverter [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_dwidth_converter:1.1 DataWidthConverter ]
-  set_property -dict [ list \
-   CONFIG.HAS_MI_TKEEP {1} \
-   CONFIG.HAS_TLAST {1} \
-   CONFIG.M_TDATA_NUM_BYTES {8} \
-   CONFIG.S_TDATA_NUM_BYTES {4} \
- ] $DataWidthConverter
-
   # Create instance: StreamReader, and set properties
   set StreamReader [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi4stream_vip:1.1 StreamReader ]
   set_property -dict [ list \
    CONFIG.INTERFACE_MODE {SLAVE} \
+   CONFIG.TDATA_NUM_BYTES {4} \
  ] $StreamReader
 
-  # Create interface connections
-  connect_bd_intf_net -intf_net DataWidthConverter_M_AXIS [get_bd_intf_pins DataWidthConverter/M_AXIS] [get_bd_intf_pins StreamReader/S_AXIS]
-
   # Create port connections
-  connect_bd_net -net DataWidthConverter_s_axis_tready [get_bd_ports TREADY] [get_bd_pins DataWidthConverter/s_axis_tready]
-  connect_bd_net -net TDATA_1 [get_bd_ports TDATA] [get_bd_pins DataWidthConverter/s_axis_tdata]
-  connect_bd_net -net TLAST_1 [get_bd_ports TLAST] [get_bd_pins DataWidthConverter/s_axis_tlast]
-  connect_bd_net -net TVALID_1 [get_bd_ports TVALID] [get_bd_pins DataWidthConverter/s_axis_tvalid]
-  connect_bd_net -net aclk_0_1 [get_bd_ports ACLK] [get_bd_pins DataWidthConverter/aclk] [get_bd_pins StreamReader/aclk]
-  connect_bd_net -net aresetn_0_1 [get_bd_ports ARESETN] [get_bd_pins DataWidthConverter/aresetn] [get_bd_pins StreamReader/aresetn]
+  connect_bd_net -net StreamReader_s_axis_tready [get_bd_ports TREADY] [get_bd_pins StreamReader/s_axis_tready]
+  connect_bd_net -net TDATA_1 [get_bd_ports TDATA] [get_bd_pins StreamReader/s_axis_tdata]
+  connect_bd_net -net TLAST_1 [get_bd_ports TLAST] [get_bd_pins StreamReader/s_axis_tlast]
+  connect_bd_net -net TVALID_1 [get_bd_ports TVALID] [get_bd_pins StreamReader/s_axis_tvalid]
+  connect_bd_net -net aclk_0_1 [get_bd_ports ACLK] [get_bd_pins StreamReader/aclk]
+  connect_bd_net -net aresetn_0_1 [get_bd_ports ARESETN] [get_bd_pins StreamReader/aresetn]
 
   # Create address segments
 

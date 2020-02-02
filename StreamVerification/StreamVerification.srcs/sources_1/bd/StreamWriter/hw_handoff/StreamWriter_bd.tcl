@@ -20,7 +20,7 @@ set script_folder [_tcl::get_script_folder]
 ################################################################
 # Check if script is running in correct Vivado version.
 ################################################################
-set scripts_vivado_version 2018.3
+set scripts_vivado_version 2019.2
 set current_vivado_version [version -short]
 
 if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
@@ -157,10 +157,7 @@ proc create_root_design { parentCell } {
   # Create interface ports
 
   # Create ports
-  set ACLK [ create_bd_port -dir I -type clk ACLK ]
-  set_property -dict [ list \
-   CONFIG.FREQ_HZ {125000000} \
- ] $ACLK
+  set ACLK [ create_bd_port -dir I -type clk -freq_hz 125000000 ACLK ]
   set ARESETN [ create_bd_port -dir I -type rst ARESETN ]
   set TDATA [ create_bd_port -dir O -from 31 -to 0 TDATA ]
   set TLAST [ create_bd_port -dir O -from 0 -to 0 TLAST ]

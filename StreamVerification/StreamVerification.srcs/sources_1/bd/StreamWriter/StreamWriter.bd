@@ -5,7 +5,7 @@
       "device": "xc7z010clg400-1",
       "name": "StreamWriter",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2018.3",
+      "tool_version": "2019.2",
       "validated": "true"
     },
     "design_tree": {
