@@ -1,8 +1,8 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-//Date        : Sat Feb  1 23:36:30 2020
-//Host        : PC running 64-bit major release  (build 9200)
+//Date        : Mon Feb  3 09:39:00 2020
+//Host        : 40B0341C1F56 running 64-bit major release  (build 9200)
 //Command     : generate_target StreamReader.bd
 //Design      : StreamReader
 //Purpose     : IP block netlist
@@ -40,8 +40,8 @@ module StreamReader
   StreamReader_axi4stream_vip_0_0 StreamReader
        (.aclk(aclk_0_1),
         .aresetn(aresetn_0_1),
-        .s_axis_tdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,TDATA_1}),
-        .s_axis_tkeep({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
+        .s_axis_tdata(TDATA_1),
+        .s_axis_tkeep({1'b1,1'b1,1'b1,1'b1}),
         .s_axis_tlast(TLAST_1),
         .s_axis_tready(StreamReader_s_axis_tready),
         .s_axis_tvalid(TVALID_1));

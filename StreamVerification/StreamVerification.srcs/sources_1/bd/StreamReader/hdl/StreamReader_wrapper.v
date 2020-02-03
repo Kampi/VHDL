@@ -1,8 +1,8 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-//Date        : Sun Feb  2 16:51:11 2020
-//Host        : PC running 64-bit major release  (build 9200)
+//Date        : Mon Feb  3 09:39:54 2020
+//Host        : 40B0341C1F56 running 64-bit major release  (build 9200)
 //Command     : generate_target StreamReader_wrapper.bd
 //Design      : StreamReader_wrapper
 //Purpose     : IP block netlist

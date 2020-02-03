@@ -47,7 +47,7 @@ module Testbench();
 
     StreamReader Reader(
         .ACLK(SimulationClock),
-        .ARESETN(SimulationResetn),
+        .ARESETN(SimulationResetN),
         .TDATA(TDATA),
         .TLAST(TLAST),
         .TREADY(TREADY),
@@ -106,7 +106,8 @@ module Testbench();
         ReadAgent = new("Read agent", Reader.StreamReader.inst.IF);
         ReadAgent.vif_proxy.set_dummy_drive_type(XIL_AXI4STREAM_VIF_DRIVE_NONE);
 
-        #100ns;
+        // Wait at least 16 clock cycles after a reset
+        #500ns;
         SimulationResetN <= 1'b1;
 
         // Start the agents
@@ -115,12 +116,16 @@ module Testbench();
 
         fork
             begin
-                SlaveReceive();
-            end
-            begin
                 SendData(0, 4);
             end
+
+            begin
+                SlaveReceive();
+            end
         join_any
+        
+        #10000 $finish;
+        
     end
 
     initial begin

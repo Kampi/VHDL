@@ -13,7 +13,7 @@ import axi4stream_vip_pkg::*;
 ///////////////////////////////////////////////////////////////////////////
       parameter StreamReader_axi4stream_vip_0_0_VIP_INTERFACE_MODE     = 2;
       parameter StreamReader_axi4stream_vip_0_0_VIP_SIGNAL_SET         = 8'b00011011;
-      parameter StreamReader_axi4stream_vip_0_0_VIP_DATA_WIDTH         = 64;
+      parameter StreamReader_axi4stream_vip_0_0_VIP_DATA_WIDTH         = 32;
       parameter StreamReader_axi4stream_vip_0_0_VIP_ID_WIDTH           = 0;
       parameter StreamReader_axi4stream_vip_0_0_VIP_DEST_WIDTH         = 0;
       parameter StreamReader_axi4stream_vip_0_0_VIP_USER_WIDTH         = 0;

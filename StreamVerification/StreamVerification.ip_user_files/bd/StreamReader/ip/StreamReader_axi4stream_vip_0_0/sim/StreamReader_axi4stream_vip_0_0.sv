@@ -74,17 +74,17 @@ input wire [0 : 0] s_axis_tvalid;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TREADY" *)
 output wire [0 : 0] s_axis_tready;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TDATA" *)
-input wire [63 : 0] s_axis_tdata;
+input wire [31 : 0] s_axis_tdata;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TKEEP" *)
-input wire [7 : 0] s_axis_tkeep;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S_AXIS, TDATA_NUM_BYTES 8, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 1, HAS_TLAST 1, FREQ_HZ 125000000, PHASE 0.000, CLK_DOMAIN StreamReader_ACLK, LAYERED_METADATA undef, INSERT_VIP 0" *)
+input wire [3 : 0] s_axis_tkeep;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S_AXIS, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 1, HAS_TLAST 1, FREQ_HZ 125000000, PHASE 0.000, CLK_DOMAIN StreamReader_ACLK, LAYERED_METADATA undef, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TLAST" *)
 input wire [0 : 0] s_axis_tlast;
 
   axi4stream_vip_v1_1_6_top #(
     .C_AXI4STREAM_SIGNAL_SET('B00000000000000000000000000011011),
     .C_AXI4STREAM_INTERFACE_MODE(2),
-    .C_AXI4STREAM_DATA_WIDTH(64),
+    .C_AXI4STREAM_DATA_WIDTH(32),
     .C_AXI4STREAM_USER_BITS_PER_BYTE(0),
     .C_AXI4STREAM_ID_WIDTH(0),
     .C_AXI4STREAM_DEST_WIDTH(0),
@@ -97,7 +97,7 @@ input wire [0 : 0] s_axis_tlast;
     .s_axis_tvalid(s_axis_tvalid),
     .s_axis_tready(s_axis_tready),
     .s_axis_tdata(s_axis_tdata),
-    .s_axis_tstrb(8'B0),
+    .s_axis_tstrb(4'B0),
     .s_axis_tkeep(s_axis_tkeep),
     .s_axis_tlast(s_axis_tlast),
     .s_axis_tid(1'B0),
