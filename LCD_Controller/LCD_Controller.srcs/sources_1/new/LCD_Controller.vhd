@@ -100,7 +100,6 @@ begin
             LCD_Data <= (others => '0');
             Data_Int <= (others => '0');
             CurrentState <= Reset;
-            if(ResetN = '0') then
         elsif(rising_edge(Clock)) then
             case CurrentState is
 
