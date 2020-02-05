@@ -91,146 +91,145 @@ begin
         -- Millisecond counter for state machine timing
         variable usCounter  : INTEGER := 0;
     begin
-        if(rising_edge(Clock)) then
+        if(ResetN = '0') then
+            usCounter := 0;
+            Ready <= '0';
+            LCD_E <= '0';
+            LCD_RS <= '0';
+            LCD_RW <= '0';
+            LCD_Data <= (others => '0');
+            Data_Int <= (others => '0');
+            CurrentState <= Reset;
             if(ResetN = '0') then
-                usCounter := 0;
-                Ready <= '0';
-                LCD_E <= '0';
-                LCD_RS <= '0';
-                LCD_RW <= '0';
-                LCD_Data <= (others => '0');
-                Data_Int <= (others => '0');
-                CurrentState <= Reset;
-            else
-                case CurrentState is
+        elsif(rising_edge(Clock)) then
+            case CurrentState is
 
-                    -- The entry point for the state machine.
-                    when Reset =>
-                        usCounter := usCounter + 1;
+                -- The entry point for the state machine.
+                when Reset =>
+                    usCounter := usCounter + 1;
 
-                        if(usCounter < (RESET_DELAY_1 * CLOCK_FREQ)) then
-                            CurrentState <= Reset;
-                        else
-                            usCounter := 0;
-                            LCD_Data <= x"30";
-                            CurrentState <= Initialize;
-                        end if;
+                    if(usCounter < (RESET_DELAY_1 * CLOCK_FREQ)) then
+                        CurrentState <= Reset;
+                    else
+                        usCounter := 0;
+                        LCD_Data <= x"30";
+                        CurrentState <= Initialize;
+                    end if;
 
-                    -- Initialize the display controller with a default configuration.
-                    when Initialize =>
-                        usCounter := usCounter + 1;
+                -- Initialize the display controller with a default configuration.
+                when Initialize =>
+                    usCounter := usCounter + 1;
 
-                        -- Send three times 0x30 to put the LCD into 8-bit mode
-                        if(usCounter < (RESET_DELAY_2 * CLOCK_FREQ)) then
-                            LCD_E <= '1';
-                        elsif(usCounter < ((RESET_DELAY_2 + 10) * CLOCK_FREQ)) then
-                            LCD_E <= '0';
-                        elsif(usCounter < ((RESET_DELAY_2 + RESET_DELAY_3 + 10) * CLOCK_FREQ)) then
-                            LCD_E <= '1';
-                        elsif(usCounter < ((RESET_DELAY_2 + RESET_DELAY_3 + 20) * CLOCK_FREQ)) then
-                            LCD_E <= '0';         
-                        elsif(usCounter < ((RESET_DELAY_2 + RESET_DELAY_3 + RESET_DELAY_4 + 20) * CLOCK_FREQ)) then
-                            LCD_E <= '1';
-                        elsif(usCounter < ((RESET_DELAY_3 + RESET_DELAY_3 + RESET_DELAY_4 + 30) * CLOCK_FREQ)) then
-                            LCD_E <= '0';
+                    -- Send three times 0x30 to put the LCD into 8-bit mode
+                    if(usCounter < (RESET_DELAY_2 * CLOCK_FREQ)) then
+                        LCD_E <= '1';
+                    elsif(usCounter < ((RESET_DELAY_2 + 10) * CLOCK_FREQ)) then
+                        LCD_E <= '0';
+                    elsif(usCounter < ((RESET_DELAY_2 + RESET_DELAY_3 + 10) * CLOCK_FREQ)) then
+                        LCD_E <= '1';
+                    elsif(usCounter < ((RESET_DELAY_2 + RESET_DELAY_3 + 20) * CLOCK_FREQ)) then
+                        LCD_E <= '0';         
+                    elsif(usCounter < ((RESET_DELAY_2 + RESET_DELAY_3 + RESET_DELAY_4 + 20) * CLOCK_FREQ)) then
+                        LCD_E <= '1';
+                    elsif(usCounter < ((RESET_DELAY_3 + RESET_DELAY_3 + RESET_DELAY_4 + 30) * CLOCK_FREQ)) then
+                        LCD_E <= '0';
 
-                        -- Send the display configuration
-                        elsif(usCounter < ((RESET_DELAY + 40) * CLOCK_FREQ)) then
-                            LCD_E <= '1';
-                            LCD_Data <= Configs(CONFIG, 0);
-                        elsif(usCounter < ((RESET_DELAY + 50) * CLOCK_FREQ)) then
-                            LCD_E <= '0';
-                        elsif(usCounter < ((RESET_DELAY + 60) * CLOCK_FREQ)) then
-                            LCD_E <= '1';
-                            LCD_Data <= Configs(CONFIG, 1);
-                        elsif(usCounter < ((RESET_DELAY + 70) * CLOCK_FREQ)) then
-                            LCD_E <= '0';
-                        elsif(usCounter < ((RESET_DELAY + 80) * CLOCK_FREQ)) then
-                            LCD_E <= '1';
-                            LCD_Data <= Configs(CONFIG, 2);
-                        elsif(usCounter < ((RESET_DELAY + 90) * CLOCK_FREQ)) then
-                            LCD_E <= '0';
-                        elsif(usCounter < ((RESET_DELAY + 100) * CLOCK_FREQ)) then
-                            LCD_E <= '1';
-                            LCD_Data <= Configs(CONFIG, 3);
-                        elsif(usCounter < ((RESET_DELAY + 110) * CLOCK_FREQ)) then
-                            LCD_E <= '0';
-                        elsif(usCounter < ((RESET_DELAY + 120) * CLOCK_FREQ)) then
-                            LCD_E <= '1';
-                            LCD_Data <= Configs(CONFIG, 4);
-                        elsif(usCounter < ((RESET_DELAY + 130) * CLOCK_FREQ)) then
-                            LCD_E <= '0';
-                        elsif(usCounter < ((RESET_DELAY + 140) * CLOCK_FREQ)) then
-                            LCD_E <= '1';
-                            LCD_Data <= Configs(CONFIG, 5);
-                        elsif(usCounter < ((RESET_DELAY + 150) * CLOCK_FREQ)) then
-                            LCD_E <= '0';
+                    -- Send the display configuration
+                    elsif(usCounter < ((RESET_DELAY + 40) * CLOCK_FREQ)) then
+                        LCD_E <= '1';
+                        LCD_Data <= Configs(CONFIG, 0);
+                    elsif(usCounter < ((RESET_DELAY + 50) * CLOCK_FREQ)) then
+                        LCD_E <= '0';
+                    elsif(usCounter < ((RESET_DELAY + 60) * CLOCK_FREQ)) then
+                        LCD_E <= '1';
+                        LCD_Data <= Configs(CONFIG, 1);
+                    elsif(usCounter < ((RESET_DELAY + 70) * CLOCK_FREQ)) then
+                        LCD_E <= '0';
+                    elsif(usCounter < ((RESET_DELAY + 80) * CLOCK_FREQ)) then
+                        LCD_E <= '1';
+                        LCD_Data <= Configs(CONFIG, 2);
+                    elsif(usCounter < ((RESET_DELAY + 90) * CLOCK_FREQ)) then
+                        LCD_E <= '0';
+                    elsif(usCounter < ((RESET_DELAY + 100) * CLOCK_FREQ)) then
+                        LCD_E <= '1';
+                        LCD_Data <= Configs(CONFIG, 3);
+                    elsif(usCounter < ((RESET_DELAY + 110) * CLOCK_FREQ)) then
+                        LCD_E <= '0';
+                    elsif(usCounter < ((RESET_DELAY + 120) * CLOCK_FREQ)) then
+                        LCD_E <= '1';
+                        LCD_Data <= Configs(CONFIG, 4);
+                    elsif(usCounter < ((RESET_DELAY + 130) * CLOCK_FREQ)) then
+                        LCD_E <= '0';
+                    elsif(usCounter < ((RESET_DELAY + 140) * CLOCK_FREQ)) then
+                        LCD_E <= '1';
+                        LCD_Data <= Configs(CONFIG, 5);
+                    elsif(usCounter < ((RESET_DELAY + 150) * CLOCK_FREQ)) then
+                        LCD_E <= '0';
 
-                        -- Initialization complete. Wait for the display to become ready.
-                        else
-                            usCounter := 0;
-                            CurrentState <= WaitBusy;
-                        end if;
+                    -- Initialization complete. Wait for the display to become ready.
+                    else
+                        usCounter := 0;
+                        CurrentState <= WaitBusy;
+                    end if;
 
-                    -- Read the BUSY-Flag from the display controller and check 
-                    -- if the controller is ready.
-                    when WaitBusy =>
-                        usCounter := usCounter + 1;
+                -- Read the BUSY-Flag from the display controller and check 
+                -- if the controller is ready.
+                when WaitBusy =>
+                    usCounter := usCounter + 1;
 
-                        if(usCounter < (10 * CLOCK_FREQ)) then
-                            LCD_RS <= '0';
-                            LCD_RW <= '1';
-                            LCD_E <= '1';
-                            LCD_Data <= (others => 'Z');
-                        elsif(usCounter < (20 * CLOCK_FREQ)) then
-                            LCD_E <= '0';
-                        else
-                            usCounter := 0;
+                    if(usCounter < (10 * CLOCK_FREQ)) then
+                        LCD_RS <= '0';
+                        LCD_RW <= '1';
+                        LCD_E <= '1';
+                        LCD_Data <= (others => 'Z');
+                    elsif(usCounter < (20 * CLOCK_FREQ)) then
+                        LCD_E <= '0';
+                    else
+                        usCounter := 0;
 
-                            -- Check if the BUSY-Flag is set
-                            if(LCD_Data(7) = '1') then
-                                Ready <= '0';
-                                CurrentState <= WaitBusy;
-                            else
-                                Ready <= '1';
-                                CurrentState <= Idle;
-                            end if;
-                        end if;
-
-                    -- Wait for a new data transmission.
-                    when Idle =>
-                        if(Valid = '1') then
+                        -- Check if the BUSY-Flag is set
+                        if(LCD_Data(7) = '1') then
                             Ready <= '0';
-                            Data_Int <= Data;
-                            if(SendCommand = '1') then
-                                LCD_RS <= '0';
-                            else
-                                LCD_RS <= '1';
-                            end if;
-
-                            CurrentState <= Transmit;
+                            CurrentState <= WaitBusy;
                         else
                             Ready <= '1';
                             CurrentState <= Idle;
                         end if;
+                    end if;
 
-                    -- Write the data into the display controller.
-                    when Transmit =>
-                        usCounter := usCounter + 1;
-
-                        if(usCounter < (10 * CLOCK_FREQ)) then
-                            LCD_RW <= '0';
-                            LCD_E <= '1';
-                            LCD_Data <= Data_Int;
-                        elsif(usCounter < (20 * CLOCK_FREQ)) then
-                            LCD_E <= '0';
+                -- Wait for a new data transmission.
+                when Idle =>
+                    if(Valid = '1') then
+                        Ready <= '0';
+                        Data_Int <= Data;
+                        if(SendCommand = '1') then
+                            LCD_RS <= '0';
                         else
-                            usCounter := 0;
-                            CurrentState <= WaitBusy;
+                            LCD_RS <= '1';
                         end if;
 
-                end case;
-            end if;
+                        CurrentState <= Transmit;
+                    else
+                        Ready <= '1';
+                        CurrentState <= Idle;
+                    end if;
+
+                -- Write the data into the display controller.
+                when Transmit =>
+                    usCounter := usCounter + 1;
+
+                    if(usCounter < (10 * CLOCK_FREQ)) then
+                        LCD_RW <= '0';
+                        LCD_E <= '1';
+                        LCD_Data <= Data_Int;
+                    elsif(usCounter < (20 * CLOCK_FREQ)) then
+                        LCD_E <= '0';
+                    else
+                        usCounter := 0;
+                        CurrentState <= WaitBusy;
+                    end if;
+
+            end case;
         end if;
     end process;
 end LCD_Controller_Arch;
