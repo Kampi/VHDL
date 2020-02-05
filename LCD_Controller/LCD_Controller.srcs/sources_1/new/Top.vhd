@@ -110,50 +110,49 @@ begin
     process(Clock)
         variable Index : INTEGER := 0;
     begin
-        if(rising_edge(Clock)) then
-            if(ResetN = '0') then
-                CurrentState <= Reset;
-            else
-                case CurrentState is
+        if(ResetN = '0') then
+            CurrentState <= Reset;
+        elsif(rising_edge(Clock)) then
+            case CurrentState is
 
-                    when Reset =>
-                        Valid <= '0';
-                        Data <= (others => '0');
+                when Reset =>
+                    Valid <= '0';
+                    Data <= (others => '0');
+                    CurrentState <= WaitDisplay;
+
+                when WaitDisplay =>
+                    Valid <= '0';
+
+                    if(Ready = '1') then
+                        if(AddressSet = '0') then
+                            AddressSet <= '1';
+                            SendCommand <= '1';
+                            Data <= '1' & STD_LOGIC_VECTOR(Address);
+                        else
+                            SendCommand <= RAM(Index).IsCommand;
+                            Data <= RAM(Index).Data;
+                            Index := Index + 1;
+                        end if;
+
+                        Valid <= '1';
+                        CurrentState <= Send;
+                    else
                         CurrentState <= WaitDisplay;
+                    end if;
 
-                    when WaitDisplay =>
-                        Valid <= '0';
-
-                        if(Ready = '1') then
-                            if(AddressSet = '0') then
-                                AddressSet <= '1';
-                                SendCommand <= '1';
-                                Data <= '1' & STD_LOGIC_VECTOR(Address);
-                            else
-                                SendCommand <= RAM(Index).IsCommand;
-                                Data <= RAM(Index).Data;
-                                Index := Index + 1;
-                            end if;
-
-                            Valid <= '1';
-                            CurrentState <= Send;
-                        else
+                when Send =>
+                    if(Ready <= '0') then
+                        if(Index < RAM'length) then
                             CurrentState <= WaitDisplay;
-                        end if;
-
-                    when Send =>
-                        if(Ready <= '0') then
-                            if(Index < RAM'length) then
-                                CurrentState <= WaitDisplay;
-                            else
-                                CurrentState <= Finish;
-                            end if;
                         else
-                            CurrentState <= Send;
+                            CurrentState <= Finish;
                         end if;
+                    else
+                        CurrentState <= Send;
+                    end if;
 
-                    when Finish =>
-                        Valid <= '0';
+                when Finish =>
+                    Valid <= '0';
 
                 end case;
             end if;
