@@ -87,7 +87,7 @@ architecture LCD_Controller_Arch of LCD_Controller is
 
 begin
 
-    process(Clock)
+    process(Clock, ResetN)
         -- Millisecond counter for state machine timing
         variable usCounter  : INTEGER := 0;
     begin
