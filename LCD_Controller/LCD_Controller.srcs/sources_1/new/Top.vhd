@@ -107,7 +107,7 @@ begin
                                     LCD_Data => LCD_Data
                                     );
 
-    process(Clock)
+    process(Clock, ResetN)
         variable Index : INTEGER := 0;
     begin
         if(ResetN = '0') then
