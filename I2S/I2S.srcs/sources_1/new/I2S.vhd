@@ -33,7 +33,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity I2S is
     Generic (   MULT          : INTEGER := 256;                             -- Integer multiplier between SCLK and MCLK (must be 4 or higher)
-                WIDTH         : INTEGER := 32                               -- Data width per channel
+                WIDTH         : INTEGER := 16                               -- Data width per channel
                 );
     Port (  ACLK     : in STD_LOGIC;                                        -- AXI-Stream interface clock
             ARESETn  : in STD_LOGIC;                                        -- Reset (active low)
@@ -85,9 +85,9 @@ architecture I2S_Arch of I2S is
     end component;
 
     component SineROM is
-        Port (  Address : in STD_LOGIC_VECTOR(6 downto 0);
-                Clock   : in STD_LOGIC;
-                DataOut : out STD_LOGIC_VECTOR(31 downto 0)
+        Port (  Clock   : in STD_LOGIC;
+                Address : in STD_LOGIC_VECTOR(6 downto 0);
+                DataOut : out STD_LOGIC_VECTOR(15 downto 0)
                 );
     end component SineROM;
 
@@ -126,15 +126,15 @@ begin
                     when WaitForReady =>
                         if(Ready = '1') then
                             Valid <= '1';
-                            if(Counter < 100) then
+                            if(Counter < 99) then
                                 Counter <= Counter + 1;
                             else
                                 Counter <= 0;
                             end if;
                             
-                            ROM_Address <= STD_LOGIC_VECTOR(to_unsigned(Counter, ROM_Address'length));
+                             ROM_Address <= STD_LOGIC_VECTOR(to_unsigned(Counter, ROM_Address'length));
 
-                            FIFO <= ROM_Data & x"00000000";
+                            FIFO <= ROM_Data & x"0000";
                             CurrentState <= Increase;
                         else
                             CurrentState <= WaitForReady;
