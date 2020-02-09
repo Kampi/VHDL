@@ -1,6 +1,0 @@
-# compile verilog/system verilog design source files
-verilog xil_defaultlib  --include "../../../../../I2S_Transmitter.srcs/sources_1/bd/ClockGeneration/ipshared/b65a" \
-"I2S_TB_time_synth.v" \
-
-# Do not sort compile order
-nosort

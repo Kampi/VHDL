@@ -1,5 +1,0 @@
-AXI4S_ROM.vhd,vhdl,xil_defaultlib,../../../bd/DataROM/ipshared/4c93/src/AXI4S_ROM.vhd,
-ROM.vhd,vhdl,xil_defaultlib,../../../bd/DataROM/ipshared/4c93/src/ROM.vhd,
-DataROM_AXI4S_ROM_0_1.vhd,vhdl,xil_defaultlib,../../../bd/DataROM/ip/DataROM_AXI4S_ROM_0_1/sim/DataROM_AXI4S_ROM_0_1.vhd,
-DataROM.vhd,vhdl,xil_defaultlib,../../../bd/DataROM/sim/DataROM.vhd,
-glbl.v,Verilog,xil_defaultlib,glbl.v
