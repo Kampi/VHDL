@@ -1,0 +1,152 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0xDD223E339DE8081D",
+      "device": "xc7z010clg400-1",
+      "name": "SystemClock",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2019.2",
+      "validated": "true"
+    },
+    "design_tree": {
+      "ClockingWizard": ""
+    },
+    "ports": {
+      "ResetN": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_LOW",
+            "value_src": "default"
+          }
+        }
+      },
+      "ClockIn": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "ASSOCIATED_RESET": {
+            "value": "ResetN"
+          },
+          "CLK_DOMAIN": {
+            "value": "SystemClock_clk_in1_0",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "125000000"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.000",
+            "value_src": "default"
+          }
+        }
+      },
+      "Locked": {
+        "direction": "O"
+      },
+      "Clk5MHz": {
+        "type": "clk",
+        "direction": "O",
+        "parameters": {
+          "CLK_DOMAIN": {
+            "value": "/ClockingWizard_clk_out1",
+            "value_src": "ip_prop"
+          },
+          "FREQ_HZ": {
+            "value": "5000000"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "ip_prop"
+          }
+        }
+      }
+    },
+    "components": {
+      "ClockingWizard": {
+        "vlnv": "xilinx.com:ip:clk_wiz:6.0",
+        "xci_name": "SystemClock_clk_wiz_0_0",
+        "parameters": {
+          "CLKIN1_JITTER_PS": {
+            "value": "80.0"
+          },
+          "CLKOUT1_JITTER": {
+            "value": "529.616"
+          },
+          "CLKOUT1_PHASE_ERROR": {
+            "value": "319.966"
+          },
+          "CLKOUT1_REQUESTED_OUT_FREQ": {
+            "value": "5"
+          },
+          "CLK_OUT1_PORT": {
+            "value": "Clk5MHz"
+          },
+          "MMCM_CLKFBOUT_MULT_F": {
+            "value": "25.500"
+          },
+          "MMCM_CLKIN1_PERIOD": {
+            "value": "8.000"
+          },
+          "MMCM_CLKIN2_PERIOD": {
+            "value": "10.0"
+          },
+          "MMCM_CLKOUT0_DIVIDE_F": {
+            "value": "127.500"
+          },
+          "MMCM_DIVCLK_DIVIDE": {
+            "value": "5"
+          },
+          "PRIM_IN_FREQ": {
+            "value": "125.000"
+          },
+          "RESET_PORT": {
+            "value": "resetn"
+          },
+          "RESET_TYPE": {
+            "value": "ACTIVE_LOW"
+          }
+        }
+      }
+    },
+    "nets": {
+      "resetn_0_1": {
+        "ports": [
+          "ResetN",
+          "ClockingWizard/resetn"
+        ]
+      },
+      "clk_in1_0_1": {
+        "ports": [
+          "ClockIn",
+          "ClockingWizard/clk_in1"
+        ]
+      },
+      "ClockingWizard_locked": {
+        "ports": [
+          "ClockingWizard/locked",
+          "Locked"
+        ]
+      },
+      "ClockingWizard_Clk5MHz": {
+        "ports": [
+          "ClockingWizard/Clk5MHz",
+          "Clk5MHz"
+        ]
+      }
+    }
+  }
+}

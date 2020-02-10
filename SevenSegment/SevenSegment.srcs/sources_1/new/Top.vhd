@@ -1,19 +1,19 @@
 ----------------------------------------------------------------------------------
--- Company: 		https://www.kampis-elektroecke.de
--- Engineer: 		Daniel Kampert
+-- Company:             https://www.kampis-elektroecke.de
+-- Engineer:            Daniel Kampert
 -- 
--- Create Date:   	14.01.2019 18:15:17
+-- Create Date:         14.01.2019 18:15:17
 -- Design Name: 
--- Module Name:    	Top - Top_Arch
+-- Module Name:    	    Top - Top_Arch
 -- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
+-- Target Devices:      XC7Z010CLG400-1
+-- Tool Versions:       Vivado 2019.2
+-- Description:         Seven segment top level module.
 -- 
 -- Dependencies: 
 -- 
 -- Revision:
---  	0.01 - File Created
+--  Revision            0.01 - File Created
 --
 -- Additional Comments:
 -- 
@@ -32,9 +32,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity Top is
-    Port (  Clock_In : in STD_LOGIC;
-            Reset    : in STD_LOGIC;
-            Reset_Out: out STD_LOGIC;
+    Port (  Clock    : in STD_LOGIC;
+            ResetN   : in STD_LOGIC;
             Kathode  : out STD_LOGIC;
             Anode    : out STD_LOGIC_VECTOR (6 downto 0)
             );
@@ -42,16 +41,18 @@ end Top;
 
 architecture Top_Arch of Top is
 
-    signal Clk5MHz  : STD_LOGIC := '0';
-    signal Reset_In : STD_LOGIC := '0';
+    signal DisplayClock : STD_LOGIC := '0';
+    signal SystemResetN : STD_LOGIC := '0';
+    signal Locked       : STD_LOGIC;
 
-    component Clock is
-        Port (  ResetN : in STD_LOGIC;
-                Clock_In : in STD_LOGIC;
-                Clk5MHz : out STD_LOGIC
+    component SystemClock is
+        Port (  Clk5MHz : out STD_LOGIC;
+                ClockIn : in STD_LOGIC;
+                Locked : out STD_LOGIC;
+                ResetN : in STD_LOGIC
                 );
-    end component Clock;
-    
+    end component SystemClock;
+
     component SevenSegment is
         Port ( Clock    : in STD_LOGIC;
                ResetN   : in STD_LOGIC;
@@ -63,20 +64,19 @@ architecture Top_Arch of Top is
 
 begin
 
-    Reset_In <= Reset;
+    Clock_5MHz : component SystemClock port map (   Clk5MHz => DisplayClock,
+                                                    ClockIn => Clock,
+                                                    ResetN => ResetN,
+                                                    Locked => Locked
+                                                    );
 
-    Clock_5MHz : component Clock port map ( Clk5MHz => Clk5MHz,
-                                            Clock_In => Clock_In,
-                                            ResetN => Reset_In
-                                            );
-
-    Segment : component SevenSegment port map ( Clock => Clk5MHz,
+    Segment : component SevenSegment port map ( Clock => DisplayClock,
                                                 Data => "0001" & "0110",
-                                                ResetN => Reset_In,
+                                                ResetN => SystemResetN,
                                                 Anode => Anode,
                                                 Active => Kathode
-                                                );                                    
+                                                );
 
-    Reset_Out <= Reset_In;
+    SystemResetN <= ResetN and Locked;
 
 end Top_Arch;
