@@ -1,9 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../SevenSegment.ip_user_files/bd/SystemClock/sim/SystemClock.vhd" \
-"../../../../SevenSegment.srcs/sources_1/new/SevenSegment.vhd" \
-"../../../../SevenSegment.srcs/sources_1/new/Top.vhd" \
-"../../../../SevenSegment.srcs/SevenSegment/new/Testbench.vhd" \
-
-# Do not sort compile order
-nosort
