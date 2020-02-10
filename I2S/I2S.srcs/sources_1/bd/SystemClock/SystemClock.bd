@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xBED4C57B62F4024F",
+      "boundary_crc": "0xE973F9300FE05047",
       "device": "xc7z010clg400-1",
       "name": "SystemClock",
       "synth_flow_mode": "Hierarchical",
@@ -31,7 +31,7 @@
         "direction": "I",
         "parameters": {
           "CLK_DOMAIN": {
-            "value": "SystemClock_clk_in1_0",
+            "value": "SystemClock_ClockIn",
             "value_src": "default"
           },
           "FREQ_HZ": {
@@ -50,6 +50,28 @@
       "Locked": {
         "direction": "O"
       },
+      "SystemClock": {
+        "type": "clk",
+        "direction": "O",
+        "parameters": {
+          "CLK_DOMAIN": {
+            "value": "/ClockingWizard_clk_out1",
+            "value_src": "ip_prop"
+          },
+          "FREQ_HZ": {
+            "value": "100000000",
+            "value_src": "ip_prop"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "ip_prop"
+          }
+        }
+      },
       "MCLK": {
         "type": "clk",
         "direction": "O",
@@ -59,7 +81,7 @@
             "value_src": "ip_prop"
           },
           "FREQ_HZ": {
-            "value": "40000000"
+            "value": "11290322"
           },
           "INSERT_VIP": {
             "value": "0",
@@ -78,16 +100,46 @@
         "xci_name": "SystemClock_clk_wiz_0_0",
         "parameters": {
           "CLKOUT1_JITTER": {
-            "value": "150.675"
+            "value": "442.036"
+          },
+          "CLKOUT1_PHASE_ERROR": {
+            "value": "301.898"
           },
           "CLKOUT1_REQUESTED_OUT_FREQ": {
-            "value": "40"
+            "value": "11.2896"
+          },
+          "CLKOUT2_JITTER": {
+            "value": "290.778"
+          },
+          "CLKOUT2_PHASE_ERROR": {
+            "value": "301.898"
+          },
+          "CLKOUT2_USED": {
+            "value": "true"
           },
           "CLK_OUT1_PORT": {
             "value": "MCLK"
           },
+          "CLK_OUT2_PORT": {
+            "value": "SystemClock"
+          },
+          "MMCM_CLKFBOUT_MULT_F": {
+            "value": "28.000"
+          },
+          "MMCM_CLKIN2_PERIOD": {
+            "value": "10.0"
+          },
           "MMCM_CLKOUT0_DIVIDE_F": {
-            "value": "25.000"
+            "value": "62.000"
+          },
+          "MMCM_CLKOUT1_DIVIDE": {
+            "value": "7"
+          },
+          "MMCM_DIVCLK_DIVIDE": {
+            "value": "5"
+          },
+          "NUM_OUT_CLKS": {
+            "value": "2"
           },
           "RESET_PORT": {
             "value": "resetn"
@@ -117,7 +169,13 @@
           "Locked"
         ]
       },
-      "clk_wiz_0_MCLK": {
+      "ClockingWizard_SystemClock": {
+        "ports": [
+          "ClockingWizard/SystemClock",
+          "SystemClock"
+        ]
+      },
+      "ClockingWizard_MCLK": {
         "ports": [
           "ClockingWizard/MCLK",
           "MCLK"

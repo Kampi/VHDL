@@ -32,7 +32,7 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity I2S is
-    Generic (   MULT          : INTEGER := 256;                             -- Integer multiplier between SCLK and MCLK (must be 4 or higher)
+    Generic (   MULT          : INTEGER := 8;                               -- Integer multiplier between SCLK and MCLK (must be 4 or higher)
                 WIDTH         : INTEGER := 16                               -- Data width per channel
                 );
     Port (  ACLK     : in STD_LOGIC;                                        -- AXI-Stream interface clock
@@ -46,7 +46,7 @@ entity I2S is
             
             -- I2S interface
             MCLK     : in STD_LOGIC;                                        -- Master audio clock. Must be an integer ration of the L/R clock signal
-            LRCLK    : out STD_LOGIC;                                       -- L/R clock for the I2S protocol
+            LRCLK    : out STD_LOGIC;                                       -- I2S L/R clock
             SCLK     : out STD_LOGIC;                                       -- I2S clock signal
             SD       : out STD_LOGIC                                        -- I2S data signal
             );

@@ -37,7 +37,7 @@ entity Top is
                 WIDTH   : INTEGER := 16
                 );
     Port (  Clock   : in STD_LOGIC;
-            Resetn  : in STD_LOGIC;
+            ResetN  : in STD_LOGIC;
             MCLK    : out STD_LOGIC;
             LRCLK   : out STD_LOGIC;
             SCLK    : out STD_LOGIC;
@@ -49,6 +49,7 @@ end Top;
 architecture Top_Arch of Top is
 
     signal SystemResetN : STD_LOGIC := '0';
+    signal SysClock     : STD_LOGIC := '0';
     signal MCLK_DCM     : STD_LOGIC := '0';
     signal Locked       : STD_LOGIC := '0';
 
@@ -60,7 +61,7 @@ architecture Top_Arch of Top is
     signal TDATA        : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0) := (others => '0');
 
     component I2S is    
-        Generic ( MULT   : INTEGER := 256;
+        Generic ( MULT   : INTEGER := 4;
                   WIDTH  : INTEGER := 16
                   );
         Port (  ACLK     : in STD_LOGIC;
@@ -77,10 +78,11 @@ architecture Top_Arch of Top is
     end component;
 
     component SystemClock is
-        Port (  ClockIn : in STD_LOGIC;
-                Locked : out STD_LOGIC;
-                MCLK : out STD_LOGIC;
-                ResetN : in STD_LOGIC
+        Port (  ClockIn     : in STD_LOGIC;
+                Locked      : out STD_LOGIC;
+                MCLK        : out STD_LOGIC;
+                SystemClock : out STD_LOGIC;
+                ResetN      : in STD_LOGIC
                 );
     end component;
 
@@ -88,6 +90,7 @@ begin
 
     -- Generate MLCK
     InputClock : SystemClock port map ( ClockIn => Clock,
+                                        SystemClock => SysClock,
                                         ResetN => ResetN,
                                         MCLK => MCLK_DCM,
                                         Locked => Locked
@@ -96,7 +99,7 @@ begin
     I2S_Module : I2S generic map (  MULT => MULT,
                                     WIDTH => WIDTH
                                     )
-                          port map ( ACLK => Clock,
+                          port map ( ACLK => SysClock,
                                      ARESETn => SystemResetN,
                                      TDATA => TDATA,
                                      TVALID => TVALID,

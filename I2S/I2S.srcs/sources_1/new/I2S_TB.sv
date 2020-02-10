@@ -49,12 +49,9 @@ module I2S_TB();
         .M_AXIS_tvalid(TVALID)
     );
 
-    Top #(  .MULT(8), 
-            .WIDTH(16)
-        )
-        Transmitter(
+    Top Transmitter(
             .Clock(SimulationClock),
-            .Resetn(ARESETn),
+            .ResetN(ARESETn),
             .MCLK(MCLK),
             .SCLK(SCLK),
             .LRCLK(LRCLK),
@@ -92,7 +89,7 @@ module I2S_TB();
     endtask
 
     // Generate the clocks
-    always #4ns SimulationClock = ~SimulationClock;
+    always #5ns SimulationClock = ~SimulationClock;
 
     initial begin
 
