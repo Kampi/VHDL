@@ -1,0 +1,6 @@
+verilog xil_defaultlib  \
+"../../../bd/SineROM/ip/SineROM_blk_mem_gen_0_0/sim/SineROM_blk_mem_gen_0_0.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+nosort

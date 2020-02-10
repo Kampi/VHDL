@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-// Date        : Thu Feb  6 15:34:40 2020
+// Date        : Mon Feb 10 08:24:00 2020
 // Host        : 40B0341C1F56 running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim -rename_top SineROM_blk_mem_gen_0_0 -prefix
-//               SineROM_blk_mem_gen_0_0_ SineROM_blk_mem_gen_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim
+//               C:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/I2S.srcs/sources_1/bd/SineROM/ip/SineROM_blk_mem_gen_0_0/SineROM_blk_mem_gen_0_0_sim_netlist.v
 // Design      : SineROM_blk_mem_gen_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -20,11 +20,11 @@ module SineROM_blk_mem_gen_0_0
     douta);
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTA CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME BRAM_PORTA, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER, READ_WRITE_MODE READ_ONLY, READ_LATENCY 1" *) input clka;
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTA ADDR" *) input [6:0]addra;
-  (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTA DOUT" *) output [31:0]douta;
+  (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTA DOUT" *) output [15:0]douta;
 
   wire [6:0]addra;
   wire clka;
-  wire [31:0]douta;
+  wire [15:0]douta;
   wire NLW_U0_dbiterr_UNCONNECTED;
   wire NLW_U0_rsta_busy_UNCONNECTED;
   wire NLW_U0_rstb_busy_UNCONNECTED;
@@ -37,12 +37,12 @@ module SineROM_blk_mem_gen_0_0
   wire NLW_U0_s_axi_sbiterr_UNCONNECTED;
   wire NLW_U0_s_axi_wready_UNCONNECTED;
   wire NLW_U0_sbiterr_UNCONNECTED;
-  wire [31:0]NLW_U0_doutb_UNCONNECTED;
+  wire [15:0]NLW_U0_doutb_UNCONNECTED;
   wire [6:0]NLW_U0_rdaddrecc_UNCONNECTED;
   wire [3:0]NLW_U0_s_axi_bid_UNCONNECTED;
   wire [1:0]NLW_U0_s_axi_bresp_UNCONNECTED;
   wire [6:0]NLW_U0_s_axi_rdaddrecc_UNCONNECTED;
-  wire [31:0]NLW_U0_s_axi_rdata_UNCONNECTED;
+  wire [15:0]NLW_U0_s_axi_rdata_UNCONNECTED;
   wire [3:0]NLW_U0_s_axi_rid_UNCONNECTED;
   wire [1:0]NLW_U0_s_axi_rresp_UNCONNECTED;
 
@@ -69,7 +69,7 @@ module SineROM_blk_mem_gen_0_0
   (* C_EN_SAFETY_CKT = "0" *) 
   (* C_EN_SHUTDOWN_PIN = "0" *) 
   (* C_EN_SLEEP_PIN = "0" *) 
-  (* C_EST_POWER_SUMMARY = "Estimated Power for IP     :     3.375199 mW" *) 
+  (* C_EST_POWER_SUMMARY = "Estimated Power for IP     :     2.7096 mW" *) 
   (* C_FAMILY = "zynq" *) 
   (* C_HAS_AXI_ID = "0" *) 
   (* C_HAS_ENA = "0" *) 
@@ -98,8 +98,8 @@ module SineROM_blk_mem_gen_0_0
   (* C_READ_DEPTH_B = "100" *) 
   (* C_READ_LATENCY_A = "1" *) 
   (* C_READ_LATENCY_B = "1" *) 
-  (* C_READ_WIDTH_A = "32" *) 
-  (* C_READ_WIDTH_B = "32" *) 
+  (* C_READ_WIDTH_A = "16" *) 
+  (* C_READ_WIDTH_B = "16" *) 
   (* C_RSTRAM_A = "0" *) 
   (* C_RSTRAM_B = "0" *) 
   (* C_RST_PRIORITY_A = "CE" *) 
@@ -118,8 +118,8 @@ module SineROM_blk_mem_gen_0_0
   (* C_WRITE_DEPTH_B = "100" *) 
   (* C_WRITE_MODE_A = "WRITE_FIRST" *) 
   (* C_WRITE_MODE_B = "WRITE_FIRST" *) 
-  (* C_WRITE_WIDTH_A = "32" *) 
-  (* C_WRITE_WIDTH_B = "32" *) 
+  (* C_WRITE_WIDTH_A = "16" *) 
+  (* C_WRITE_WIDTH_B = "16" *) 
   (* C_XDEVICEFAMILY = "zynq" *) 
   (* downgradeipidentifiedwarnings = "yes" *) 
   SineROM_blk_mem_gen_0_0_blk_mem_gen_v8_4_4 U0
@@ -129,10 +129,10 @@ module SineROM_blk_mem_gen_0_0
         .clkb(1'b0),
         .dbiterr(NLW_U0_dbiterr_UNCONNECTED),
         .deepsleep(1'b0),
-        .dina({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .dinb({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .dina({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .dinb({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .douta(douta),
-        .doutb(NLW_U0_doutb_UNCONNECTED[31:0]),
+        .doutb(NLW_U0_doutb_UNCONNECTED[15:0]),
         .eccpipece(1'b0),
         .ena(1'b0),
         .enb(1'b0),
@@ -169,14 +169,14 @@ module SineROM_blk_mem_gen_0_0
         .s_axi_injectdbiterr(1'b0),
         .s_axi_injectsbiterr(1'b0),
         .s_axi_rdaddrecc(NLW_U0_s_axi_rdaddrecc_UNCONNECTED[6:0]),
-        .s_axi_rdata(NLW_U0_s_axi_rdata_UNCONNECTED[31:0]),
+        .s_axi_rdata(NLW_U0_s_axi_rdata_UNCONNECTED[15:0]),
         .s_axi_rid(NLW_U0_s_axi_rid_UNCONNECTED[3:0]),
         .s_axi_rlast(NLW_U0_s_axi_rlast_UNCONNECTED),
         .s_axi_rready(1'b0),
         .s_axi_rresp(NLW_U0_s_axi_rresp_UNCONNECTED[1:0]),
         .s_axi_rvalid(NLW_U0_s_axi_rvalid_UNCONNECTED),
         .s_axi_sbiterr(NLW_U0_s_axi_sbiterr_UNCONNECTED),
-        .s_axi_wdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .s_axi_wdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .s_axi_wlast(1'b0),
         .s_axi_wready(NLW_U0_s_axi_wready_UNCONNECTED),
         .s_axi_wstrb(1'b0),
@@ -188,17 +188,18 @@ module SineROM_blk_mem_gen_0_0
         .web(1'b0));
 endmodule
 
+(* ORIG_REF_NAME = "blk_mem_gen_generic_cstr" *) 
 module SineROM_blk_mem_gen_0_0_blk_mem_gen_generic_cstr
    (douta,
     clka,
     addra);
-  output [31:0]douta;
+  output [15:0]douta;
   input clka;
   input [6:0]addra;
 
   wire [6:0]addra;
   wire clka;
-  wire [31:0]douta;
+  wire [15:0]douta;
 
   SineROM_blk_mem_gen_0_0_blk_mem_gen_prim_width \ramloop[0].ram.r 
        (.addra(addra),
@@ -206,17 +207,18 @@ module SineROM_blk_mem_gen_0_0_blk_mem_gen_generic_cstr
         .douta(douta));
 endmodule
 
+(* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
 module SineROM_blk_mem_gen_0_0_blk_mem_gen_prim_width
    (douta,
     clka,
     addra);
-  output [31:0]douta;
+  output [15:0]douta;
   input clka;
   input [6:0]addra;
 
   wire [6:0]addra;
   wire clka;
-  wire [31:0]douta;
+  wire [15:0]douta;
 
   SineROM_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init \prim_init.ram 
        (.addra(addra),
@@ -224,21 +226,38 @@ module SineROM_blk_mem_gen_0_0_blk_mem_gen_prim_width
         .douta(douta));
 endmodule
 
+(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper_init" *) 
 module SineROM_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init
    (douta,
     clka,
     addra);
-  output [31:0]douta;
+  output [15:0]douta;
   input clka;
   input [6:0]addra;
 
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_0 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_1 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_10 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_11 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_16 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_17 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_18 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_19 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_2 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_24 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_25 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_26 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_27 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_3 ;
   wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_32 ;
   wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_33 ;
   wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_34 ;
   wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_35 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_8 ;
+  wire \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_9 ;
   wire [6:0]addra;
   wire clka;
-  wire [31:0]douta;
+  wire [15:0]douta;
 
   (* box_type = "PRIMITIVE" *) 
   RAMB18E1 #(
@@ -252,19 +271,19 @@ module SineROM_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init
     .INITP_05(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_06(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_07(256'h0000000000000000000000000000000000000000000000000000000000000000),
-    .INIT_00(256'h0000B67F0000AF1E0000A78D00009FD5000097FC0000900A0000880900008000),
-    .INIT_01(256'h0000E78D0000E2A00000DD4E0000D79F0000D1970000CB3C0000C4950000BDAA),
-    .INIT_02(256'h0000FEFD0000FDBB0000FBFA0000F9BC0000F7020000F3D10000F02A0000EC12),
-    .INIT_03(256'h0000F7020000F9BC0000FBFA0000FDBB0000FEFD0000FFBF0000FFFF0000FFBF),
-    .INIT_04(256'h0000D1970000D79F0000DD4E0000E2A00000E78D0000EC120000F02A0000F3D1),
-    .INIT_05(256'h000097FC00009FD50000A78D0000AF1E0000B67F0000BDAA0000C4950000CB3C),
-    .INIT_06(256'h000058720000602A0000680300006FF5000077F600008000000088090000900A),
-    .INIT_07(256'h000022B10000286000002E68000034C300003B6A0000425500004980000050E1),
-    .INIT_08(256'h0000040500000643000008FD00000C2E00000FD5000013ED0000187200001D5F),
-    .INIT_09(256'h0000040500000244000001020000004000000000000000400000010200000244),
-    .INIT_0A(256'h000022B100001D5F00001872000013ED00000FD500000C2E000008FD00000643),
-    .INIT_0B(256'h00005872000050E1000049800000425500003B6A000034C300002E6800002860),
-    .INIT_0C(256'h00000000000000000000000000000000000077F600006FF5000068030000602A),
+    .INIT_00(256'h0306070F020F010E0207080D010F0D0401070F0B0100000A0008000900000000),
+    .INIT_01(256'h0607080D0602090F050D040E0507090E05010906040B030B04040905030D0A09),
+    .INIT_02(256'h070E0F0C070D0B0A070B0F0907090B0B0707000107030D0007000209060C0102),
+    .INIT_03(256'h0707000107090B0B070B0F09070D0B0A070E0F0C070F0B0E070F0F0F070F0B0E),
+    .INIT_04(256'h050109060507090E050D040E0602090F0607080D060C01020700020907030D00),
+    .INIT_05(256'h01070F0B010F0D040207080D020F010E0306070F030D0A0904040905040B030B),
+    .INIT_06(256'h0D0807030E00020C0E0800050E0F0F060F070F0700000000000800090100000A),
+    .INIT_07(256'h0A020B020A0806020A0E060A0B040C050B0B060B0C0205070C0908010D000E02),
+    .INIT_08(256'h080400070806040508080F0F080C0300080F0D0709030E0E09080703090D0601),
+    .INIT_09(256'h0804000708020406080100040800040208000001080004020801000408020406),
+    .INIT_0A(256'h0A020B02090D06010908070309030E0E080F0D07080C030008080F0F08060405),
+    .INIT_0B(256'h0D0807030D000E020C0908010C0205070B0B060B0B040C050A0E060A0A080602),
+    .INIT_0C(256'h000000000000000000000000000000000F070F070E0F0F060E0800050E00020C),
     .INIT_0D(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INIT_0E(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INIT_0F(256'h0000000000000000000000000000000000000000000000000000000000000000),
@@ -350,8 +369,8 @@ module SineROM_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init
         .DIBDI({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .DIPADIP({1'b0,1'b0}),
         .DIPBDIP({1'b0,1'b0}),
-        .DOADO(douta[15:0]),
-        .DOBDO(douta[31:16]),
+        .DOADO({\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_0 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_1 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_2 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_3 ,douta[7:4],\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_8 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_9 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_10 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_11 ,douta[3:0]}),
+        .DOBDO({\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_16 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_17 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_18 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_19 ,douta[15:12],\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_24 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_25 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_26 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_27 ,douta[11:8]}),
         .DOPADOP({\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_32 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_33 }),
         .DOPBDOP({\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_34 ,\DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_n_35 }),
         .ENARDEN(1'b1),
@@ -366,17 +385,18 @@ module SineROM_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init
         .WEBWE({1'b0,1'b0,1'b0,1'b0}));
 endmodule
 
+(* ORIG_REF_NAME = "blk_mem_gen_top" *) 
 module SineROM_blk_mem_gen_0_0_blk_mem_gen_top
    (douta,
     clka,
     addra);
-  output [31:0]douta;
+  output [15:0]douta;
   input clka;
   input [6:0]addra;
 
   wire [6:0]addra;
   wire clka;
-  wire [31:0]douta;
+  wire [15:0]douta;
 
   SineROM_blk_mem_gen_0_0_blk_mem_gen_generic_cstr \valid.cstr 
        (.addra(addra),
@@ -391,7 +411,7 @@ endmodule
 (* C_DISABLE_WARN_BHV_COLL = "0" *) (* C_DISABLE_WARN_BHV_RANGE = "0" *) (* C_ELABORATION_DIR = "./" *) 
 (* C_ENABLE_32BIT_ADDRESS = "0" *) (* C_EN_DEEPSLEEP_PIN = "0" *) (* C_EN_ECC_PIPE = "0" *) 
 (* C_EN_RDADDRA_CHG = "0" *) (* C_EN_RDADDRB_CHG = "0" *) (* C_EN_SAFETY_CKT = "0" *) 
-(* C_EN_SHUTDOWN_PIN = "0" *) (* C_EN_SLEEP_PIN = "0" *) (* C_EST_POWER_SUMMARY = "Estimated Power for IP     :     3.375199 mW" *) 
+(* C_EN_SHUTDOWN_PIN = "0" *) (* C_EN_SLEEP_PIN = "0" *) (* C_EST_POWER_SUMMARY = "Estimated Power for IP     :     2.7096 mW" *) 
 (* C_FAMILY = "zynq" *) (* C_HAS_AXI_ID = "0" *) (* C_HAS_ENA = "0" *) 
 (* C_HAS_ENB = "0" *) (* C_HAS_INJECTERR = "0" *) (* C_HAS_MEM_OUTPUT_REGS_A = "1" *) 
 (* C_HAS_MEM_OUTPUT_REGS_B = "0" *) (* C_HAS_MUX_OUTPUT_REGS_A = "0" *) (* C_HAS_MUX_OUTPUT_REGS_B = "0" *) 
@@ -401,15 +421,15 @@ endmodule
 (* C_INIT_FILE_NAME = "SineROM_blk_mem_gen_0_0.mif" *) (* C_INTERFACE_TYPE = "0" *) (* C_LOAD_INIT_FILE = "1" *) 
 (* C_MEM_TYPE = "3" *) (* C_MUX_PIPELINE_STAGES = "0" *) (* C_PRIM_TYPE = "1" *) 
 (* C_READ_DEPTH_A = "100" *) (* C_READ_DEPTH_B = "100" *) (* C_READ_LATENCY_A = "1" *) 
-(* C_READ_LATENCY_B = "1" *) (* C_READ_WIDTH_A = "32" *) (* C_READ_WIDTH_B = "32" *) 
+(* C_READ_LATENCY_B = "1" *) (* C_READ_WIDTH_A = "16" *) (* C_READ_WIDTH_B = "16" *) 
 (* C_RSTRAM_A = "0" *) (* C_RSTRAM_B = "0" *) (* C_RST_PRIORITY_A = "CE" *) 
 (* C_RST_PRIORITY_B = "CE" *) (* C_SIM_COLLISION_CHECK = "ALL" *) (* C_USE_BRAM_BLOCK = "0" *) 
 (* C_USE_BYTE_WEA = "0" *) (* C_USE_BYTE_WEB = "0" *) (* C_USE_DEFAULT_DATA = "1" *) 
 (* C_USE_ECC = "0" *) (* C_USE_SOFTECC = "0" *) (* C_USE_URAM = "0" *) 
 (* C_WEA_WIDTH = "1" *) (* C_WEB_WIDTH = "1" *) (* C_WRITE_DEPTH_A = "100" *) 
 (* C_WRITE_DEPTH_B = "100" *) (* C_WRITE_MODE_A = "WRITE_FIRST" *) (* C_WRITE_MODE_B = "WRITE_FIRST" *) 
-(* C_WRITE_WIDTH_A = "32" *) (* C_WRITE_WIDTH_B = "32" *) (* C_XDEVICEFAMILY = "zynq" *) 
-(* downgradeipidentifiedwarnings = "yes" *) 
+(* C_WRITE_WIDTH_A = "16" *) (* C_WRITE_WIDTH_B = "16" *) (* C_XDEVICEFAMILY = "zynq" *) 
+(* ORIG_REF_NAME = "blk_mem_gen_v8_4_4" *) (* downgradeipidentifiedwarnings = "yes" *) 
 module SineROM_blk_mem_gen_0_0_blk_mem_gen_v8_4_4
    (clka,
     rsta,
@@ -480,16 +500,16 @@ module SineROM_blk_mem_gen_0_0_blk_mem_gen_v8_4_4
   input regcea;
   input [0:0]wea;
   input [6:0]addra;
-  input [31:0]dina;
-  output [31:0]douta;
+  input [15:0]dina;
+  output [15:0]douta;
   input clkb;
   input rstb;
   input enb;
   input regceb;
   input [0:0]web;
   input [6:0]addrb;
-  input [31:0]dinb;
-  output [31:0]doutb;
+  input [15:0]dinb;
+  output [15:0]doutb;
   input injectsbiterr;
   input injectdbiterr;
   input eccpipece;
@@ -510,7 +530,7 @@ module SineROM_blk_mem_gen_0_0_blk_mem_gen_v8_4_4
   input [1:0]s_axi_awburst;
   input s_axi_awvalid;
   output s_axi_awready;
-  input [31:0]s_axi_wdata;
+  input [15:0]s_axi_wdata;
   input [0:0]s_axi_wstrb;
   input s_axi_wlast;
   input s_axi_wvalid;
@@ -527,7 +547,7 @@ module SineROM_blk_mem_gen_0_0_blk_mem_gen_v8_4_4
   input s_axi_arvalid;
   output s_axi_arready;
   output [3:0]s_axi_rid;
-  output [31:0]s_axi_rdata;
+  output [15:0]s_axi_rdata;
   output [1:0]s_axi_rresp;
   output s_axi_rlast;
   output s_axi_rvalid;
@@ -541,25 +561,9 @@ module SineROM_blk_mem_gen_0_0_blk_mem_gen_v8_4_4
   wire \<const0> ;
   wire [6:0]addra;
   wire clka;
-  wire [31:0]douta;
+  wire [15:0]douta;
 
   assign dbiterr = \<const0> ;
-  assign doutb[31] = \<const0> ;
-  assign doutb[30] = \<const0> ;
-  assign doutb[29] = \<const0> ;
-  assign doutb[28] = \<const0> ;
-  assign doutb[27] = \<const0> ;
-  assign doutb[26] = \<const0> ;
-  assign doutb[25] = \<const0> ;
-  assign doutb[24] = \<const0> ;
-  assign doutb[23] = \<const0> ;
-  assign doutb[22] = \<const0> ;
-  assign doutb[21] = \<const0> ;
-  assign doutb[20] = \<const0> ;
-  assign doutb[19] = \<const0> ;
-  assign doutb[18] = \<const0> ;
-  assign doutb[17] = \<const0> ;
-  assign doutb[16] = \<const0> ;
   assign doutb[15] = \<const0> ;
   assign doutb[14] = \<const0> ;
   assign doutb[13] = \<const0> ;
@@ -602,22 +606,6 @@ module SineROM_blk_mem_gen_0_0_blk_mem_gen_v8_4_4
   assign s_axi_rdaddrecc[2] = \<const0> ;
   assign s_axi_rdaddrecc[1] = \<const0> ;
   assign s_axi_rdaddrecc[0] = \<const0> ;
-  assign s_axi_rdata[31] = \<const0> ;
-  assign s_axi_rdata[30] = \<const0> ;
-  assign s_axi_rdata[29] = \<const0> ;
-  assign s_axi_rdata[28] = \<const0> ;
-  assign s_axi_rdata[27] = \<const0> ;
-  assign s_axi_rdata[26] = \<const0> ;
-  assign s_axi_rdata[25] = \<const0> ;
-  assign s_axi_rdata[24] = \<const0> ;
-  assign s_axi_rdata[23] = \<const0> ;
-  assign s_axi_rdata[22] = \<const0> ;
-  assign s_axi_rdata[21] = \<const0> ;
-  assign s_axi_rdata[20] = \<const0> ;
-  assign s_axi_rdata[19] = \<const0> ;
-  assign s_axi_rdata[18] = \<const0> ;
-  assign s_axi_rdata[17] = \<const0> ;
-  assign s_axi_rdata[16] = \<const0> ;
   assign s_axi_rdata[15] = \<const0> ;
   assign s_axi_rdata[14] = \<const0> ;
   assign s_axi_rdata[13] = \<const0> ;
@@ -653,17 +641,18 @@ module SineROM_blk_mem_gen_0_0_blk_mem_gen_v8_4_4
         .douta(douta));
 endmodule
 
+(* ORIG_REF_NAME = "blk_mem_gen_v8_4_4_synth" *) 
 module SineROM_blk_mem_gen_0_0_blk_mem_gen_v8_4_4_synth
    (douta,
     clka,
     addra);
-  output [31:0]douta;
+  output [15:0]douta;
   input clka;
   input [6:0]addra;
 
   wire [6:0]addra;
   wire clka;
-  wire [31:0]douta;
+  wire [15:0]douta;
 
   SineROM_blk_mem_gen_0_0_blk_mem_gen_top \gnbram.gnativebmg.native_blk_mem_gen 
        (.addra(addra),

@@ -159,13 +159,13 @@ proc create_root_design { parentCell } {
   # Create ports
   set Address [ create_bd_port -dir I -from 6 -to 0 Address ]
   set Clock [ create_bd_port -dir I -type clk -freq_hz 125000000 Clock ]
-  set DataOut [ create_bd_port -dir O -from 31 -to 0 DataOut ]
+  set DataOut [ create_bd_port -dir O -from 15 -to 0 DataOut ]
 
   # Create instance: SineROM, and set properties
   set SineROM [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.4 SineROM ]
   set_property -dict [ list \
    CONFIG.Byte_Size {9} \
-   CONFIG.Coe_File {../../../../../../Sine.coe} \
+   CONFIG.Coe_File {../../../../../../SineWave.coe} \
    CONFIG.EN_SAFETY_CKT {false} \
    CONFIG.Enable_32bit_Address {false} \
    CONFIG.Enable_A {Always_Enabled} \
@@ -173,14 +173,14 @@ proc create_root_design { parentCell } {
    CONFIG.Load_Init_File {true} \
    CONFIG.Memory_Type {Single_Port_ROM} \
    CONFIG.Port_A_Write_Rate {0} \
-   CONFIG.Read_Width_A {32} \
-   CONFIG.Read_Width_B {32} \
+   CONFIG.Read_Width_A {16} \
+   CONFIG.Read_Width_B {16} \
    CONFIG.Register_PortA_Output_of_Memory_Primitives {true} \
    CONFIG.Use_Byte_Write_Enable {false} \
    CONFIG.Use_RSTA_Pin {false} \
    CONFIG.Write_Depth_A {100} \
-   CONFIG.Write_Width_A {32} \
-   CONFIG.Write_Width_B {32} \
+   CONFIG.Write_Width_A {16} \
+   CONFIG.Write_Width_B {16} \
    CONFIG.use_bram_block {Stand_Alone} \
  ] $SineROM
 

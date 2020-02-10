@@ -1272,7 +1272,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Feb 06 07:45:34 UTC 2020</spirit:value>
+            <spirit:value>Mon Feb 10 06:45:34 UTC 2020</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>

@@ -34,7 +34,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity Top is
     Generic (   MULT    : INTEGER := 8;
-                WIDTH   : INTEGER := 32
+                WIDTH   : INTEGER := 16
                 );
     Port (  Clock   : in STD_LOGIC;
             Resetn  : in STD_LOGIC;
@@ -58,11 +58,6 @@ architecture Top_Arch of Top is
     signal TVALID       : STD_LOGIC := '0';
     signal TLAST        : STD_LOGIC := '0';
     signal TDATA        : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0) := (others => '0');
-
-    -- ROM signals
-    signal Address      : INTEGER := 0;
-    signal ROM_Data     : STD_LOGIC_VECTOR((WIDTH - 1) downto 0) := (others => '0');
-    signal ROM_Address  : STD_LOGIC_VECTOR(10 downto 0) := (others => '0');
 
     component I2S is    
         Generic ( MULT   : INTEGER := 256;
@@ -115,6 +110,7 @@ begin
 
     SystemResetN <= ResetN and Locked;
     LED(0) <= ResetN;
+    LED(1) <= Locked;
     MCLK <= MCLK_DCM;
 
 end Top_Arch;

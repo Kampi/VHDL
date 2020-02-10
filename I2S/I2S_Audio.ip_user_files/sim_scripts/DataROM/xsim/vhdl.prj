@@ -1,7 +1,0 @@
-vhdl xil_defaultlib  \
-"../../../bd/DataROM/ipshared/4c93/src/AXI4S_ROM.vhd" \
-"../../../bd/DataROM/ipshared/4c93/src/ROM.vhd" \
-"../../../bd/DataROM/ip/DataROM_AXI4S_ROM_0_1/sim/DataROM_AXI4S_ROM_0_1.vhd" \
-"../../../bd/DataROM/sim/DataROM.vhd" \
-
-nosort

@@ -1,0 +1,4 @@
+vhdl xil_defaultlib  \
+"../../../bd/SineROM/sim/SineROM.vhd" \
+
+nosort

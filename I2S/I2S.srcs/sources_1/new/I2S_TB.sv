@@ -38,6 +38,7 @@ module I2S_TB();
     bit SCLK = 0;
     bit LRCLK;
     bit SD;
+    bit MCLK;
 
     StreamWriter Writer(
         .ACLK(SimulationClock),
@@ -48,17 +49,16 @@ module I2S_TB();
         .M_AXIS_tvalid(TVALID)
     );
 
-    I2S Transmitter(
-        .ACLK(SimulationClock),
-        .ARESETn(ARESETn),
-        .TDATA(TDATA),
-        .TLAST(TLAST),
-        .TREADY(TREADY),
-        .TVALID(TVALID),
-        .MCLK(SimulationClock),
-        .SCLK(SCLK),
-        .LRCLK(LRCLK),
-        .SD(SD)
+    Top #(  .MULT(8), 
+            .WIDTH(16)
+        )
+        Transmitter(
+            .Clock(SimulationClock),
+            .Resetn(ARESETn),
+            .MCLK(MCLK),
+            .SCLK(SCLK),
+            .LRCLK(LRCLK),
+            .SD(SD)
     );
 
     StreamWriter_axi4stream_vip_0_0_mst_t           WriteAgent;
