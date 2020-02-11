@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="44" Path="G:/Dropbox/Git/VHDL/StateMachine/StateMachine.xpr">
+<Project Version="7" Minor="44" Path="C:/Users/Daniel.Kampert/Desktop/Git/VHDL/StateMachine/StateMachine.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="d7023c208cc046c1a9c446b990b5056c"/>
@@ -62,6 +62,11 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sim_1/new/Top_TB_behav.wcfg">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="Top"/>
@@ -79,13 +84,6 @@
       <File Path="$PSRCDIR/sim_1/new/Top_TB.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sim_1/imports/sim_1/Top_TB_behav.wcfg">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSIMDIR/sim_1/Top_TB_behav.wcfg"/>
-          <Attr Name="ImportTime" Val="1579429250"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>

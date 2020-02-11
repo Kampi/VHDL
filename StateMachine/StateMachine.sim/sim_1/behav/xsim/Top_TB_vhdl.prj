@@ -1,7 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../StateMachine.srcs/sources_1/new/Top.vhd" \
-"../../../../StateMachine.srcs/sim_1/new/Top_TB.vhd" \
-
-# Do not sort compile order
-nosort

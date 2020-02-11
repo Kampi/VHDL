@@ -154,8 +154,7 @@ begin
                 when Finish =>
                     Valid <= '0';
 
-                end case;
-            end if;
+            end case;
         end if;
     end process;
     
