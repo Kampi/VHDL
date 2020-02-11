@@ -1,14 +1,15 @@
 ----------------------------------------------------------------------------------
--- Company:             www.kampis-elektroecke.de
+-- Company:             https://www.kampis-elektroecke.de
 -- Engineer:            Daniel Kampert
 -- 
 -- Create Date:         15.01.2019 16:35:35
 -- Design Name: 
 -- Module Name:         Testbench - Testbench_Arch
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
+-- Project Name:        Testbench for the seven segment multiplexer tutorial from
+--                      https://www.kampis-elektroecke.de/fpga/multiplexer-fuer-siebensegmentanzeigen
+-- Target Devices:      XC7Z010CLG400-1
+-- Tool Versions:       Vivado 2019.2
+-- Description:         Testbench for the seven segment multiplexer tutorial top design.
 -- 
 -- Dependencies: 
 -- 
