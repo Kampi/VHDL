@@ -1,7 +1,7 @@
 -- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
--- Date        : Mon Feb 10 13:00:05 2020
+-- Date        : Tue Feb 11 07:34:45 2020
 -- Host        : 40B0341C1F56 running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -mode funcsim -nolib -force -file
 --               C:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/I2S.sim/I2S/impl/func/xsim/I2S_TB_func_impl.vhd
@@ -3177,7 +3177,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \SystemClock_clk_wiz_0_0__SystemClock_clk_wiz_0_0_clk_wiz\ is
+entity SystemClock_clk_wiz_0_0_SystemClock_clk_wiz_0_0_clk_wiz is
   port (
     MCLK : out STD_LOGIC;
     resetn : in STD_LOGIC;
@@ -3185,10 +3185,10 @@ entity \SystemClock_clk_wiz_0_0__SystemClock_clk_wiz_0_0_clk_wiz\ is
     clk_in1 : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \SystemClock_clk_wiz_0_0__SystemClock_clk_wiz_0_0_clk_wiz\ : entity is "SystemClock_clk_wiz_0_0_clk_wiz";
-end \SystemClock_clk_wiz_0_0__SystemClock_clk_wiz_0_0_clk_wiz\;
+  attribute ORIG_REF_NAME of SystemClock_clk_wiz_0_0_SystemClock_clk_wiz_0_0_clk_wiz : entity is "SystemClock_clk_wiz_0_0_clk_wiz";
+end SystemClock_clk_wiz_0_0_SystemClock_clk_wiz_0_0_clk_wiz;
 
-architecture STRUCTURE of \SystemClock_clk_wiz_0_0__SystemClock_clk_wiz_0_0_clk_wiz\ is
+architecture STRUCTURE of SystemClock_clk_wiz_0_0_SystemClock_clk_wiz_0_0_clk_wiz is
   signal MCLK_SystemClock_clk_wiz_0_0 : STD_LOGIC;
   signal clkfbout_SystemClock_clk_wiz_0_0 : STD_LOGIC;
   signal clkfbout_buf_SystemClock_clk_wiz_0_0 : STD_LOGIC;
@@ -3505,7 +3505,7 @@ end SystemClock_clk_wiz_0_0;
 
 architecture STRUCTURE of SystemClock_clk_wiz_0_0 is
 begin
-inst: entity work.\SystemClock_clk_wiz_0_0__SystemClock_clk_wiz_0_0_clk_wiz\
+inst: entity work.SystemClock_clk_wiz_0_0_SystemClock_clk_wiz_0_0_clk_wiz
      port map (
       MCLK => MCLK,
       clk_in1 => clk_in1,
@@ -5812,7 +5812,7 @@ entity Top is
   attribute NotValidForBitStream : boolean;
   attribute NotValidForBitStream of Top : entity is true;
   attribute ECO_CHECKSUM : string;
-  attribute ECO_CHECKSUM of Top : entity is "85503913";
+  attribute ECO_CHECKSUM of Top : entity is "cc859a57";
   attribute MULT : integer;
   attribute MULT of Top : entity is 8;
   attribute POWER_OPT_BRAM_CDC : integer;

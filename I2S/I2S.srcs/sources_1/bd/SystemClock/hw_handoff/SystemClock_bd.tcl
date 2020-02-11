@@ -161,35 +161,33 @@ proc create_root_design { parentCell } {
   set Locked [ create_bd_port -dir O Locked ]
   set MCLK [ create_bd_port -dir O -type clk MCLK ]
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {11290322} \
+   CONFIG.FREQ_HZ {12288013} \
  ] $MCLK
   set ResetN [ create_bd_port -dir I -type rst ResetN ]
-  set SystemClock [ create_bd_port -dir O -type clk SystemClock ]
 
   # Create instance: ClockingWizard, and set properties
   set ClockingWizard [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 ClockingWizard ]
   set_property -dict [ list \
-   CONFIG.CLKOUT1_JITTER {442.036} \
-   CONFIG.CLKOUT1_PHASE_ERROR {301.898} \
-   CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {11.2896} \
-   CONFIG.CLKOUT2_JITTER {290.778} \
-   CONFIG.CLKOUT2_PHASE_ERROR {301.898} \
-   CONFIG.CLKOUT2_USED {true} \
+   CONFIG.CLKOUT1_JITTER {473.813} \
+   CONFIG.CLKOUT1_PHASE_ERROR {351.816} \
+   CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {12.288} \
+   CONFIG.CLKOUT2_JITTER {124.615} \
+   CONFIG.CLKOUT2_PHASE_ERROR {96.948} \
+   CONFIG.CLKOUT2_USED {false} \
    CONFIG.CLK_OUT1_PORT {MCLK} \
    CONFIG.CLK_OUT2_PORT {SystemClock} \
-   CONFIG.MMCM_CLKFBOUT_MULT_F {28.000} \
-   CONFIG.MMCM_CLKIN2_PERIOD {10.0} \
-   CONFIG.MMCM_CLKOUT0_DIVIDE_F {62.000} \
-   CONFIG.MMCM_CLKOUT1_DIVIDE {7} \
-   CONFIG.MMCM_DIVCLK_DIVIDE {5} \
-   CONFIG.NUM_OUT_CLKS {2} \
+   CONFIG.MMCM_CLKFBOUT_MULT_F {42.750} \
+   CONFIG.MMCM_CLKIN2_PERIOD {10.000} \
+   CONFIG.MMCM_CLKOUT0_DIVIDE_F {62.125} \
+   CONFIG.MMCM_CLKOUT1_DIVIDE {1} \
+   CONFIG.MMCM_DIVCLK_DIVIDE {7} \
+   CONFIG.NUM_OUT_CLKS {1} \
    CONFIG.RESET_PORT {resetn} \
    CONFIG.RESET_TYPE {ACTIVE_LOW} \
  ] $ClockingWizard
 
   # Create port connections
   connect_bd_net -net ClockingWizard_MCLK [get_bd_ports MCLK] [get_bd_pins ClockingWizard/MCLK]
-  connect_bd_net -net ClockingWizard_SystemClock [get_bd_ports SystemClock] [get_bd_pins ClockingWizard/SystemClock]
   connect_bd_net -net clk_in1_0_1 [get_bd_ports ClockIn] [get_bd_pins ClockingWizard/clk_in1]
   connect_bd_net -net clk_wiz_0_locked [get_bd_ports Locked] [get_bd_pins ClockingWizard/locked]
   connect_bd_net -net resetn_0_1 [get_bd_ports ResetN] [get_bd_pins ClockingWizard/resetn]

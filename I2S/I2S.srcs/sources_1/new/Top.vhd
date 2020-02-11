@@ -81,7 +81,6 @@ architecture Top_Arch of Top is
         Port (  ClockIn     : in STD_LOGIC;
                 Locked      : out STD_LOGIC;
                 MCLK        : out STD_LOGIC;
-                SystemClock : out STD_LOGIC;
                 ResetN      : in STD_LOGIC
                 );
     end component;
@@ -90,7 +89,6 @@ begin
 
     -- Generate MLCK
     InputClock : SystemClock port map ( ClockIn => Clock,
-                                        SystemClock => SysClock,
                                         ResetN => ResetN,
                                         MCLK => MCLK_DCM,
                                         Locked => Locked
@@ -99,7 +97,7 @@ begin
     I2S_Module : I2S generic map (  MULT => MULT,
                                     WIDTH => WIDTH
                                     )
-                          port map ( ACLK => SysClock,
+                          port map ( ACLK => Clock,
                                      ARESETn => SystemResetN,
                                      TDATA => TDATA,
                                      TVALID => TVALID,
