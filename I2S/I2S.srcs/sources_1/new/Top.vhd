@@ -55,10 +55,6 @@ architecture Top_Arch of Top is
 
     -- AXI4 stream signals
     signal ARESETn      : STD_LOGIC := '1';
-    signal TREADY       : STD_LOGIC := '0';
-    signal TVALID       : STD_LOGIC := '0';
-    signal TLAST        : STD_LOGIC := '0';
-    signal TDATA        : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0) := (others => '0');
 
     component I2S is    
         Generic ( MULT   : INTEGER := 4;
@@ -66,10 +62,6 @@ architecture Top_Arch of Top is
                   );
         Port (  ACLK     : in STD_LOGIC;
                 ARESETn  : in STD_LOGIC;
-                TDATA    : in STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0);
-                TREADY   : out STD_LOGIC;
-                TVALID   : in STD_LOGIC;
-                TLAST    : in STD_LOGIC;
                 MCLK     : in STD_LOGIC;
                 LRCLK    : out STD_LOGIC;
                 SCLK     : out STD_LOGIC;
@@ -99,10 +91,6 @@ begin
                                     )
                           port map ( ACLK => Clock,
                                      ARESETn => SystemResetN,
-                                     TDATA => TDATA,
-                                     TVALID => TVALID,
-                                     TLAST => TLAST,
-                                     TREADY => TREADY,
                                      MCLK => MCLK_DCM,
                                      LRCLK => LRCLK,
                                      SCLK => SCLK,

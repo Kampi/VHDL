@@ -39,10 +39,10 @@ entity I2S is
             ARESETn  : in STD_LOGIC;                                        -- Reset (active low)
             
             -- AXI4 Stream interface
-            TDATA    : in STD_LOGIC_VECTOR(((WIDTH * 2) - 1) downto 0);     -- The primary payload that is used to provide the data
-            TREADY   : out STD_LOGIC;                                       -- Indicates that the slave can accept a transfer in the current cycle
-            TVALID   : in STD_LOGIC;                                        -- Indicates that the master is driving a valid transfer
-            TLAST    : in STD_LOGIC;                                        -- Indicates the boundary of a packet
+--            TDATA    : in STD_LOGIC_VECTOR(((WIDTH * 2) - 1) downto 0);     -- The primary payload that is used to provide the data
+--            TREADY   : out STD_LOGIC;                                       -- Indicates that the slave can accept a transfer in the current cycle
+--            TVALID   : in STD_LOGIC;                                        -- Indicates that the master is driving a valid transfer
+--            TLAST    : in STD_LOGIC;                                        -- Indicates the boundary of a packet
             
             -- I2S interface
             MCLK     : in STD_LOGIC;                                        -- Master audio clock. Must be an integer ration of the L/R clock signal

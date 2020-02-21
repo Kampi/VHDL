@@ -17,6 +17,11 @@
         "left": "6",
         "right": "0"
       },
+      "DataOut": {
+        "direction": "O",
+        "left": "15",
+        "right": "0"
+      },
       "Clock": {
         "type": "clk",
         "direction": "I",
@@ -37,11 +42,6 @@
             "value_src": "default"
           }
         }
-      },
-      "DataOut": {
-        "direction": "O",
-        "left": "15",
-        "right": "0"
       }
     },
     "components": {
@@ -95,16 +95,16 @@
           "SineROM/addra"
         ]
       },
-      "clka_0_1": {
-        "ports": [
-          "Clock",
-          "SineROM/clka"
-        ]
-      },
       "SineROM_douta": {
         "ports": [
           "SineROM/douta",
           "DataOut"
+        ]
+      },
+      "clka_0_1": {
+        "ports": [
+          "Clock",
+          "SineROM/clka"
         ]
       }
     }

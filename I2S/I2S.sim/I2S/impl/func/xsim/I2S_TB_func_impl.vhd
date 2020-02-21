@@ -1,7 +1,7 @@
 -- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
--- Date        : Tue Feb 11 07:34:45 2020
+-- Date        : Tue Feb 18 09:58:19 2020
 -- Host        : 40B0341C1F56 running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -mode funcsim -nolib -force -file
 --               C:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/I2S.sim/I2S/impl/func/xsim/I2S_TB_func_impl.vhd
@@ -3177,7 +3177,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity SystemClock_clk_wiz_0_0_SystemClock_clk_wiz_0_0_clk_wiz is
+entity \SystemClock_clk_wiz_0_0__SystemClock_clk_wiz_0_0_clk_wiz\ is
   port (
     MCLK : out STD_LOGIC;
     resetn : in STD_LOGIC;
@@ -3185,10 +3185,10 @@ entity SystemClock_clk_wiz_0_0_SystemClock_clk_wiz_0_0_clk_wiz is
     clk_in1 : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of SystemClock_clk_wiz_0_0_SystemClock_clk_wiz_0_0_clk_wiz : entity is "SystemClock_clk_wiz_0_0_clk_wiz";
-end SystemClock_clk_wiz_0_0_SystemClock_clk_wiz_0_0_clk_wiz;
+  attribute ORIG_REF_NAME of \SystemClock_clk_wiz_0_0__SystemClock_clk_wiz_0_0_clk_wiz\ : entity is "SystemClock_clk_wiz_0_0_clk_wiz";
+end \SystemClock_clk_wiz_0_0__SystemClock_clk_wiz_0_0_clk_wiz\;
 
-architecture STRUCTURE of SystemClock_clk_wiz_0_0_SystemClock_clk_wiz_0_0_clk_wiz is
+architecture STRUCTURE of \SystemClock_clk_wiz_0_0__SystemClock_clk_wiz_0_0_clk_wiz\ is
   signal MCLK_SystemClock_clk_wiz_0_0 : STD_LOGIC;
   signal clkfbout_SystemClock_clk_wiz_0_0 : STD_LOGIC;
   signal clkfbout_buf_SystemClock_clk_wiz_0_0 : STD_LOGIC;
@@ -3344,8 +3344,8 @@ architecture STRUCTURE of \SineROM_blk_mem_gen_0_0__blk_mem_gen_prim_wrapper_ini
 begin
 \DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram\: unisim.vcomponents.RAMB18E1
     generic map(
-      DOA_REG => 1,
-      DOB_REG => 1,
+      DOA_REG => 0,
+      DOB_REG => 0,
       INITP_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
@@ -3469,8 +3469,8 @@ begin
       DOPBDOP(1 downto 0) => \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_DOPBDOP_UNCONNECTED\(1 downto 0),
       ENARDEN => \I2S_Module/ROM/SineROM/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_cooolgate_en_sig_1\,
       ENBWREN => \I2S_Module/ROM/SineROM/U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_init.ram/DEVICE_7SERIES.NO_BMM_INFO.SP.WIDE_PRIM18.ram_cooolgate_en_sig_1\,
-      REGCEAREGCE => '1',
-      REGCEB => '1',
+      REGCEAREGCE => '0',
+      REGCEB => '0',
       RSTRAMARSTRAM => '0',
       RSTRAMB => '0',
       RSTREGARSTREG => '0',
@@ -3505,7 +3505,7 @@ end SystemClock_clk_wiz_0_0;
 
 architecture STRUCTURE of SystemClock_clk_wiz_0_0 is
 begin
-inst: entity work.SystemClock_clk_wiz_0_0_SystemClock_clk_wiz_0_0_clk_wiz
+inst: entity work.\SystemClock_clk_wiz_0_0__SystemClock_clk_wiz_0_0_clk_wiz\
      port map (
       MCLK => MCLK,
       clk_in1 => clk_in1,
@@ -3784,7 +3784,7 @@ entity \SineROM_blk_mem_gen_0_0__blk_mem_gen_v8_4_4\ is
   attribute C_HAS_INJECTERR : integer;
   attribute C_HAS_INJECTERR of \SineROM_blk_mem_gen_0_0__blk_mem_gen_v8_4_4\ : entity is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_A : integer;
-  attribute C_HAS_MEM_OUTPUT_REGS_A of \SineROM_blk_mem_gen_0_0__blk_mem_gen_v8_4_4\ : entity is 1;
+  attribute C_HAS_MEM_OUTPUT_REGS_A of \SineROM_blk_mem_gen_0_0__blk_mem_gen_v8_4_4\ : entity is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_B : integer;
   attribute C_HAS_MEM_OUTPUT_REGS_B of \SineROM_blk_mem_gen_0_0__blk_mem_gen_v8_4_4\ : entity is 0;
   attribute C_HAS_MUX_OUTPUT_REGS_A : integer;
@@ -4100,7 +4100,7 @@ architecture STRUCTURE of SineROM_blk_mem_gen_0_0 is
   attribute C_HAS_INJECTERR : integer;
   attribute C_HAS_INJECTERR of U0 : label is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_A : integer;
-  attribute C_HAS_MEM_OUTPUT_REGS_A of U0 : label is 1;
+  attribute C_HAS_MEM_OUTPUT_REGS_A of U0 : label is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_B : integer;
   attribute C_HAS_MEM_OUTPUT_REGS_B of U0 : label is 0;
   attribute C_HAS_MUX_OUTPUT_REGS_A : integer;
@@ -4460,8 +4460,12 @@ architecture STRUCTURE of I2S is
   attribute OPT_MODIFIED of \Counter_reg[28]_i_1__0\ : label is "SWEEP";
   attribute OPT_MODIFIED of \Counter_reg[4]_i_1__0\ : label is "SWEEP";
   attribute OPT_MODIFIED of \Counter_reg[8]_i_1__0\ : label is "SWEEP";
+  attribute \PinAttr:I2:HOLD_DETOUR\ : integer;
+  attribute \PinAttr:I2:HOLD_DETOUR\ of \FSM_sequential_CurrentState[0]_i_1\ : label is 190;
   attribute SOFT_HLUTNM : string;
   attribute SOFT_HLUTNM of \FSM_sequential_CurrentState[0]_i_1\ : label is "soft_lutpair10";
+  attribute \PinAttr:I0:HOLD_DETOUR\ : integer;
+  attribute \PinAttr:I0:HOLD_DETOUR\ of \FSM_sequential_CurrentState[1]_i_1\ : label is 190;
   attribute SOFT_HLUTNM of \FSM_sequential_CurrentState[1]_i_1\ : label is "soft_lutpair10";
   attribute FSM_ENCODED_STATES : string;
   attribute FSM_ENCODED_STATES of \FSM_sequential_CurrentState_reg[0]\ : label is "reset:00,increase:10,waitforready:01";
@@ -5812,7 +5816,7 @@ entity Top is
   attribute NotValidForBitStream : boolean;
   attribute NotValidForBitStream of Top : entity is true;
   attribute ECO_CHECKSUM : string;
-  attribute ECO_CHECKSUM of Top : entity is "cc859a57";
+  attribute ECO_CHECKSUM of Top : entity is "40dc954b";
   attribute MULT : integer;
   attribute MULT of Top : entity is 8;
   attribute POWER_OPT_BRAM_CDC : integer;

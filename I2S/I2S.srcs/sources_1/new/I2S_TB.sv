@@ -89,7 +89,7 @@ module I2S_TB();
 //    endtask
 
     // Generate the clocks
-    always #5ns SimulationClock = ~SimulationClock;
+    always #4ns SimulationClock = ~SimulationClock;
 
     initial begin
 
@@ -118,7 +118,7 @@ module I2S_TB();
 //            end
 //        join_any
 
-        #10000 $finish;
+        #20000 $finish;
 
     end
 endmodule
