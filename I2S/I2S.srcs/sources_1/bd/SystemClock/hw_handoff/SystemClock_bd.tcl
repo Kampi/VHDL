@@ -161,27 +161,33 @@ proc create_root_design { parentCell } {
   set Locked [ create_bd_port -dir O Locked ]
   set MCLK [ create_bd_port -dir O -type clk MCLK ]
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {12288013} \
+   CONFIG.FREQ_HZ {12286324} \
  ] $MCLK
   set ResetN [ create_bd_port -dir I -type rst ResetN ]
 
   # Create instance: ClockingWizard, and set properties
   set ClockingWizard [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 ClockingWizard ]
   set_property -dict [ list \
-   CONFIG.CLKOUT1_JITTER {473.813} \
-   CONFIG.CLKOUT1_PHASE_ERROR {351.816} \
+   CONFIG.CLKOUT1_DRIVES {BUFG} \
+   CONFIG.CLKOUT1_JITTER {181.502} \
+   CONFIG.CLKOUT1_PHASE_ERROR {91.957} \
    CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {12.288} \
    CONFIG.CLKOUT2_JITTER {124.615} \
    CONFIG.CLKOUT2_PHASE_ERROR {96.948} \
    CONFIG.CLKOUT2_USED {false} \
    CONFIG.CLK_OUT1_PORT {MCLK} \
    CONFIG.CLK_OUT2_PORT {SystemClock} \
-   CONFIG.MMCM_CLKFBOUT_MULT_F {42.750} \
+   CONFIG.FEEDBACK_SOURCE {FDBK_AUTO} \
+   CONFIG.JITTER_SEL {Min_O_Jitter} \
+   CONFIG.MMCM_BANDWIDTH {HIGH} \
+   CONFIG.MMCM_CLKFBOUT_MULT_F {8.625} \
    CONFIG.MMCM_CLKIN2_PERIOD {10.000} \
-   CONFIG.MMCM_CLKOUT0_DIVIDE_F {62.125} \
+   CONFIG.MMCM_CLKOUT0_DIVIDE_F {87.750} \
    CONFIG.MMCM_CLKOUT1_DIVIDE {1} \
-   CONFIG.MMCM_DIVCLK_DIVIDE {7} \
+   CONFIG.MMCM_COMPENSATION {ZHOLD} \
+   CONFIG.MMCM_DIVCLK_DIVIDE {1} \
    CONFIG.NUM_OUT_CLKS {1} \
+   CONFIG.PRIM_SOURCE {Single_ended_clock_capable_pin} \
    CONFIG.RESET_PORT {resetn} \
    CONFIG.RESET_TYPE {ACTIVE_LOW} \
  ] $ClockingWizard

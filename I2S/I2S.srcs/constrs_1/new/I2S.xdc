@@ -1,6 +1,6 @@
 set_property PACKAGE_PIN L16 [get_ports Clock]
 set_property IOSTANDARD LVCMOS33 [get_ports Clock]
-create_clock -add -name Clock125 -period 8.00 -waveform {0 4} [get_ports { Clock }];
+create_clock -period 8.000 -name Clock125 -waveform {0.000 4.000} -add [get_ports Clock]
 
 set_property PACKAGE_PIN G15 [get_ports ResetN]
 set_property IOSTANDARD LVCMOS33 [get_ports ResetN]
@@ -30,3 +30,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports SCLK]
 
 set_property PACKAGE_PIN W20 [get_ports SD]
 set_property IOSTANDARD LVCMOS33 [get_ports SD]
+
+set_property OFFCHIP_TERM NONE [get_ports MCLK]
+set_property SLEW FAST [get_ports MCLK]

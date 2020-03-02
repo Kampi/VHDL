@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xBED4C57BD4043819",
+      "boundary_crc": "0xBED4C57BDBB00EA4",
       "device": "xc7z010clg400-1",
       "name": "SystemClock",
       "synth_flow_mode": "Hierarchical",
@@ -59,7 +59,7 @@
             "value_src": "ip_prop"
           },
           "FREQ_HZ": {
-            "value": "12288013"
+            "value": "12286324"
           },
           "INSERT_VIP": {
             "value": "0",
@@ -77,11 +77,14 @@
         "vlnv": "xilinx.com:ip:clk_wiz:6.0",
         "xci_name": "SystemClock_clk_wiz_0_0",
         "parameters": {
+          "CLKOUT1_DRIVES": {
+            "value": "BUFG"
+          },
           "CLKOUT1_JITTER": {
-            "value": "473.813"
+            "value": "181.502"
           },
           "CLKOUT1_PHASE_ERROR": {
-            "value": "351.816"
+            "value": "91.957"
           },
           "CLKOUT1_REQUESTED_OUT_FREQ": {
             "value": "12.288"
@@ -101,23 +104,38 @@
           "CLK_OUT2_PORT": {
             "value": "SystemClock"
           },
+          "FEEDBACK_SOURCE": {
+            "value": "FDBK_AUTO"
+          },
+          "JITTER_SEL": {
+            "value": "Min_O_Jitter"
+          },
+          "MMCM_BANDWIDTH": {
+            "value": "HIGH"
+          },
           "MMCM_CLKFBOUT_MULT_F": {
-            "value": "42.750"
+            "value": "8.625"
           },
           "MMCM_CLKIN2_PERIOD": {
             "value": "10.000"
           },
           "MMCM_CLKOUT0_DIVIDE_F": {
-            "value": "62.125"
+            "value": "87.750"
           },
           "MMCM_CLKOUT1_DIVIDE": {
             "value": "1"
           },
+          "MMCM_COMPENSATION": {
+            "value": "ZHOLD"
+          },
           "MMCM_DIVCLK_DIVIDE": {
-            "value": "7"
+            "value": "1"
           },
           "NUM_OUT_CLKS": {
             "value": "1"
+          },
+          "PRIM_SOURCE": {
+            "value": "Single_ended_clock_capable_pin"
           },
           "RESET_PORT": {
             "value": "resetn"

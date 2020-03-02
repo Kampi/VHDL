@@ -32,7 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity I2S_Transmitter is
-    Generic (   MULT    : INTEGER := 4;                                         -- Integer multiplier between SCLK and MCLK (must be 4 or higher)
+    Generic (   MULT    : INTEGER := 8;                                         -- Integer multiplier between SCLK and MCLK (must be 4 or higher)
                 WIDTH   : INTEGER := 16                                         -- Data width per channel
                 );
     Port (  MCLK    : in STD_LOGIC;                                             -- Master clock

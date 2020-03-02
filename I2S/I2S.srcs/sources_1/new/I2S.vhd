@@ -37,13 +37,7 @@ entity I2S is
                 );
     Port (  ACLK     : in STD_LOGIC;                                        -- AXI-Stream interface clock
             ARESETn  : in STD_LOGIC;                                        -- Reset (active low)
-            
-            -- AXI4 Stream interface
---            TDATA    : in STD_LOGIC_VECTOR(((WIDTH * 2) - 1) downto 0);     -- The primary payload that is used to provide the data
---            TREADY   : out STD_LOGIC;                                       -- Indicates that the slave can accept a transfer in the current cycle
---            TVALID   : in STD_LOGIC;                                        -- Indicates that the master is driving a valid transfer
---            TLAST    : in STD_LOGIC;                                        -- Indicates the boundary of a packet
-            
+
             -- I2S interface
             MCLK     : in STD_LOGIC;                                        -- Master audio clock. Must be an integer ration of the L/R clock signal
             LRCLK    : out STD_LOGIC;                                       -- I2S L/R clock
@@ -58,7 +52,6 @@ architecture I2S_Arch of I2S is
 
     signal CurrentState : FIFO_State_t  := Reset;
 
-    signal FIFO_Valid   : STD_LOGIC := '0';
     signal FIFO         : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0) := (others => '0');
 
     signal ROM_Data     : STD_LOGIC_VECTOR((WIDTH - 1) downto 0) := (others => '0');
@@ -152,41 +145,4 @@ begin
             end if;
         end if;
     end process;
-
---    process(ACLK)
---    begin
---        if(rising_edge(ACLK)) then
---            if(ARESETn = '0') then
---                CurrentState <= Reset;
---            else
---                case CurrentState is
-
---                    when Reset =>
---                        FIFO_Valid <= '0';
---                        --FIFO <= (others => '0');
---                        TREADY <= '1';
---                        CurrentState <= Waiting;
-
---                    when Waiting =>
---                        if((TVALID = '1') and (FIFO_Valid = '0')) then
---                            TREADY <= '0';
---                            FIFO_Valid <= '1';
---                            FIFO <= TDATA;
---                            CurrentState <= Transmit;
---                        else
---                            CurrentState <= Waiting;
---                        end if;
- 
---                    when Transmit =>
---                        if(FIFO_Valid = '1') then
---                            CurrentState <= Transmit;
---                        else
---                            TREADY <= '1';
---                            CurrentState <= Waiting;
---                        end if;
- 
---                end case;
---            end if;
---        end if;
---    end process;
 end I2S_Arch;
