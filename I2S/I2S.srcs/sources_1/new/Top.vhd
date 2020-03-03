@@ -8,8 +8,8 @@
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
--- Description:         Top design for the hardware implementation of the I2S audio project.
--- 
+-- Description:         Top design for the hardware implementation of the I2S audio project from
+--                      https://www.kampis-elektroecke.de/fpga/i2s/
 -- Dependencies: 
 -- 
 -- Revision:
