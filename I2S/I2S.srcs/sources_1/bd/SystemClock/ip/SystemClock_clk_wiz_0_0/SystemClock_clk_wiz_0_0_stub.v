@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-// Date        : Mon Mar  2 15:13:57 2020
+// Date        : Wed Feb 12 08:03:13 2020
 // Host        : 40B0341C1F56 running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub
-//               C:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/I2S.srcs/sources_1/bd/SystemClock/ip/SystemClock_clk_wiz_0_0/SystemClock_clk_wiz_0_0_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top SystemClock_clk_wiz_0_0 -prefix
+//               SystemClock_clk_wiz_0_0_ SystemClock_clk_wiz_0_0_stub.v
 // Design      : SystemClock_clk_wiz_0_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z010clg400-1
