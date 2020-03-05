@@ -1,9 +1,0 @@
-# compile verilog/system verilog design source files
-verilog xil_defaultlib  --include "../../../../../AXI4S-ROM.srcs/sources_1/bd/Receiver/ipshared/8713/hdl" --include "C:/Xilinx/Vivado/2018.3/data/xilinx_vip/include" \
-"Testbench_time_synth.v" \
-
-sv xil_defaultlib  --include "../../../../../AXI4S-ROM.srcs/sources_1/bd/Receiver/ipshared/8713/hdl" --include "C:/Xilinx/Vivado/2018.3/data/xilinx_vip/include" \
-"../../../../../AXI4S-ROM.srcs/sim_1/new/Testbench.sv" \
-
-# Do not sort compile order
-nosort

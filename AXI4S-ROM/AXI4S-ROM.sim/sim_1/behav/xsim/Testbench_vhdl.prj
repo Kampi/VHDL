@@ -1,8 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../AXI4S-ROM.ip_user_files/bd/Receiver/sim/Receiver.vhd" \
-"../../../../AXI4S-ROM.ip_user_files/bd/DataROM/sim/DataROM.vhd" \
-"../../../../AXI4S-ROM.srcs/sources_1/new/AXI4S_ROM.vhd" \
-
-# Do not sort compile order
-nosort

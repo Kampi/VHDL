@@ -1,6 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../StreamVerification.ip_user_files/bd/StreamWriter/sim/StreamWriter.vhd" \
-
-# Do not sort compile order
-nosort

@@ -1,4 +1,0 @@
-vhdl xil_defaultlib  \
-"../../../bd/DataROM/sim/DataROM.vhd" \
-
-nosort
