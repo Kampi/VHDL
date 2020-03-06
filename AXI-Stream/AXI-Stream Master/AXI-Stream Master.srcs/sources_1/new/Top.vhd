@@ -47,12 +47,11 @@ end Top;
 
 architecture Top_Arch of Top is
 
-    type State_t is (Reset, WaitForTriggerHigh, WaitForTriggerLow, Ready, WaitForSlave);
+    type State_t is (Reset, WaitForTriggerHigh, WaitForTriggerLow, WaitForReady, WaitForSlave);
 
     signal TransmitState    : State_t   := Reset;
 
-    signal Counter          : INTEGER   := 1;
-    signal SampleCounter    : INTEGER   := 0;
+    signal Counter          : INTEGER   := 0;
 
 begin
 
@@ -66,8 +65,7 @@ begin
                 case TransmitState is
 
                     when Reset =>
-                        Counter <= 1;
-                        SampleCounter <= 0;
+                        Counter <= 0;
                         TDATA_TXD <= (others => '0');
                         TVALID_TXD <= '0';
                         TLAST_TXD <= '0';
@@ -82,48 +80,41 @@ begin
                    
                     when WaitForTriggerLow =>
                         if(Trigger = '0') then
-                            TransmitState <= Ready;
+                            TransmitState <= WaitForReady;
                         else
                             TransmitState <= WaitForTriggerLow;
                         end if;                 
 
-                    when Ready =>
+                    when WaitForReady =>
                         TDATA_TXD <= std_logic_vector(to_unsigned(Counter, 32));
                         TVALID_TXD <= '1';
                         
-                        if(SampleCounter < 99) then
+                        if(Counter < 99) then
                             TLAST_TXD <= '0';
                         else
                             TLAST_TXD <= '1';
                         end if;
 
-                        if(TREADY_TXD = '1') then
-                            TransmitState <= WaitForSlave;
-                        else
-                            TransmitState <= Ready;
-                        end if;
+                        TransmitState <= WaitForSlave;
 
                     when WaitForSlave =>
                         if(TREADY_TXD = '1') then
                             TVALID_TXD <= '0';
                             TLAST_TXD <= '0';
-
-                            if(SampleCounter < 99) then
+                            
+                            if(Counter < 99) then
                                 Counter <= Counter + 1;
-                                SampleCounter <= SampleCounter + 1;
-
-                                TransmitState <= Ready;
+                                TransmitState <= WaitForReady;
                             else
                                 Counter <= 0;
-                                SampleCounter <= 0;
                                 TransmitState <= WaitForTriggerHigh;
                             end if;
                         else
                             TransmitState <= WaitForSlave;
                         end if;
-
                 end case;
             end if;
         end if;
     end process;
+       
 end Top_Arch;
