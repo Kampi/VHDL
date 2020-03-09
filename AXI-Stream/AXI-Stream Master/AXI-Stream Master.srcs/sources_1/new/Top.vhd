@@ -7,9 +7,9 @@
 -- Module Name:         Top - Top_Arch
 -- Project Name: 
 -- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
+-- Tool Versions: 		Vivado 2019.2
+-- Description: 		AXI-Stream Master implementation from
+--                      <>
 -- Dependencies: 
 -- 
 -- Revision:
@@ -86,7 +86,7 @@ begin
                         end if;                 
 
                     when WaitForReady =>
-                        TDATA_TXD <= std_logic_vector(to_unsigned(Counter, 32));
+                        TDATA_TXD <= STD_LOGIC_VECTOR(to_unsigned(Counter, 32));
                         TVALID_TXD <= '1';
                         
                         if(Counter < 99) then
@@ -116,5 +116,4 @@ begin
             end if;
         end if;
     end process;
-       
 end Top_Arch;

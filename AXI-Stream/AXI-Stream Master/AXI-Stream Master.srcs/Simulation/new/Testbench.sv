@@ -1,20 +1,20 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company:         https://www.kampis-elektroecke.de
-// Engineer:        Daniel Kampert
+// Company:         	https://www.kampis-elektroecke.de
+// Engineer:        	Daniel Kampert
 // 
-// Create           Date: 05.03.2020 11:44:57
+// Create           	Date: 05.03.2020 11:44:57
 // Design Name: 
-// Module Name:     Testbench
+// Module Name:     	Testbench
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
-// Description:     Testbench for the AXI-Stream Master project.
-// 
+// Description:     	Testbench for the AXI-Stream Master project from
+//                      <>
 // Dependencies: 
 // 
 // Revision:
-//  Revision        0.01 - File Created
+//  Revision        	0.01 - File Created
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
@@ -57,10 +57,9 @@ module Testbench();
 
     StreamReader_axi4stream_vip_0_0_slv_t           ReadAgent;
 
-    axi4stream_monitor_transaction                 slv_monitor_transaction;
-    axi4stream_monitor_transaction                 slave_moniter_transaction_queue[$];
-    xil_axi4stream_uint                            slave_moniter_transaction_queue_size = 0;
-    axi4stream_transaction                         wr_transaction;
+    axi4stream_monitor_transaction                 SlaveMonitor_Transaction;
+    axi4stream_monitor_transaction                 SlaveMonitor_Transaction_Queue[$];
+    xil_axi4stream_uint                            SlaveMonitor_Transaction_QueueSize = 0;
 
     task SlaveReceive();
         axi4stream_ready_gen                           ready_gen;
@@ -100,15 +99,15 @@ module Testbench();
             end
         join_any
         
-        #10000 $finish;
+        #10000ns $finish;
 
     end
 
     initial begin
         forever begin
-            ReadAgent.monitor.item_collected_port.get(slv_monitor_transaction);
-            slave_moniter_transaction_queue.push_back(slv_monitor_transaction);
-            slave_moniter_transaction_queue_size++;
+            ReadAgent.monitor.item_collected_port.get(SlaveMonitor_Transaction);
+            SlaveMonitor_Transaction_Queue.push_back(SlaveMonitor_Transaction);
+            SlaveMonitor_Transaction_QueueSize++;
         end
     end
 endmodule
