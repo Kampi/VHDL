@@ -37,7 +37,7 @@ entity Top is
             
             Trigger      : in STD_LOGIC;
 
-            -- Transmission interface
+            -- AXI-Stream Interface
             TDATA_TXD   : out STD_LOGIC_VECTOR(31 downto 0);
             TREADY_TXD  : in STD_LOGIC;
             TVALID_TXD  : out STD_LOGIC;
@@ -55,7 +55,6 @@ architecture Top_Arch of Top is
 
 begin
 
-    -- Data transmission path
     process(clk, resetn)
     begin
         if(rising_edge(clk)) then

@@ -37,7 +37,7 @@ entity Top is
     Port (  clk         : in STD_LOGIC;
             resetn      : in STD_LOGIC;
 
-            -- Transmission interface
+            -- AXI-Stream Interface
             TDATA_RXD   : in STD_LOGIC_VECTOR(31 downto 0);
             TREADY_RXD  : out STD_LOGIC;
             TVALID_RXD  : in STD_LOGIC;
@@ -60,7 +60,6 @@ architecture Top_Arch of Top is
 
 begin
 
-    -- Data transmission path
     process(clk, resetn)
     begin
         if(rising_edge(clk)) then
