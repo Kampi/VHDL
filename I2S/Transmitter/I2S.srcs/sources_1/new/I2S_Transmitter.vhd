@@ -8,8 +8,8 @@
 -- Project Name: 
 -- Target Devices:      XC7Z010CLG400-1
 -- Tool Versions:       Vivado 2019.2
--- Description:         I2S transmitter module.
--- 
+-- Description:         I2S transmitter module from
+--                      https://www.kampis-elektroecke.de/fpga/i2s/
 -- Dependencies: 
 -- 
 -- Revision:

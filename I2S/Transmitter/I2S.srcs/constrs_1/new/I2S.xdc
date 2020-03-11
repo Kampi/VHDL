@@ -1,3 +1,4 @@
+# PL clock
 set_property PACKAGE_PIN L16 [get_ports Clock]
 set_property IOSTANDARD LVCMOS33 [get_ports Clock]
 create_clock -period 8.000 -name Clock125 -waveform {0.000 4.000} -add [get_ports Clock]

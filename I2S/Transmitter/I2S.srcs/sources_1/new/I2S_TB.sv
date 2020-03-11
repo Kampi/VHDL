@@ -9,7 +9,8 @@
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
-// Description:         Testbench for the I2S audio project.
+// Description:         Testbench for the I2S audio project from
+//                      https://www.kampis-elektroecke.de/fpga/i2s/
 // 
 // Dependencies: 
 // 
