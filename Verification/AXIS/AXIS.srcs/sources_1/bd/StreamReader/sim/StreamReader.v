@@ -1,7 +1,7 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-//Date        : Mon Feb  3 09:39:54 2020
+//Date        : Mon Mar  9 08:28:44 2020
 //Host        : 40B0341C1F56 running 64-bit major release  (build 9200)
 //Command     : generate_target StreamReader.bd
 //Design      : StreamReader
