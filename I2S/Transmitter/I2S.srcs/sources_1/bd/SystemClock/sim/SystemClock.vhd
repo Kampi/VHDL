@@ -1,7 +1,7 @@
 --Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
---Date        : Tue Mar  3 11:05:20 2020
+--Date        : Thu Mar 12 15:05:28 2020
 --Host        : 40B0341C1F56 running 64-bit major release  (build 9200)
 --Command     : generate_target SystemClock.bd
 --Design      : SystemClock
@@ -42,7 +42,7 @@ architecture STRUCTURE of SystemClock is
   attribute X_INTERFACE_PARAMETER : string;
   attribute X_INTERFACE_PARAMETER of ClockIn : signal is "XIL_INTERFACENAME CLK.CLOCKIN, CLK_DOMAIN SystemClock_ClockIn, FREQ_HZ 125000000, INSERT_VIP 0, PHASE 0.000";
   attribute X_INTERFACE_INFO of MCLK : signal is "xilinx.com:signal:clock:1.0 CLK.MCLK CLK";
-  attribute X_INTERFACE_PARAMETER of MCLK : signal is "XIL_INTERFACENAME CLK.MCLK, CLK_DOMAIN /ClockingWizard_clk_out1, FREQ_HZ 12288013, INSERT_VIP 0, PHASE 0.0";
+  attribute X_INTERFACE_PARAMETER of MCLK : signal is "XIL_INTERFACENAME CLK.MCLK, CLK_DOMAIN /ClockingWizard_clk_out1, FREQ_HZ 12286324, INSERT_VIP 0, PHASE 0.0";
   attribute X_INTERFACE_INFO of ResetN : signal is "xilinx.com:signal:reset:1.0 RST.RESETN RST";
   attribute X_INTERFACE_PARAMETER of ResetN : signal is "XIL_INTERFACENAME RST.RESETN, INSERT_VIP 0, POLARITY ACTIVE_LOW";
 begin

@@ -35,8 +35,8 @@ entity I2S is
     Generic (   MULT          : INTEGER := 8;                               -- Integer multiplier between SCLK and MCLK (must be 4 or higher)
                 WIDTH         : INTEGER := 16                               -- Data width per channel
                 );
-    Port (  ACLK     : in STD_LOGIC;                                        -- AXI-Stream interface clock
-            ARESETn  : in STD_LOGIC;                                        -- Reset (active low)
+    Port (  aclk     : in STD_LOGIC;                                        -- AXI-Stream interface clock
+            aresetn  : in STD_LOGIC;                                        -- Reset (active low)
 
             -- I2S interface
             MCLK     : in STD_LOGIC;                                        -- Master audio clock. Must be an integer ration of the L/R clock signal
@@ -48,7 +48,7 @@ end I2S;
 
 architecture I2S_Arch of I2S is
 
-    type FIFO_State_t is (Reset, WaitForReady, Increase);
+    type FIFO_State_t is (Reset, WaitForReady, IncreaseAddress, WaitForStart);
 
     signal CurrentState : FIFO_State_t  := Reset;
 
@@ -99,46 +99,50 @@ begin
                                                 SD => SD
                                                 );
 
-    ROM : SineROM port map (Clock => ACLK,
+    ROM : SineROM port map (Clock => aclk,
                             Address => ROM_Address,
                             DataOut => ROM_Data
                             );
 
-    process(ACLK, ARESETn)
+    process(aclk)
     begin
-        if(ARESETn = '0') then
-            Valid <= '0';
-            Counter <= 0;
-            CurrentState <= Reset;
-        else
-            if(rising_edge(ACLK)) then
+        if(rising_edge(aclk)) then
+            if(aresetn = '0') then
+                Valid <= '0';
+                Counter <= 0;
+                CurrentState <= Reset;
+            else
                 case CurrentState is
                     when Reset =>
+                        CurrentState <= IncreaseAddress;
+
+                    when IncreaseAddress =>
+                        if(Counter < 99) then
+                            Counter <= Counter + 1;
+                        else
+                            Counter <= 0;
+                        end if;
+
                         CurrentState <= WaitForReady;
 
                     when WaitForReady =>
                         if(Ready = '1') then
                             Valid <= '1';
-                            if(Counter < 99) then
-                                Counter <= Counter + 1;
-                            else
-                                Counter <= 0;
-                            end if;
                             
                             ROM_Address <= STD_LOGIC_VECTOR(to_unsigned(Counter, ROM_Address'length));
 
                             FIFO <= ROM_Data & x"0000";
-                            CurrentState <= Increase;
+                            CurrentState <= WaitForStart;
                         else
                             CurrentState <= WaitForReady;
                         end if;
 
-                    when Increase =>
+                    when WaitForStart =>
                         if(Ready = '0') then
                             Valid <= '0';
-                            CurrentState <= WaitForReady;
+                            CurrentState <= IncreaseAddress;
                         else
-                            CurrentState <= Increase;
+                            CurrentState <= WaitForStart;
                         end if;
 
                 end case;

@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x6042B4500137E0F5",
+      "boundary_crc": "0x6042B450D55CC6B2",
       "device": "xc7z010clg400-1",
       "name": "SineROM",
       "synth_flow_mode": "Hierarchical",
@@ -10,6 +10,37 @@
     },
     "design_tree": {
       "SineROM": ""
+    },
+    "interface_ports": {
+      "BRAM_PORTA_0": {
+        "mode": "Slave",
+        "vlnv": "xilinx.com:interface:bram_rtl:1.0",
+        "parameters": {
+          "MEM_SIZE": {
+            "value": "8192",
+            "value_src": "default"
+          },
+          "MEM_WIDTH": {
+            "value": "32",
+            "value_src": "default"
+          },
+          "MEM_ECC": {
+            "value": "NONE",
+            "value_src": "default"
+          },
+          "MASTER_TYPE": {
+            "value": "OTHER",
+            "value_src": "default"
+          },
+          "READ_WRITE_MODE": {
+            "value": "READ_ONLY"
+          },
+          "READ_LATENCY": {
+            "value": "1",
+            "value_src": "default"
+          }
+        }
+      }
     },
     "ports": {
       "Address": {
@@ -50,7 +81,7 @@
         "xci_name": "SineROM_blk_mem_gen_0_0",
         "parameters": {
           "Coe_File": {
-            "value": "../../../../../../SineWave.coe"
+            "value": "../../../../../../../SineWave.coe"
           },
           "Enable_32bit_Address": {
             "value": "false"
@@ -86,6 +117,14 @@
             "value": "Stand_Alone"
           }
         }
+      }
+    },
+    "interface_nets": {
+      "BRAM_PORTA_0_1": {
+        "interface_ports": [
+          "BRAM_PORTA_0",
+          "SineROM/BRAM_PORTA"
+        ]
       }
     },
     "nets": {

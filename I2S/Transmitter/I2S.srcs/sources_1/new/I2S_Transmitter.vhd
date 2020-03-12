@@ -8,8 +8,8 @@
 -- Project Name: 
 -- Target Devices:      XC7Z010CLG400-1
 -- Tool Versions:       Vivado 2019.2
--- Description:         I2S transmitter module from
---                      https://www.kampis-elektroecke.de/fpga/i2s/
+-- Description:         I2S transmitter module.
+-- 
 -- Dependencies: 
 -- 
 -- Revision:
@@ -59,79 +59,85 @@ architecture I2S_Transmitter_Arch of I2S_Transmitter is
     signal Data_Int         : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0) := (others => '0');
 
     signal SCLK_Int         : STD_LOGIC := '0';
-    signal ClockEnable      : STD_LOGIC := '0';
+    signal Enable           : STD_LOGIC := '0';
 
 begin
 
-    SCLK_Gen : process(MCLK, ResetN)
+    SCLK_Gen : process(MCLK)
         variable Counter    : INTEGER := 0;
     begin
-        if(ResetN = '0') then
-            Counter := 0;
-        elsif(falling_edge(MCLK)) then
-            if(Counter < ((MULT / 2) - 1)) then
-                Counter := Counter + 1;
-            else
-                SCLK_Int <= not SCLK_Int;
+        if(falling_edge(MCLK)) then
+            if(ResetN = '0') then
                 Counter := 0;
+            else
+                if(Counter < ((MULT / 2) - 1)) then
+                    Counter := Counter + 1;
+                else
+                    SCLK_Int <= not SCLK_Int;
+                    Counter := 0;
+                end if;
             end if;
         end if;
     end process;
 
-    I2S : process(SCLK_Int, ResetN)
+    I2S : process(SCLK_Int)
         variable BitCounter : INTEGER := 0;
     begin
-        if(ResetN = '0') then
-            Ready <= '0';
-            ClockEnable <= '0';
-            LRCLK <= '1';
-            SD <= '0';
-            Data_Int <= (others => '0');
-            CurrentState <= Reset;
-        elsif(falling_edge(SCLK_Int)) then
-            case CurrentState is
-
-                when Reset =>
-                    BitCounter := 0;
-                    Ready <= '1';
-                    ClockEnable <= '1';
-                    CurrentState <= Idle;
-
-                when Idle =>
-                    if(Valid = '1') then
+        if(falling_edge(SCLK_Int)) then
+            if(ResetN = '0') then
+                CurrentState <= Reset;
+            else
+                case CurrentState is
+                    when Reset =>
                         BitCounter := 0;
+
+                        Enable <= '0';
                         Ready <= '0';
-                        LRCLK <= '0';
-                        Data_Int <= Data;
+                        SD <= '0';
+                        Data_Int <= (others => '0');
 
-                        CurrentState <= Transmit;
-                    else
                         CurrentState <= Idle;
-                    end if;
 
-                when Transmit =>
-                    BitCounter := BitCounter + 1;
-
-                    if(BitCounter < WIDTH) then
+                    when Idle =>
+                        BitCounter := 0;
+                        Enable <= '1';
                         LRCLK <= '0';
-                    else
-                        LRCLK <= '1';
-                    end if;
 
-                    if(BitCounter < ((2 * WIDTH) - 1)) then
-                        CurrentState <= Transmit;
-                    else
-                        Ready <= '1';
-                        CurrentState <= Idle;
-                    end if;
+                        if(Valid = '1') then
+                            Ready <= '0';
+                            Data_Int <= Data;
 
-                    Data_Int <= Data_Int(((2 * WIDTH) - 2) downto 0) & "0";
-                    SD <= Data_Int((2 * WIDTH) - 1);
+                            CurrentState <= Transmit;
+                        else
+                            Ready <= '1';
 
-            end case;
-        end if;
+                            CurrentState <= Idle;
+                        end if;
+
+                    when Transmit =>
+                        BitCounter := BitCounter + 1;
+
+                        Data_Int <= Data_Int(((2 * WIDTH) - 2) downto 0) & "0";
+                        SD <= Data_Int((2 * WIDTH) - 1);
+
+                        if(BitCounter < WIDTH) then
+                            LRCLK <= '0';
+                        else
+                            LRCLK <= '1';
+                        end if;
+
+                        if(BitCounter < ((2 * WIDTH) - 1)) then
+                            CurrentState <= Transmit;
+                        else
+                            Ready <= '1';
+                            CurrentState <= Idle;
+                        end if;
+
+                    end case;
+                end if;
+            end if;
     end process;
 
-    SCLK <= SCLK_Int and ClockEnable;
+    SCLK <= SCLK_Int and Enable;
 
 end I2S_Transmitter_Arch;

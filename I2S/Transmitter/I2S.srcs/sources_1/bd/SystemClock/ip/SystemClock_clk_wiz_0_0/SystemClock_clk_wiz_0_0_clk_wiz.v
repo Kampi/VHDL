@@ -56,7 +56,7 @@
 //  Output     Output      Phase    Duty Cycle   Pk-to-Pk     Phase
 //   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
 //----------------------------------------------------------------------------
-// ____MCLK__12.28801______0.000______50.0______473.813____351.816
+// ____MCLK__12.28632______0.000______50.0______181.502_____91.957
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
@@ -123,15 +123,15 @@ wire clk_in2_SystemClock_clk_wiz_0_0;
   wire        reset_high;
 
   MMCME2_ADV
-  #(.BANDWIDTH            ("OPTIMIZED"),
+  #(.BANDWIDTH            ("HIGH"),
     .CLKOUT4_CASCADE      ("FALSE"),
     .COMPENSATION         ("ZHOLD"),
     .STARTUP_WAIT         ("FALSE"),
-    .DIVCLK_DIVIDE        (7),
-    .CLKFBOUT_MULT_F      (42.750),
+    .DIVCLK_DIVIDE        (1),
+    .CLKFBOUT_MULT_F      (8.625),
     .CLKFBOUT_PHASE       (0.000),
     .CLKFBOUT_USE_FINE_PS ("FALSE"),
-    .CLKOUT0_DIVIDE_F     (62.125),
+    .CLKOUT0_DIVIDE_F     (87.750),
     .CLKOUT0_PHASE        (0.000),
     .CLKOUT0_DUTY_CYCLE   (0.500),
     .CLKOUT0_USE_FINE_PS  ("FALSE"),

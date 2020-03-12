@@ -13,7 +13,7 @@
 -- Dependencies: 
 -- 
 -- Revision:
---      Revision 0.01 - File Created
+--      Revision        0.01 - File Created
 --
 -- Additional Comments:
 -- 
@@ -49,12 +49,8 @@ end Top;
 architecture Top_Arch of Top is
 
     signal SystemResetN : STD_LOGIC := '0';
-    signal SysClock     : STD_LOGIC := '0';
     signal MCLK_DCM     : STD_LOGIC := '0';
     signal Locked       : STD_LOGIC := '0';
-
-    -- AXI4 stream signals
-    signal ARESETn      : STD_LOGIC := '1';
 
     component I2S is    
         Generic ( MULT   : INTEGER := 4;
@@ -79,7 +75,6 @@ architecture Top_Arch of Top is
 
 begin
 
-    -- Generate MLCK
     InputClock : SystemClock port map ( ClockIn => Clock,
                                         ResetN => ResetN,
                                         MCLK => MCLK_DCM,
