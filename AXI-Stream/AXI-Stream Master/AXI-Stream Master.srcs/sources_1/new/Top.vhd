@@ -8,7 +8,7 @@
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 		Vivado 2019.2
--- Description: 		AXI-Stream Master implementation from
+-- Description: 		AXI-Stream master implementation from
 --                      <>
 -- Dependencies: 
 -- 
@@ -32,12 +32,14 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity Top is
-    Port (  clk         : in STD_LOGIC;
-            resetn      : in STD_LOGIC;
+    Generic (   LENGTH  : INTEGER := 100
+                );
+    Port (  aclk        : in STD_LOGIC;
+            aresetn     : in STD_LOGIC;
             
             Trigger      : in STD_LOGIC;
 
-            -- AXI-Stream Interface
+            -- AXI-Stream interface
             TDATA_TXD   : out STD_LOGIC_VECTOR(31 downto 0);
             TREADY_TXD  : in STD_LOGIC;
             TVALID_TXD  : out STD_LOGIC;
@@ -50,19 +52,20 @@ architecture Top_Arch of Top is
     type State_t is (Reset, WaitForTriggerHigh, WaitForTriggerLow, WaitForReady, WaitForSlave);
 
     signal TransmitState    : State_t   := Reset;
+    
+    signal IsLast           : STD_LOGIC := '0';
 
     signal Counter          : INTEGER   := 0;
 
 begin
 
-    process(clk, resetn)
+    process(aclk)
     begin
-        if(rising_edge(clk)) then
-            if(resetn = '0') then
+        if(rising_edge(aclk)) then
+            if(aresetn = '0') then
                 TransmitState <= Reset;
             else
                 case TransmitState is
-
                     when Reset =>
                         Counter <= 0;
                         TDATA_TXD <= (others => '0');
@@ -85,10 +88,10 @@ begin
                         end if;                 
 
                     when WaitForReady =>
-                        TDATA_TXD <= STD_LOGIC_VECTOR(to_unsigned(Counter, 32));
+                        TDATA_TXD <= std_logic_vector(to_unsigned(Counter, 32));
                         TVALID_TXD <= '1';
                         
-                        if(Counter < 99) then
+                        if(Counter < (LENGTH - 1)) then
                             TLAST_TXD <= '0';
                         else
                             TLAST_TXD <= '1';
@@ -101,7 +104,7 @@ begin
                             TVALID_TXD <= '0';
                             TLAST_TXD <= '0';
                             
-                            if(Counter < 99) then
+                            if(Counter < (LENGTH - 1)) then
                                 Counter <= Counter + 1;
                                 TransmitState <= WaitForReady;
                             else

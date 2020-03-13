@@ -8,7 +8,7 @@
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 		Vivado 2019.2
--- Description:         AXI-Stream Slave implementation from
+-- Description:         AXI-Stream slave implementation from
 --                      <>
 -- Dependencies: 
 -- 
@@ -34,10 +34,10 @@ use IEEE.NUMERIC_STD.ALL;
 entity Top is
     Generic (   FIFO_SIZE   : INTEGER := 32
                 );
-    Port (  clk         : in STD_LOGIC;
-            resetn      : in STD_LOGIC;
+    Port (  aclk        : in STD_LOGIC;
+            aresetn     : in STD_LOGIC;
 
-            -- AXI-Stream Interface
+            -- AXI-Stream interface
             TDATA_RXD   : in STD_LOGIC_VECTOR(31 downto 0);
             TREADY_RXD  : out STD_LOGIC;
             TVALID_RXD  : in STD_LOGIC;
@@ -60,10 +60,10 @@ architecture Top_Arch of Top is
 
 begin
 
-    process(clk, resetn)
+    process(aclk)
     begin
-        if(rising_edge(clk)) then
-            if(resetn = '0') then
+        if(rising_edge(aclk)) then
+            if(aresetn = '0') then
                 CurrentState <= Reset;
             else
                 case CurrentState is
