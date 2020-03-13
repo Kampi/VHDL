@@ -25,12 +25,11 @@ set_property IOSTANDARD LVCMOS33 [get_ports MCLK]
 
 set_property PACKAGE_PIN U20 [get_ports LRCLK]
 set_property IOSTANDARD LVCMOS33 [get_ports LRCLK]
+set_property OFFCHIP_TERM NONE [get_ports MCLK]
+set_property SLEW FAST [get_ports MCLK]
 
 set_property PACKAGE_PIN V20 [get_ports SCLK]
 set_property IOSTANDARD LVCMOS33 [get_ports SCLK]
 
 set_property PACKAGE_PIN W20 [get_ports SD]
 set_property IOSTANDARD LVCMOS33 [get_ports SD]
-
-set_property OFFCHIP_TERM NONE [get_ports MCLK]
-set_property SLEW FAST [get_ports MCLK]

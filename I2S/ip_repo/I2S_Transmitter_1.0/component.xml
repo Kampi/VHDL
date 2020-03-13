@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <spirit:vendor>www.Kampis-Elektroecke.com</spirit:vendor>
+  <spirit:library>Kampis-Elektroecke</spirit:library>
+  <spirit:name>AXIS_I2S_Transmitter</spirit:name>
+  <spirit:version>1.0</spirit:version>
+  <spirit:busInterfaces>
+    <spirit:busInterface>
+      <spirit:name>AXIS_RXD</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="axis" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="axis_rtl" spirit:version="1.0"/>
+      <spirit:slave/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>TDATA</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>TDATA_RXD</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>TVALID</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>TVALID_RXD</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>TREADY</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>TREADY_RXD</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>aresetn</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset_rtl" spirit:version="1.0"/>
+      <spirit:slave/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RST</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>aresetn</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>POLARITY</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.ARESETN.POLARITY" spirit:choiceRef="choice_list_9d8b0d81">ACTIVE_LOW</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>aclk</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock_rtl" spirit:version="1.0"/>
+      <spirit:slave/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>CLK</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>aclk</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>ASSOCIATED_RESET</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.ACLK.ASSOCIATED_RESET">aresetn</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ASSOCIATED_BUSIF</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.ACLK.ASSOCIATED_BUSIF">AXIS_RXD</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>FREQ_HZ</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.ACLK.FREQ_HZ">100000000</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+  </spirit:busInterfaces>
+  <spirit:model>
+    <spirit:views>
+      <spirit:view>
+        <spirit:name>xilinx_vhdlsynthesis</spirit:name>
+        <spirit:displayName>VHDL Synthesis</spirit:displayName>
+        <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:synthesis</spirit:envIdentifier>
+        <spirit:language>vhdl</spirit:language>
+        <spirit:modelName>AXIS_I2S</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_vhdlsynthesis_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>c9cf9056</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_vhdlbehavioralsimulation</spirit:name>
+        <spirit:displayName>VHDL Simulation</spirit:displayName>
+        <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:simulation</spirit:envIdentifier>
+        <spirit:language>vhdl</spirit:language>
+        <spirit:modelName>AXIS_I2S</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_vhdlbehavioralsimulation_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>c9cf9056</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_xpgui</spirit:name>
+        <spirit:displayName>UI Layout</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:xgui.ui</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_xpgui_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>87da570b</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>bd_tcl</spirit:name>
+        <spirit:displayName>Block Diagram</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:block.diagram</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>bd_tcl_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>16328387</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+    </spirit:views>
+    <spirit:ports>
+      <spirit:port>
+        <spirit:name>aclk</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>aresetn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>TDATA_RXD</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">31</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC_VECTOR</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>TREADY_RXD</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>TVALID_RXD</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>MCLK</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>LRCLK</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>SCLK</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>SD</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+    </spirit:ports>
+    <spirit:modelParameters>
+      <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="INTEGER">
+        <spirit:name>FIFO_SIZE</spirit:name>
+        <spirit:displayName>Fifo Size</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.FIFO_SIZE">32</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter spirit:dataType="INTEGER">
+        <spirit:name>MULT</spirit:name>
+        <spirit:displayName>Mult</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.MULT">8</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter spirit:dataType="INTEGER">
+        <spirit:name>WIDTH</spirit:name>
+        <spirit:displayName>Width</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.WIDTH">16</spirit:value>
+      </spirit:modelParameter>
+    </spirit:modelParameters>
+  </spirit:model>
+  <spirit:choices>
+    <spirit:choice>
+      <spirit:name>choice_list_1aac4ca5</spirit:name>
+      <spirit:enumeration>16</spirit:enumeration>
+      <spirit:enumeration>24</spirit:enumeration>
+      <spirit:enumeration>32</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_9d8b0d81</spirit:name>
+      <spirit:enumeration>ACTIVE_HIGH</spirit:enumeration>
+      <spirit:enumeration>ACTIVE_LOW</spirit:enumeration>
+    </spirit:choice>
+  </spirit:choices>
+  <spirit:fileSets>
+    <spirit:fileSet>
+      <spirit:name>xilinx_vhdlsynthesis_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>hdl/I2S_Transmitter.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/Top.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>CHECKSUM_943f0e9a</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_vhdlbehavioralsimulation_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>hdl/I2S_Transmitter.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/Top.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>xgui/AXIS_I2S_Transmitter_v1_0.tcl</spirit:name>
+        <spirit:fileType>tclSource</spirit:fileType>
+        <spirit:userFileType>CHECKSUM_87da570b</spirit:userFileType>
+        <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>bd_tcl_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>bd/bd.tcl</spirit:name>
+        <spirit:fileType>tclSource</spirit:fileType>
+      </spirit:file>
+    </spirit:fileSet>
+  </spirit:fileSets>
+  <spirit:description>AXI-Stream I2S transmitter.</spirit:description>
+  <spirit:parameters>
+    <spirit:parameter>
+      <spirit:name>Component_Name</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">I2S_Transmitter_v1_0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_SIZE</spirit:name>
+      <spirit:displayName>Fifo Size</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_SIZE">32</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>MULT</spirit:name>
+      <spirit:displayName>Multiplier</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.MULT" spirit:minimum="4" spirit:maximum="8" spirit:rangeType="long">8</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>WIDTH</spirit:name>
+      <spirit:displayName>Width</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.WIDTH" spirit:choiceRef="choice_list_1aac4ca5">16</spirit:value>
+    </spirit:parameter>
+  </spirit:parameters>
+  <spirit:vendorExtensions>
+    <xilinx:coreExtensions>
+      <xilinx:supportedFamilies>
+        <xilinx:family xilinx:lifeCycle="Pre-Production">zynq</xilinx:family>
+      </xilinx:supportedFamilies>
+      <xilinx:taxonomies>
+        <xilinx:taxonomy>/AXI_Peripheral</xilinx:taxonomy>
+        <xilinx:taxonomy>/Kampis-Elektroecke</xilinx:taxonomy>
+      </xilinx:taxonomies>
+      <xilinx:displayName>AXIS I2S Transmitter</xilinx:displayName>
+      <xilinx:vendorDisplayName>Kampis-Elektroecke</xilinx:vendorDisplayName>
+      <xilinx:vendorURL>https://www.kampis-elektroecke.de</xilinx:vendorURL>
+      <xilinx:coreRevision>19</xilinx:coreRevision>
+      <xilinx:upgrades>
+        <xilinx:canUpgradeFrom>www.Kampis-Elektroecke.com:Kampis-Elektroecke:I2S_Transmitter:1.0</xilinx:canUpgradeFrom>
+      </xilinx:upgrades>
+      <xilinx:coreCreationDateTime>2020-03-13T14:06:47Z</xilinx:coreCreationDateTime>
+      <xilinx:tags>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@187252e7_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@90eae1e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@8d2a3ac_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1e317cd2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@ac06782_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6c3769eb_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1d0f45f6_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@ad867c8_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7d158aeb_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@26fdb248_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@17b07d9d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@30977d6e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@38266417_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2ff86521_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@17f0daf_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@631f0c89_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@470bc02d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1189db1c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@406364a8_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4b3215e2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@215a9266_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@19c4cc28_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@78f1ed79_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7962ea3b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@780eb033_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5020adc9_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@77a8573a_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@52005d8d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@b2b3837_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2991e421_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@46fe59c0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@35fcc581_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3e44964c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1333dbe7_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3e22a6ad_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@63db4c33_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6d27c97c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@20318b4e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@9e9b0a0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@52abc3f5_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5bd0d9a5_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@16253d58_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@64f4279d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@58f6f5a3_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5cc4eecb_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@df935d2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@446a84de_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4eaec0d0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2545cae6_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1a4e4f5e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2c2d7a25_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4373876c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@68f7bf83_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@607f40a_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@514e4fd4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@74032cc2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@675d7ea4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@20e1073d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1d3bc336_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@27108b12_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@766d74a9_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@31ee3fc1_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@63776f8b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@49954423_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@e5b1af3_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5e6f7d9e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@42f1d3f9_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6daf6b84_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@39a0de68_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@18a10c0b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2f31a1d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5f2c9fc_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4cad64d2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@56127a2e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@78ad524d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@751c1373_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2b95e86f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6f2824c5_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3bf73776_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@14903772_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6b427eb3_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5818554f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5b014758_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@477d6582_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@52592958_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@73e36756_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@67c77cb_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6a232f69_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@f6e270d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@50109544_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@311a60a0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@701248fa_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@f4ef77b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@688c911b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2667a676_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@49edf858_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1d420dca_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5ea0fb1a_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1f2e0f44_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@192bf179_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6e2d6b6f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@553f9d1a_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1556901c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1241241b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6a749d40_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1400ed25_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7cc58e34_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6f4f7166_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5cad4342_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@11e75916_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1711580d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5aa71714_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3c9bb97c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3901193e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@55bfe8bc_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@35e1704c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@50dbd56c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7abe9b38_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@704c8cf4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@46ca0d13_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2332010e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@28509cec_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@599db94c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3aa142a8_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@18f27e8b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@65da77ad_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a77342f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@46637df5_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@301872a5_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6aa11613_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@74c71f35_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1242abcb_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@546f416a_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@527f4706_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@13ba2b94_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@43719616_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7d5c8118_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@16f994fa_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5e600a5e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3c5b4fcb_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3ea68ec0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1c7a3791_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@555d6bd3_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7bea072_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7121fba5_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@b2688dd_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6c8c593c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@11ea826b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@11135b19_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6e73cc03_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@17d8b27b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5b096be4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a7f86e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3310f99f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@732f7d21_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1227060a_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4f04eef_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@758cd879_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2baefc2f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2da97e40_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7d99b0ef_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@bbc07a4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@16322c34_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@588ace2c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@43eb8029_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@34fcafa4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@280870c5_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4737055e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@509924c7_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1c4643a2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1af7a569_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@36180733_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@613c0682_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@603d0b13_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5fc356e2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@71f39eda_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@33901d47_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@57640326_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@53275eb4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@183f6e0a_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6d674d62_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7cc8c2df_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@12bd8dc4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@12b620a2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@41bf985e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@126654f7_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@19b713d3_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@557ca7f9_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@30c97c8b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@19d4db4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@b2d496_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1d964735_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@25ac2d15_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4e405619_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@58be7976_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@57960ca0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@40cd00ae_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6aeb4fc0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e69885a_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1afcbeb9_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@222fedc0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@60caf035_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6cc2e032_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@313423ae_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@db84b0b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7ce58a47_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1f360f22_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2869d028_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5255db88_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2bf23e5c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4c88b792_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@76f7609e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@be28cc1_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6cd09ab9_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@43e4234_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@374b4902_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a4acbd8_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@55998104_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@635cc2a2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@c10b87c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7676313d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e788468_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@16bdf_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@24c21d86_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7ea942c2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@768803b2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6122ef67_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7367b78e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a603d56_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@709f8a1f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@c52bc64_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@225ea4d2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@461178a9_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1d5304d8_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@e3c584c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4aac8d9_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@35aa9c72_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a54631f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7d18d6e2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2b2528aa_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@141eaeb0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5abffbce_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@274d9a6f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@ac81b74_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b31fc6a_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@e8e37fe_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@83ddbb6_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1c67567c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@55f0fcc7_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@326fbb0d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@561caf83_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@372b4226_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7718583f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2523755b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3f0b20e2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@59879432_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a49105a_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1f4a5a74_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1128fdc6_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@35a7f1f0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@ce4344_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2cc7ccdd_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5ac57b22_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@19dc00c2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@66cbe235_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3ef72dc8_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@58b08763_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@30f127cb_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4b4a9b14_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@38618c1_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4c3486f2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1fc4e6c7_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@31243725_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7e738df4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@239e09ac_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6cd5dc10_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@15a9ccaa_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1131f2a7_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6558201f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1bc399e6_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@80e8dab_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d9338c4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6fc15975_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@18a82347_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6f265b05_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1be6f29e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3fe98a8f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@530ea211_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1187cb60_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@329014ef_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d472969_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@568a46a0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5115a54_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@762608d7_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@390b7aac_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2d9bfd8e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@619fcc6e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@42172651_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@298f96e4_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@616b4521_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5ccceb2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@79196312_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@34e62d92_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@270690f1_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@61ca8124_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@cee004b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@309cfb43_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@287faea3_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2c03ae6e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@366d8eb1_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@652654c3_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@f577f7f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@306eb1a6_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@538dcf35_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5b0393f9_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@64452af3_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@715d5d1d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@99bf48e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6710befa_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5035a978_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@d296c22_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@37baacca_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e94430_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1b8f5983_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@715b2901_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7fc764a0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@36a12148_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@43c9ef99_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@a33a9d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@35ad5133_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@22c50af9_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@70d4565_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4ba80ef1_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/AXI/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1f55cc33_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@361840bf_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@66622ad5_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@315e49b0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4d84e25_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@dd6b47f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3c97b9f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@41cabfaa_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e02c453_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b84be8b_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1b86af4f_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@237b2970_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5ab95433_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6b4b225c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5971e2bf_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7a057bf5_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6d00e5af_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@ad3dcd7_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a93bd2e_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@63eb4d3c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3f3c2c16_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1943f3a0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2460294c_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@ac86d18_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6aa60fde_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@77f60ed0_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@49fc6334_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1323e40d_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@ac5e4d7_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5ffa458a_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@752674de_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@33149314_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@138536ee_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1828a66_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3945f785_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@622ecdf6_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7d1ba4d2_ARCHIVE_LOCATION">c:/Users/Daniel.Kampert/Desktop/Git/VHDL/I2S/ip_repo/I2S_Transmitter_1.0</xilinx:tag>
+      </xilinx:tags>
+    </xilinx:coreExtensions>
+    <xilinx:packagingInfo>
+      <xilinx:xilinxVersion>2019.2</xilinx:xilinxVersion>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="140f0438"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="295ff82b"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="c8bd5f9f"/>
+      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="79111bc7"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="82b3b89c"/>
+    </xilinx:packagingInfo>
+  </spirit:vendorExtensions>
+</spirit:component>
