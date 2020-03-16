@@ -1,0 +1,49 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.614634",
+   "Default View_TopLeft":"-172,0",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0.21  2019-05-29 bk=1.5064 VDI=41 GEI=36 GUI=JA:9.0 non-TLS
+#  -string -flagsOSRD
+preplace port DDR -pg 1 -lvl 6 -x 1640 -y 60 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -lvl 6 -x 1640 -y 80 -defaultsOSRD
+preplace port Clock125 -pg 1 -lvl 0 -x 0 -y 550 -defaultsOSRD
+preplace port LRCLK -pg 1 -lvl 6 -x 1640 -y 360 -defaultsOSRD
+preplace port SCLK -pg 1 -lvl 6 -x 1640 -y 340 -defaultsOSRD
+preplace port SD -pg 1 -lvl 6 -x 1640 -y 380 -defaultsOSRD
+preplace port MCLK -pg 1 -lvl 6 -x 1640 -y 540 -defaultsOSRD
+preplace inst ProcessingSystem -pg 1 -lvl 1 -x 230 -y 100 -defaultsOSRD
+preplace inst FIFO -pg 1 -lvl 3 -x 940 -y 340 -defaultsOSRD
+preplace inst Reset_ProcessingSystem -pg 1 -lvl 1 -x 230 -y 660 -defaultsOSRD
+preplace inst ClockingWizard -pg 1 -lvl 4 -x 1280 -y 540 -defaultsOSRD
+preplace inst Reset_Audio -pg 1 -lvl 3 -x 940 -y 720 -defaultsOSRD
+preplace inst ProcessingSystem_axi_periph -pg 1 -lvl 2 -x 600 -y 320 -defaultsOSRD
+preplace inst vio_0 -pg 1 -lvl 5 -x 1520 -y 470 -defaultsOSRD
+preplace inst AXIS_I2S_Transmitter_0 -pg 1 -lvl 4 -x 1280 -y 360 -defaultsOSRD
+preplace netloc FIFO_interrupt 1 0 4 30 200 NJ 200 NJ 200 1110
+preplace netloc clk_in1_0_1 1 0 4 NJ 550 NJ 550 NJ 550 NJ
+preplace netloc ClockingWizard_locked 1 0 5 30 760 NJ 760 760 610 NJ 610 1420
+preplace netloc ProcessingSystem_FCLK_RESET0_N 1 0 4 30 560 430 560 750 530 NJ
+preplace netloc AXIS_I2S_Transmitter_0_LRCLK 1 4 2 NJ 360 NJ
+preplace netloc AXIS_I2S_Transmitter_0_SCLK 1 4 2 NJ 340 NJ
+preplace netloc AXIS_I2S_Transmitter_0_SD 1 4 2 NJ 380 NJ
+preplace netloc Reset_Audio_peripheral_aresetn 1 3 1 1120 340n
+preplace netloc ProcessingSystem_FCLK_CLK0 1 0 5 20 210 440 440 750 420 1140 460 NJ
+preplace netloc Reset_ProcessingSystem_peripheral_aresetn 1 1 3 450 450 770 430 1130
+preplace netloc AXIS_I2S_Transmitter_0_DataOut 1 4 1 1420 400n
+preplace netloc ClockingWizard_ClkAudio 1 2 4 770 620 1150 470 1410 540 NJ
+preplace netloc ProcessingSystem_DDR 1 1 5 NJ 60 NJ 60 NJ 60 NJ 60 NJ
+preplace netloc ProcessingSystem_axi_periph_M00_AXI 1 2 1 N 320
+preplace netloc ProcessingSystem_FIXED_IO 1 1 5 NJ 80 NJ 80 NJ 80 NJ 80 NJ
+preplace netloc ProcessingSystem_M_AXI_GP0 1 1 1 450 100n
+preplace netloc FIFO_AXI_STR_TXD 1 3 1 N 320
+levelinfo -pg 1 0 230 600 940 1280 1520 1640
+pagesize -pg 1 -db -bbox -sgen -110 0 1760 820
+"
+}
+{
+   "da_axi4_cnt":"3",
+   "da_board_cnt":"2",
+   "da_clkrst_cnt":"9",
+   "da_ps7_cnt":"2"
+}

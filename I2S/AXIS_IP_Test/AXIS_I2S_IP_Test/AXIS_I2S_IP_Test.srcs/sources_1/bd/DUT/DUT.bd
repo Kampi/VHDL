@@ -1,0 +1,139 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x0",
+      "device": "xc7z010clg400-1",
+      "name": "DUT",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2019.2.1"
+    },
+    "design_tree": {
+      "Transmitter": ""
+    },
+    "interface_ports": {
+      "I2S": {
+        "mode": "Master",
+        "vlnv": "www.kampis-elektroecke.de:Kampis-Elektroecke:I2S_rtl:1.0"
+      },
+      "AXIS_RXD": {
+        "mode": "Slave",
+        "vlnv": "xilinx.com:interface:axis_rtl:1.0",
+        "parameters": {
+          "TDATA_NUM_BYTES": {
+            "value": "4"
+          },
+          "TDEST_WIDTH": {
+            "value": "0"
+          },
+          "TID_WIDTH": {
+            "value": "0"
+          },
+          "TUSER_WIDTH": {
+            "value": "0"
+          },
+          "HAS_TREADY": {
+            "value": "1"
+          },
+          "HAS_TSTRB": {
+            "value": "0"
+          },
+          "HAS_TKEEP": {
+            "value": "0"
+          },
+          "HAS_TLAST": {
+            "value": "0"
+          },
+          "FREQ_HZ": {
+            "value": "125000000"
+          },
+          "LAYERED_METADATA": {
+            "value": "undef"
+          }
+        }
+      }
+    },
+    "ports": {
+      "aresetn": {
+        "type": "rst",
+        "direction": "I"
+      },
+      "aclk": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "ASSOCIATED_BUSIF": {
+            "value": "AXIS_RXD"
+          },
+          "ASSOCIATED_RESET": {
+            "value": "aresetn"
+          },
+          "FREQ_HZ": {
+            "value": "125000000"
+          }
+        }
+      },
+      "Audio_Reset": {
+        "type": "rst",
+        "direction": "I"
+      },
+      "MCLK": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "ASSOCIATED_RESET": {
+            "value": "Audio_Reset_0"
+          },
+          "FREQ_HZ": {
+            "value": "12500000"
+          }
+        }
+      }
+    },
+    "components": {
+      "Transmitter": {
+        "vlnv": "www.Kampis-Elektroecke.com:Kampis-Elektroecke:AXIS_I2S_Transmitter:1.0",
+        "xci_name": "DUT_AXIS_I2S_Transmitter_0_0"
+      }
+    },
+    "interface_nets": {
+      "AXIS_RXD_0_1": {
+        "interface_ports": [
+          "AXIS_RXD",
+          "Transmitter/AXIS_RXD"
+        ]
+      },
+      "Transmitter_I2S": {
+        "interface_ports": [
+          "I2S",
+          "Transmitter/I2S"
+        ]
+      }
+    },
+    "nets": {
+      "aresetn_0_1": {
+        "ports": [
+          "aresetn",
+          "Transmitter/aresetn"
+        ]
+      },
+      "aclk_0_1": {
+        "ports": [
+          "aclk",
+          "Transmitter/aclk"
+        ]
+      },
+      "Audio_Reset_0_1": {
+        "ports": [
+          "Audio_Reset",
+          "Transmitter/Audio_Reset"
+        ]
+      },
+      "MCLK_0_1": {
+        "ports": [
+          "MCLK",
+          "Transmitter/MCLK"
+        ]
+      }
+    }
+  }
+}
