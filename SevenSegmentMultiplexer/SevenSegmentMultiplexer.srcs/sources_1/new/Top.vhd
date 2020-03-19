@@ -35,7 +35,7 @@ entity Top is
     Generic (   REFRESH : INTEGER := 1000
                 );
     Port (  Clock    : in STD_LOGIC;
-            ResetN   : in STD_LOGIC;
+            nReset   : in STD_LOGIC;
             Kathode  : out STD_LOGIC;
             Anode    : out STD_LOGIC_VECTOR (6 downto 0)
             );
@@ -50,7 +50,7 @@ architecture Top_Arch of Top is
         Generic (   REFRESH : INTEGER := 10000
                     );
         Port ( Clock    : in STD_LOGIC;
-               ResetN   : in STD_LOGIC;
+               nReset   : in STD_LOGIC;
                Data     : in STD_LOGIC_VECTOR(7 downto 0);
                Anode    : out STD_LOGIC_VECTOR(6 downto 0);
                Strobe   : out STD_LOGIC
@@ -63,17 +63,17 @@ begin
                                                     )
                                     port map ( Clock => Clock,
                                                Data => Second & First,
-                                               ResetN => ResetN,
+                                               nReset => nReset,
                                                Anode => Anode,
                                                Strobe => Kathode
                                                );
 
-    process(Clock, ResetN)
+    process(Clock, nReset)
         variable Counter    : INTEGER := 0;
         variable Seconds_E  : INTEGER := 0;
         variable Seconds_Z  : INTEGER := 0;
     begin
-        if(ResetN = '0') then
+        if(nReset = '0') then
             Counter := 0;
             Seconds_E := 0;
             Seconds_Z := 0;
