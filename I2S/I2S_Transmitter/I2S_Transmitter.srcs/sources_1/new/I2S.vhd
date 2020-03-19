@@ -9,7 +9,7 @@
 -- Target Devices:      XC7Z010CLG400-1
 -- Tool Versions:       Vivado 2019.2
 -- Description:         I2S top level module from
---                      https://www.kampis-elektroecke.de/fpga/i2s/
+--                      https://www.kampis-elektroecke.de/fpga/i2s/design-des-i2s-sender/
 -- Dependencies: 
 -- 
 -- Revision:
@@ -32,13 +32,13 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity I2S is
-    Generic (   WIDTH         : INTEGER := 16                               -- Data width per channel
+    Generic (   RATIO   : INTEGER := 8;                                     -- MCLK / SCLK ratio as integer value
+                WIDTH   : INTEGER := 16                                     -- Data width per channel
                 );
-    Port (  aclk     : in STD_LOGIC;                                        -- AXI-Stream interface clock
-            aresetn  : in STD_LOGIC;                                        -- Reset (active low)
+    Port (  MCLK     : in STD_LOGIC;                                        -- Interface clock
+            nReset   : in STD_LOGIC;                                        -- Interface reset (active low)
 
             -- I2S interface
-            MCLK     : in STD_LOGIC;                                        -- Master audio clock. Must be an integer ration of the L/R clock signal
             LRCLK    : out STD_LOGIC;                                       -- I2S L/R clock
             SCLK     : out STD_LOGIC;                                       -- I2S clock signal
             SD       : out STD_LOGIC                                        -- I2S data signal
@@ -47,28 +47,25 @@ end I2S;
 
 architecture I2S_Arch of I2S is
 
-    type FIFO_State_t is (Reset, WaitForReady, IncreaseAddress, WaitForStart);
+    type State_t is (State_Reset, State_WaitForReady, State_IncreaseAddress, State_WaitForStart);
 
-    signal CurrentState : FIFO_State_t  := Reset;
+    signal CurrentState : State_t                                           := State_Reset;
 
-    signal FIFO         : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0) := (others => '0');
+    signal Tx           : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0)      := (others => '0');
 
-    signal ROM_Data     : STD_LOGIC_VECTOR((WIDTH - 1) downto 0) := (others => '0');
-    signal ROM_Address  : STD_LOGIC_VECTOR(6 downto 0) := (others => '0');
+    signal ROM_Data     : STD_LOGIC_VECTOR((WIDTH - 1) downto 0)            := (others => '0');
+    signal ROM_Address  : STD_LOGIC_VECTOR(6 downto 0)                      := (others => '0');
 
-    signal Valid        : STD_LOGIC := '0';
     signal Ready        : STD_LOGIC;
-
-    signal Counter      : INTEGER := 0;
+    signal SCLK_Int     : STD_LOGIC                                         := '0';
 
     component I2S_Transmitter is
         Generic (   WIDTH   : INTEGER := 16
                     );
-        Port (  MCLK    : in STD_LOGIC;
-                ResetN  : in STD_LOGIC;
+        Port (  Clock   : in STD_LOGIC;
+                nReset  : in STD_LOGIC;
                 Ready   : out STD_LOGIC;
-                Valid   : in STD_LOGIC;
-                Data    : in STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0);
+                Tx      : in STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0);
                 LRCLK   : out STD_LOGIC;
                 SCLK    : out STD_LOGIC;
                 SD      : out STD_LOGIC
@@ -86,67 +83,79 @@ begin
 
     Transmitter : I2S_Transmitter generic map(  WIDTH => WIDTH
                                                 )
-                                  port map(     MCLK => MCLK,
-                                                ResetN => ARESETn,
-                                                Valid => Valid,
+                                  port map(     Clock => SCLK_Int,
+                                                nReset => nReset,
                                                 Ready => Ready,
-                                                Data => FIFO,
+                                                Tx => Tx,
                                                 LRCLK => LRCLK,
                                                 SCLK => SCLK,
                                                 SD => SD
                                                 );
 
-    ROM : SineROM port map (Clock => aclk,
+    ROM : SineROM port map (Clock => MCLK,
                             Address => ROM_Address,
                             DataOut => ROM_Data
                             );
 
-    process(aclk)
+    process
+        variable Counter    : INTEGER := 0;
     begin
-        if(rising_edge(aclk)) then
-            if(aresetn = '0') then
-                CurrentState <= Reset;
-            else
-                case CurrentState is
-                    when Reset =>
-                        Valid <= '0';
-                        Counter <= 0;
+        wait until rising_edge(MCLK);
+        if(Counter < ((RATIO / 2) - 1)) then
+            Counter := Counter + 1;
+        else
+            Counter := 0;
 
-                        CurrentState <= IncreaseAddress;
+            SCLK_Int <= not SCLK_Int;
+        end if;
 
-                    when IncreaseAddress =>
-                        Valid <= '0';
+        if(nReset = '0') then
+            Counter := 0;
 
-                        if(Counter < 99) then
-                            Counter <= Counter + 1;
-                        else
-                            Counter <= 0;
-                        end if;
-
-                        CurrentState <= WaitForReady;
-
-                    when WaitForReady =>
-                        if(Ready = '1') then
-                            CurrentState <= WaitForStart;
-                        else
-                            CurrentState <= WaitForReady;
-                        end if;
-
-                    when WaitForStart =>
-                        Valid <= '1';
-                        FIFO <= ROM_Data & x"0000";
-
-                        if(Ready = '0') then
-                            CurrentState <= IncreaseAddress;
-                        else
-                            CurrentState <= WaitForStart;
-                        end if;
-
-                end case;
-            end if;
+            SCLK_Int <= '0';
         end if;
     end process;
 
-    ROM_Address <= STD_LOGIC_VECTOR(to_unsigned(Counter, ROM_Address'length));
+    process
+        variable WordCounter    : INTEGER := 0;
+    begin
+        wait until rising_edge(MCLK);
+        case CurrentState is
+            when State_Reset =>
+                WordCounter := 0;
 
+                CurrentState <= State_WaitForReady;
+
+            when State_WaitForReady =>
+                if(Ready = '1') then
+                    CurrentState <= State_WaitForStart;
+                else
+                    CurrentState <= State_WaitForReady;
+                end if;
+
+            when State_WaitForStart =>
+                ROM_Address <= STD_LOGIC_VECTOR(to_unsigned(WordCounter, ROM_Address'length));
+                Tx <= ROM_Data & x"0000";
+
+                if(Ready = '0') then
+                    CurrentState <= State_IncreaseAddress;
+                else
+                    CurrentState <= State_WaitForStart;
+                end if;
+
+            when State_IncreaseAddress =>
+                if(WordCounter < 99) then
+                    WordCounter := WordCounter + 1;
+                else
+                    WordCounter := 0;
+                end if;
+
+                CurrentState <= State_WaitForReady;
+
+        end case;
+
+        if(nReset = '0') then
+            CurrentState <= State_Reset;
+        end if;
+    end process;
 end I2S_Arch;

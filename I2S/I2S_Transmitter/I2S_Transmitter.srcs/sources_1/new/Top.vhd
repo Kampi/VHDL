@@ -9,7 +9,7 @@
 -- Target Devices: 
 -- Tool Versions: 
 -- Description:         Top design for the hardware implementation of the I2S transmitter project from
---                      https://www.kampis-elektroecke.de/fpga/i2s/
+--                      https://www.kampis-elektroecke.de/fpga/i2s/design-des-i2s-sender/
 -- Dependencies: 
 -- 
 -- Revision:
@@ -33,10 +33,11 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity Top is
-    Generic (   WIDTH   : INTEGER := 16
+    Generic (   RATIO   : INTEGER := 8;
+                WIDTH   : INTEGER := 16
                 );
     Port (  Clock   : in STD_LOGIC;
-            ResetN  : in STD_LOGIC;
+            nReset  : in STD_LOGIC;
             MCLK    : out STD_LOGIC;
             LRCLK   : out STD_LOGIC;
             SCLK    : out STD_LOGIC;
@@ -47,51 +48,52 @@ end Top;
 
 architecture Top_Arch of Top is
 
-    signal SystemResetN : STD_LOGIC := '0';
+    signal nSystemReset : STD_LOGIC := '0';
     signal MCLK_DCM     : STD_LOGIC := '0';
     signal Locked       : STD_LOGIC := '0';
 
     component I2S is    
-        Generic ( WIDTH  : INTEGER := 16
-                  );
-        Port (  ACLK     : in STD_LOGIC;
-                ARESETn  : in STD_LOGIC;
-                MCLK     : in STD_LOGIC;
+        Generic (   RATIO   : INTEGER := 8;
+                    WIDTH   : INTEGER := 16
+                    );
+        Port (  MCLK    : in STD_LOGIC;
+                nReset   : in STD_LOGIC;
                 LRCLK    : out STD_LOGIC;
                 SCLK     : out STD_LOGIC;
                 SD       : out STD_LOGIC
                 );
     end component;
 
-    component SystemClock is
+    component AudioClock is
         Port (  ClockIn     : in STD_LOGIC;
                 Locked      : out STD_LOGIC;
                 MCLK        : out STD_LOGIC;
-                ResetN      : in STD_LOGIC
+                nReset      : in STD_LOGIC
                 );
     end component;
 
 begin
 
-    InputClock : SystemClock port map ( ClockIn => Clock,
-                                        ResetN => ResetN,
+    InputClock : AudioClock port map (  ClockIn => Clock,
+                                        nReset => nReset,
                                         MCLK => MCLK_DCM,
                                         Locked => Locked
                                         );
 
-    I2S_Module : I2S generic map (  WIDTH => WIDTH
+    I2S_Module : I2S generic map (  RATIO => RATIO,
+                                    WIDTH => WIDTH
                                     )
-                          port map ( ACLK => Clock,
-                                     ARESETn => SystemResetN,
-                                     MCLK => MCLK_DCM,
+                          port map ( MCLK => MCLK_DCM,
+                                     nReset => nSystemReset,
                                      LRCLK => LRCLK,
                                      SCLK => SCLK,
                                      SD => SD
                                      );
 
-    SystemResetN <= ResetN and Locked;
-    LED(0) <= ResetN;
+    nSystemReset <= nReset and Locked;
+    LED(0) <= nReset;
     LED(1) <= Locked;
+    LED(2) <= nSystemReset;
     MCLK <= MCLK_DCM;
 
 end Top_Arch;

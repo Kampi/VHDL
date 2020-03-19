@@ -1,8 +1,8 @@
 --Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
---Tool Version: Vivado v.2019.2.1 (win64) Build 2729669 Thu Dec  5 04:49:17 MST 2019
---Date        : Sat Mar 14 12:28:20 2020
---Host        : PC running 64-bit major release  (build 9200)
+--Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
+--Date        : Thu Mar 19 13:19:14 2020
+--Host        : 40B0341C1F56 running 64-bit major release  (build 9200)
 --Command     : generate_target SineROM_wrapper.bd
 --Design      : SineROM_wrapper
 --Purpose     : IP block netlist

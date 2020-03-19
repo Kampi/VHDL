@@ -155,11 +155,6 @@ proc create_root_design { parentCell } {
 
 
   # Create interface ports
-  set BRAM_PORTA_0 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:bram_rtl:1.0 BRAM_PORTA_0 ]
-  set_property -dict [ list \
-   CONFIG.READ_WRITE_MODE {READ_ONLY} \
-   ] $BRAM_PORTA_0
-
 
   # Create ports
   set Address [ create_bd_port -dir I -from 6 -to 0 Address ]
@@ -170,7 +165,7 @@ proc create_root_design { parentCell } {
   set SineROM [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.4 SineROM ]
   set_property -dict [ list \
    CONFIG.Byte_Size {9} \
-   CONFIG.Coe_File {../../../../../../../SineWave.coe} \
+   CONFIG.Coe_File {../../../../imports/I2S/SineWave.coe} \
    CONFIG.EN_SAFETY_CKT {false} \
    CONFIG.Enable_32bit_Address {false} \
    CONFIG.Enable_A {Always_Enabled} \
@@ -180,7 +175,7 @@ proc create_root_design { parentCell } {
    CONFIG.Port_A_Write_Rate {0} \
    CONFIG.Read_Width_A {16} \
    CONFIG.Read_Width_B {16} \
-   CONFIG.Register_PortA_Output_of_Memory_Primitives {true} \
+   CONFIG.Register_PortA_Output_of_Memory_Primitives {false} \
    CONFIG.Use_Byte_Write_Enable {false} \
    CONFIG.Use_RSTA_Pin {false} \
    CONFIG.Write_Depth_A {100} \
@@ -188,9 +183,6 @@ proc create_root_design { parentCell } {
    CONFIG.Write_Width_B {16} \
    CONFIG.use_bram_block {Stand_Alone} \
  ] $SineROM
-
-  # Create interface connections
-  connect_bd_intf_net -intf_net BRAM_PORTA_0_1 [get_bd_intf_ports BRAM_PORTA_0] [get_bd_intf_pins SineROM/BRAM_PORTA]
 
   # Create port connections
   connect_bd_net -net SineROM_douta [get_bd_ports DataOut] [get_bd_pins SineROM/douta]

@@ -8,7 +8,8 @@
 -- Project Name: 
 -- Target Devices:      XC7Z010CLG400-1
 -- Tool Versions:       Vivado 2019.2
--- Description:         I2S transmitter module.
+-- Description:         I2S transmitter module from
+--                      https://www.kampis-elektroecke.de/fpga/i2s/design-des-i2s-sender/
 -- 
 -- Dependencies: 
 -- 
@@ -34,13 +35,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity I2S_Transmitter is
     Generic (   WIDTH   : INTEGER := 16                                         -- Data width per channel
                 );
-    Port (  MCLK    : in STD_LOGIC;                                             -- Master clock
-            ResetN  : in STD_LOGIC;                                             -- Reset (active low)
+    Port (  Clock   : in STD_LOGIC;                                             -- Audio sample clock
+            nReset  : in STD_LOGIC;                                             -- Audio reset (active low)
 
             -- Communication bus
             Ready   : out STD_LOGIC;                                            -- Slave handshake to signal that the transmitter is ready
-            Valid   : in STD_LOGIC;                                             -- Master handshake to signal valid data
-            Data    : in STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0);          -- Audio data for both channels (Left: Top half, Right: Bottom half)
+            Tx      : in STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0);          -- Audio data for both channels (Left: Top half, Right: Bottom half)
 
             -- I2S interface
             LRCLK   : out STD_LOGIC;                                            -- L/R clock
@@ -51,93 +51,73 @@ end I2S_Transmitter;
 
 architecture I2S_Transmitter_Arch of I2S_Transmitter is
 
-    type State_t is (Reset, Idle, Transmit);
+    type State_t is (State_Reset, State_LoadWord, State_TransmitWord);
 
-    signal CurrentState     : State_t   := Reset;
+    signal CurrentState     : State_t                                       := State_Reset;
 
-    signal Data_Int         : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0) := (others => '0');
+    signal Tx_Int           : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0)  := (others => '0');
 
-    signal SCLK_Int         : STD_LOGIC := '0';
-    signal Enable           : STD_LOGIC := '0';
+    signal Ready_Int        : STD_LOGIC                                     := '0';
+    signal LRCLK_Int        : STD_LOGIC                                     := '1';
+    signal SD_Int           : STD_LOGIC                                     := '0';
+    signal Enable           : STD_LOGIC                                     := '0';
 
 begin
 
-    SCLK_Gen : process(MCLK)
-        variable Counter    : INTEGER := 0;
+    process
+        variable BitCounter : INTEGER := 0;
     begin
-        if(falling_edge(MCLK)) then
-            if(ResetN = '0') then
-                Counter := 0;
-            else
-                if(Counter < ((WIDTH / 4) - 1)) then
-                    Counter := Counter + 1;
-                else
-                    SCLK_Int <= not SCLK_Int;
-                    Counter := 0;
+        wait until falling_edge(Clock);
+
+        case CurrentState is
+            when State_Reset =>
+                BitCounter := 0;
+
+                Ready_Int <= '0';
+                LRCLK_Int <= '1';
+                Enable <= '1';
+                SD_Int <= '0';
+                Tx_Int <= (others => '0');
+                
+                CurrentState <= State_TransmitWord;
+
+            when State_LoadWord =>
+                BitCounter := 0;
+
+                Tx_Int <= Tx;
+                LRCLK_Int <= '0';
+
+                CurrentState <= State_TransmitWord;
+
+            when State_TransmitWord =>
+                BitCounter := BitCounter + 1;
+
+                if(BitCounter > (WIDTH - 1)) then
+                    LRCLK_Int <= '1';
                 end if;
-            end if;
+
+                if(BitCounter < ((2 * WIDTH) - 1)) then
+                    Ready_Int <= '0';
+
+                    CurrentState <= State_TransmitWord;
+                else
+                    Ready_Int <= '1';
+
+                    CurrentState <= State_LoadWord;
+                end if;
+
+                Tx_Int <= Tx_Int(((2 * WIDTH) - 2) downto 0) & "0";
+                SD_Int <= Tx_Int((2 * WIDTH) - 1);
+        end case;
+    
+        if(nReset = '0') then
+            CurrentState <= State_Reset;        
         end if;
     end process;
 
-    I2S : process(SCLK_Int)
-        variable BitCounter : INTEGER := 0;
-    begin
-        if(falling_edge(SCLK_Int)) then
-            if(ResetN = '0') then
-                CurrentState <= Reset;
-            else
-                case CurrentState is
-                    when Reset =>
-                        BitCounter := 0;
-
-                        Enable <= '0';
-                        Ready <= '0';
-                        SD <= '0';
-                        Data_Int <= (others => '0');
-
-                        CurrentState <= Idle;
-
-                    when Idle =>
-                        BitCounter := 0;
-
-                        Enable <= '1';
-                        LRCLK <= '0';
-
-                        if(Valid = '1') then
-                            Ready <= '0';
-                            Data_Int <= Data;
-
-                            CurrentState <= Transmit;
-                        else
-                            Ready <= '1';
-
-                            CurrentState <= Idle;
-                        end if;
-
-                    when Transmit =>
-                        BitCounter := BitCounter + 1;
-
-                        Data_Int <= Data_Int(((2 * WIDTH) - 2) downto 0) & "0";
-                        SD <= Data_Int((2 * WIDTH) - 1);
-
-                        if(BitCounter < WIDTH) then
-                            LRCLK <= '0';
-                        else
-                            LRCLK <= '1';
-                        end if;
-
-                        if(BitCounter < ((2 * WIDTH) - 1)) then
-                            CurrentState <= Transmit;
-                        else
-                            Ready <= '1';
-                            CurrentState <= Idle;
-                        end if;
-
-                    end case;
-                end if;
-            end if;
-    end process;
-
-    SCLK <= SCLK_Int and Enable;
+    Ready <= Ready_Int;
+    SCLK <= Clock and Enable;
+    LRCLK <= LRCLK_Int;
+    SD <= SD_Int;
 
 end I2S_Transmitter_Arch;

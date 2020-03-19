@@ -23,7 +23,7 @@
 module I2S_TB();
 
     bit SimulationClock = 0;
-    bit SimulationResetN = 0;
+    bit nSimulationReset = 0;
     bit[31:0] SimulationData [];
 
     // AXI-Stream interface
@@ -40,7 +40,7 @@ module I2S_TB();
 
     Top Transmitter(
             .Clock(SimulationClock),
-            .ResetN(ARESETn),
+            .nReset(nSimulationReset),
             .MCLK(MCLK),
             .SCLK(SCLK),
             .LRCLK(LRCLK),
@@ -51,6 +51,10 @@ module I2S_TB();
     always #4ns SimulationClock = ~SimulationClock;
 
     initial begin
+
+    #20ns;
+
+    nSimulationReset = 1;
 
     #1000000 $finish;
 
