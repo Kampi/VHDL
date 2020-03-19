@@ -4,7 +4,7 @@
 -- 
 -- Create Date:         14.01.2019 19:10:26
 -- Design Name: 
--- Module Name:    	    SevenSegment - SevenSegment_Arch
+-- Module Name:         SevenSegment - SevenSegment_Arch
 -- Project Name: 
 -- Target Devices:      XC7Z010CLG400-1
 -- Tool Versions:       Vivado 2019.2
@@ -33,7 +33,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity SevenSegment is
     Port ( Clock    : in STD_LOGIC;
-           ResetN   : in STD_LOGIC;
+           nReset   : in STD_LOGIC;
            Data     : in STD_LOGIC_VECTOR(7 downto 0);
            Anode    : out STD_LOGIC_VECTOR(6 downto 0);
            Active   : out STD_LOGIC
@@ -49,9 +49,9 @@ begin
 
     Active <= RefreshCounter(10);
 
-    process(Clock, ResetN)
+    process(Clock, nReset)
     begin
-        if(ResetN = '0') then
+        if(nReset = '0') then
             RefreshCounter <= (others => '0');
         else
             if(rising_edge(Clock)) then
