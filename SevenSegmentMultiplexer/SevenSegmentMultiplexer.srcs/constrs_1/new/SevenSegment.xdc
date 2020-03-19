@@ -4,8 +4,8 @@ set_property IOSTANDARD LVCMOS33 [get_ports Clock]
 create_clock -period 8.000 -name sys_clk_pin -waveform {0.000 4.000} -add [get_ports Clock]
 
 # Reset
-set_property PACKAGE_PIN G15 [get_ports ResetN]
-set_property IOSTANDARD LVCMOS33 [get_ports ResetN]
+set_property PACKAGE_PIN G15 [get_ports nReset]
+set_property IOSTANDARD LVCMOS33 [get_ports nReset]
 
 # Seven segment display
 set_property PACKAGE_PIN T14 [get_ports {Anode[0]}]
