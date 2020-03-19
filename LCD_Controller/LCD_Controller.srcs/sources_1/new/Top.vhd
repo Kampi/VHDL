@@ -33,7 +33,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity Top is
     Port (  Clock   : in STD_LOGIC;
-            ResetN  : in STD_LOGIC;
+            nReset  : in STD_LOGIC;
 
             -- Output the current state machine state
             LED     : out STD_LOGIC_VECTOR(3 downto 0);
@@ -75,7 +75,7 @@ architecture Top_Arch of Top is
         Generic (   CLOCK_FREQ  : INTEGER := 125
                     );
         Port (  Clock   : in STD_LOGIC;
-                ResetN  : in STD_LOGIC;
+                nReset  : in STD_LOGIC;
 
                 Data    : in STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
 
@@ -96,7 +96,7 @@ begin
     LCD : LCD_Controller generic map (  CLOCK_FREQ => 125
                                         )
                          port map(  Clock => Clock,
-                                    ResetN => ResetN,
+                                    nReset => nReset,
                                     Data => Data,
                                     Ready => Ready,
                                     Valid => Valid,
@@ -107,10 +107,10 @@ begin
                                     LCD_Data => LCD_Data
                                     );
 
-    process(Clock, ResetN)
+    process(Clock, nReset)
         variable Index : INTEGER := 0;
     begin
-        if(ResetN = '0') then
+        if(nReset = '0') then
             CurrentState <= Reset;
         elsif(rising_edge(Clock)) then
             case CurrentState is
