@@ -36,7 +36,7 @@ entity LCD_Controller is
                 CLOCK_FREQ  : INTEGER := 125                        -- Input clock frequency in MHz.
                 );
     Port (  Clock   : in STD_LOGIC;
-            ResetN  : in STD_LOGIC;
+            nReset  : in STD_LOGIC;
 
             -- Communication bus
             Data    : in STD_LOGIC_VECTOR(7 downto 0);
@@ -87,7 +87,7 @@ architecture LCD_Controller_Arch of LCD_Controller is
 
 begin
 
-    process(Clock, ResetN)
+    process(Clock, nReset)
         -- Millisecond counter for state machine timing
         variable usCounter  : INTEGER := 0;
     begin
