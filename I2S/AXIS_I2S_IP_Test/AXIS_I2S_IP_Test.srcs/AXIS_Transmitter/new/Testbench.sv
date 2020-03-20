@@ -43,13 +43,13 @@ module Testbench();
                                         32'hFE02B, 32'hFE804, 32'hFEFF5, 32'hFF7F6
                                     }; 
 
-    // AXI-Stream
+    // AXI-Stream interface
     bit TREADY;
     bit TVALID;
     bit TLAST;
     bit[31:0] TDATA;
 
-    // I2S
+    // I2S interface
     bit SCLK;
     bit SD;
     bit LRCLK;
@@ -64,14 +64,14 @@ module Testbench();
         .TVALID(TVALID)
     );
 
-    DUT DUT_i (
-        .AXIS_RXD_tdata(TDATA),
-        .AXIS_RXD_tready(TREADY),
-        .AXIS_RXD_tvalid(TVALID),
-        .Audio_Reset(SimulationAudioResetN),
-        .I2S_lrclk(LRCLK),
-        .I2S_sclk(SCLK),
-        .I2S_sd(SD),
+    AXIS_I2S DUT_i (
+        .TDATA_RXD(TDATA),
+        .TREADY_RXD(TREADY),
+        .TVALID_RXD(TVALID),
+        .nReset(SimulationAudioResetN),
+        .LRCLK(LRCLK),
+        .SCLK(SCLK),
+        .SD(SD),
         .MCLK(MCLK),
         .aclk(SimulationClock),
         .aresetn(SimulationResetN)
@@ -104,7 +104,6 @@ module Testbench();
     always #80 MCLK = ~MCLK;
 
     initial begin
-
         // Create new agents
         WriteAgent = new("Master agent", Writer.StreamWriter.inst.IF);
         WriteAgent.vif_proxy.set_dummy_drive_type(XIL_AXI4STREAM_VIF_DRIVE_NONE);
@@ -120,6 +119,5 @@ module Testbench();
         SendData(100);
 
         #50000 $finish;
-
     end
 endmodule
