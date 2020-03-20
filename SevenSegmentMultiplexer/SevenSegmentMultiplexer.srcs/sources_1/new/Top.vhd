@@ -4,11 +4,11 @@
 -- 
 -- Create Date:         14.01.2019 18:15:17
 -- Design Name: 
--- Project Name:        Design for the seven segment multiplexer tutorial from
---                      https://www.kampis-elektroecke.de/fpga/multiplexer-fuer-siebensegmentanzeigen
+-- Project Name:
 -- Target Devices:      XC7Z010CLG400-1
 -- Tool Versions:       Vivado 2019.2
--- Description:         Seven segment multiplexer top level module.
+-- Description:         Top design for the seven segment multiplexer tutorial from
+--                      https://www.kampis-elektroecke.de/fpga/multiplexer-fuer-siebensegmentanzeigen
 -- 
 -- Dependencies: 
 -- 
