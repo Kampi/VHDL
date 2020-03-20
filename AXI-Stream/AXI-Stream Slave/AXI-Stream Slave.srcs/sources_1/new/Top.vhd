@@ -34,8 +34,8 @@ use IEEE.NUMERIC_STD.ALL;
 entity Top is
     Generic (   FIFO_SIZE   : INTEGER := 32
                 );
-    Port (  aclk        : in STD_LOGIC;
-            aresetn     : in STD_LOGIC;
+    Port (  ACLK        : in STD_LOGIC;
+            ARESETn     : in STD_LOGIC;
 
             -- AXI-Stream interface
             TDATA_RXD   : in STD_LOGIC_VECTOR(31 downto 0);
@@ -60,10 +60,10 @@ architecture Top_Arch of Top is
 
 begin
 
-    process(aclk)
+    process(ACLK)
     begin
-        if(rising_edge(aclk)) then
-            if(aresetn = '0') then
+        if(rising_edge(ACLK)) then
+            if(ARESETn = '0') then
                 CurrentState <= Reset;
             else
                 case CurrentState is
