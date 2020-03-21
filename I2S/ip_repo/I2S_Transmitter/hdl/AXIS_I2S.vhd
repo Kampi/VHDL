@@ -40,11 +40,11 @@ entity AXIS_I2S is
                 WIDTH   : INTEGER := 16                                         -- Data width per channel
                 );
     Port (  -- Audio interface
-            MCLK     : in STD_LOGIC;                                            -- Audio clock
-            nReset   : in STD_LOGIC;                                            -- Audio reset (active low)
-            LRCLK   : out STD_LOGIC;                                            -- L/R clock
-            SCLK    : out STD_LOGIC;                                            -- I2S serial clock
-            SD      : out STD_LOGIC;                                            -- I2S serial data
+            MCLK        : in STD_LOGIC;                                         -- Audio clock
+            nReset      : in STD_LOGIC;                                         -- Audio reset (active low)
+            LRCLK       : out STD_LOGIC;                                        -- L/R clock
+            SCLK        : out STD_LOGIC;                                        -- I2S serial clock
+            SD          : out STD_LOGIC;                                        -- I2S serial data
 
             -- AXI-Stream interface
             ACLK        : in STD_LOGIC;                                         -- AXI-Stream clock
