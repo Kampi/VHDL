@@ -44,7 +44,7 @@ entity AXIS_I2S is
             nReset   : in STD_LOGIC;                                            -- Audio reset (active low)
             LRCLK   : out STD_LOGIC;                                            -- L/R clock
             SCLK    : out STD_LOGIC;                                            -- I2S serial clock
-            SD      : out STD_LOGIC                                             -- I2S serial data
+            SD      : out STD_LOGIC;                                            -- I2S serial data
 
             -- AXI-Stream interface
             ACLK        : in STD_LOGIC;                                         -- AXI-Stream clock
