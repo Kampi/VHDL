@@ -63,7 +63,7 @@ architecture AXIS_I2S_Arch of AXIS_I2S is
 
     signal Tx_AXI               : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0)      := (others => '0');
     signal Ready_AXI            : STD_LOGIC;
-    
+
     signal Tx_Transmitter       : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0)      := (others => '0');
     signal Ready_Transmitter    : STD_LOGIC;
 
