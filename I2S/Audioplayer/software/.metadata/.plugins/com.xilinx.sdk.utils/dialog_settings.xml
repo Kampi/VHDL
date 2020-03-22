@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="G:\Dropbox\Git\VHDL\I2S\Audioplayer\hardware" key="scw_hwspec"/>
 	<item value="G:\Dropbox\Git\VHDL\I2S\Audioplayer\project" key="sdx_export_archive_directory"/>
 </section>

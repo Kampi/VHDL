@@ -5,7 +5,8 @@
       "device": "xc7z010clg400-1",
       "name": "System",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2019.2.1"
+      "tool_version": "2019.2.1",
+      "validated": "true"
     },
     "design_tree": {
       "ProcessingSystem": "",
@@ -23,11 +24,67 @@
     "interface_ports": {
       "DDR": {
         "mode": "Master",
-        "vlnv": "xilinx.com:interface:ddrx_rtl:1.0"
+        "vlnv": "xilinx.com:interface:ddrx_rtl:1.0",
+        "parameters": {
+          "CAN_DEBUG": {
+            "value": "false",
+            "value_src": "default"
+          },
+          "TIMEPERIOD_PS": {
+            "value": "1250",
+            "value_src": "default"
+          },
+          "MEMORY_TYPE": {
+            "value": "COMPONENTS",
+            "value_src": "default"
+          },
+          "DATA_WIDTH": {
+            "value": "8",
+            "value_src": "default"
+          },
+          "CS_ENABLED": {
+            "value": "true",
+            "value_src": "default"
+          },
+          "DATA_MASK_ENABLED": {
+            "value": "true",
+            "value_src": "default"
+          },
+          "SLOT": {
+            "value": "Single",
+            "value_src": "default"
+          },
+          "MEM_ADDR_MAP": {
+            "value": "ROW_COLUMN_BANK",
+            "value_src": "default"
+          },
+          "BURST_LENGTH": {
+            "value": "8",
+            "value_src": "default"
+          },
+          "AXI_ARBITRATION_SCHEME": {
+            "value": "TDM",
+            "value_src": "default"
+          },
+          "CAS_LATENCY": {
+            "value": "11",
+            "value_src": "default"
+          },
+          "CAS_WRITE_LATENCY": {
+            "value": "11",
+            "value_src": "default"
+          }
+        }
       },
       "FIXED_IO": {
         "mode": "Master",
-        "vlnv": "xilinx.com:display_processing_system7:fixedio_rtl:1.0"
+        "vlnv": "xilinx.com:display_processing_system7:fixedio_rtl:1.0",
+        "parameters": {
+          "CAN_DEBUG": {
+            "value": "false",
+            "value_src": "default"
+          }
+        }
       }
     },
     "ports": {
@@ -35,8 +92,20 @@
         "type": "clk",
         "direction": "I",
         "parameters": {
+          "CLK_DOMAIN": {
+            "value": "System_Clock125",
+            "value_src": "default"
+          },
           "FREQ_HZ": {
             "value": "125000000"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.000",
+            "value_src": "default"
           }
         }
       },
@@ -53,8 +122,20 @@
         "type": "clk",
         "direction": "O",
         "parameters": {
+          "CLK_DOMAIN": {
+            "value": "/ClockingWizard_clk_out1",
+            "value_src": "ip_prop"
+          },
           "FREQ_HZ": {
             "value": "12288013"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "ip_prop"
           }
         }
       }
@@ -1415,16 +1496,16 @@
           }
         },
         "interface_nets": {
-          "s00_couplers_to_ProcessingSystem_axi_periph": {
-            "interface_ports": [
-              "M00_AXI",
-              "s00_couplers/M_AXI"
-            ]
-          },
           "ProcessingSystem_axi_periph_to_s00_couplers": {
             "interface_ports": [
               "S00_AXI",
               "s00_couplers/S_AXI"
+            ]
+          },
+          "s00_couplers_to_ProcessingSystem_axi_periph": {
+            "interface_ports": [
+              "M00_AXI",
+              "s00_couplers/M_AXI"
             ]
           }
         },
@@ -1457,10 +1538,21 @@
       },
       "AXIS_I2S_Transmitter_0": {
         "vlnv": "www.Kampis-Elektroecke.com:Kampis-Elektroecke:AXIS_I2S_Transmitter:1.0",
-        "xci_name": "System_AXIS_I2S_Transmitter_0_0"
+        "xci_name": "System_AXIS_I2S_Transmitter_0_0",
+        "parameters": {
+          "RATIO": {
+            "value": "8"
+          }
+        }
       }
     },
     "interface_nets": {
+      "FIFO_AXI_STR_TXD": {
+        "interface_ports": [
+          "FIFO/AXI_STR_TXD",
+          "AXIS_I2S_Transmitter_0/AXIS_RXD"
+        ]
+      },
       "ProcessingSystem_FIXED_IO": {
         "interface_ports": [
           "FIXED_IO",
@@ -1471,12 +1563,6 @@
         "interface_ports": [
           "ProcessingSystem/M_AXI_GP0",
           "ProcessingSystem_axi_periph/S00_AXI"
-        ]
-      },
-      "FIFO_AXI_STR_TXD": {
-        "interface_ports": [
-          "FIFO/AXI_STR_TXD",
-          "AXIS_I2S_Transmitter_0/AXIS_RXD"
         ]
       },
       "ProcessingSystem_DDR": {
