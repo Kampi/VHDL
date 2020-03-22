@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (win64) Build 2729669 Thu Dec  5 04:49:17 MST 2019
-// Date        : Fri Mar 20 16:23:13 2020
+// Date        : Sat Mar 21 23:43:24 2020
 // Host        : PC running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub -rename_top System_processing_system7_0_0 -prefix
 //               System_processing_system7_0_0_ System_processing_system7_0_0_stub.v
@@ -13,7 +13,7 @@
 // This empty module with port declaration file causes synthesis tools to infer a black box for IP.
 // The synthesis directives are for Synopsys Synplify support to prevent IO buffer insertion.
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
-(* X_CORE_INFO = "processing_system7_v5_5_processing_system7,Vivado 2019.2" *)
+(* X_CORE_INFO = "processing_system7_v5_5_processing_system7,Vivado 2019.2.1" *)
 module System_processing_system7_0_0(SDIO0_WP, M_AXI_GP0_ARVALID, 
   M_AXI_GP0_AWVALID, M_AXI_GP0_BREADY, M_AXI_GP0_RREADY, M_AXI_GP0_WLAST, M_AXI_GP0_WVALID, 
   M_AXI_GP0_ARID, M_AXI_GP0_AWID, M_AXI_GP0_WID, M_AXI_GP0_ARBURST, M_AXI_GP0_ARLOCK, 

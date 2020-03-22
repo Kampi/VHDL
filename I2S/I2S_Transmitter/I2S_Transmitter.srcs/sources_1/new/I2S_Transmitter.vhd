@@ -78,7 +78,7 @@ begin
                 Enable <= '1';
                 SD_Int <= '0';
                 Tx_Int <= (others => '0');
-                
+
                 CurrentState <= State_TransmitWord;
 
             when State_LoadWord =>

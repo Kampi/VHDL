@@ -49,6 +49,8 @@ u32 SD_OpenCard(void)
 		xil_printf("[ERROR] Can not open SD card!\n\r");
 		return XST_FAILURE;
 	}
+
+	return XST_SUCCESS;
 }
 
 u32 SD_ScanFiles(char* path)
@@ -120,7 +122,7 @@ u32 SD_LoadFileFromCard(const char* FileName)
 	xil_printf("	File size: %lu bytes\n\r", _Header.Header.ChunkSize + 8);
 	xil_printf("	File format: %lu\n\r", _Format.AudioFormat);
 	xil_printf("	Channels: %lu\n\r", _Format.NumChannels);
-	xil_printf("	Sample rate: %lu kHz\n\r", _Format.SampleRate);
+	xil_printf("	Sample rate: %lu Hz\n\r", _Format.SampleRate);
 	xil_printf("	Bits per sample: %lu bits\n\r", _Format.BitsPerSample);
 	xil_printf("	Data bytes: %lu bytes\n\r", _DataBytes);
 	xil_printf("	Samples: %lu\n\r", 8 * _DataBytes / _Format.BitsPerSample);

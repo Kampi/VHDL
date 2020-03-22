@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (win64) Build 2729669 Thu Dec  5 04:49:17 MST 2019
-// Date        : Fri Mar 20 16:30:37 2020
+// Date        : Sat Mar 21 23:41:56 2020
 // Host        : PC running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               G:/Dropbox/Git/VHDL/I2S/Audioplayer/hardware/AudioPlayer.srcs/sources_1/bd/System/ip/System_clk_wiz_0_0/System_clk_wiz_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top System_clk_wiz_0_0 -prefix
+//               System_clk_wiz_0_0_ System_clk_wiz_0_0_sim_netlist.v
 // Design      : System_clk_wiz_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -35,7 +35,6 @@ module System_clk_wiz_0_0
         .resetn(resetn));
 endmodule
 
-(* ORIG_REF_NAME = "System_clk_wiz_0_0_clk_wiz" *) 
 module System_clk_wiz_0_0_System_clk_wiz_0_0_clk_wiz
    (ClkAudio,
     resetn,

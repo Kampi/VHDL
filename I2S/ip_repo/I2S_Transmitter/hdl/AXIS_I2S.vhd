@@ -7,9 +7,9 @@
 -- Module Name:         AXIS_I2S - AXIS_I2S_Arch
 -- Project Name: 
 -- Target Devices: 
--- Tool Versions: 		Vivado 2019.2
+-- Tool Versions:       Vivado 2019.2
 -- Description:         AXI-Stream I2S transmitter IP core from
---						https://www.kampis-elektroecke.de/fpga/i2s/axi-stream-inter…-fuer-den-sender/
+--                      https://www.kampis-elektroecke.de/fpga/i2s/axi-stream-inter-fuer-den-sender/
 --
 -- Dependencies: 
 -- 
@@ -40,20 +40,18 @@ entity AXIS_I2S is
                 WIDTH   : INTEGER := 16                                         -- Data width per channel
                 );
     Port (  -- Audio interface
-            MCLK     : in STD_LOGIC;                                            -- Audio clock
-            nReset   : in STD_LOGIC;                                            -- Audio reset (active low)
+            MCLK        : in STD_LOGIC;                                         -- Audio clock
+            nReset      : in STD_LOGIC;                                         -- Audio reset (active low)
+            LRCLK       : out STD_LOGIC;                                        -- L/R clock
+            SCLK        : out STD_LOGIC;                                        -- I2S serial clock
+            SD          : out STD_LOGIC;                                        -- I2S serial data
 
             -- AXI-Stream interface
             ACLK        : in STD_LOGIC;                                         -- AXI-Stream clock
             ARESETn     : in STD_LOGIC;                                         -- AXI-Stream reset (active low)
             TDATA_RXD   : in STD_LOGIC_VECTOR(31 downto 0);                     -- AXI-Stream TDATA (receive channel)
             TREADY_RXD  : out STD_LOGIC;                                        -- AXI-Stream TREADY handshake (receive channel)
-            TVALID_RXD  : in STD_LOGIC;                                         -- AXI-Stream TVALID handshake (receive channel)
-
-            -- I2S interface
-            LRCLK   : out STD_LOGIC;                                            -- L/R clock
-            SCLK    : out STD_LOGIC;                                            -- I2S serial clock
-            SD      : out STD_LOGIC                                             -- I2S serial data
+            TVALID_RXD  : in STD_LOGIC                                          -- AXI-Stream TVALID handshake (receive channel)
             );
 end AXIS_I2S;
 
@@ -65,7 +63,7 @@ architecture AXIS_I2S_Arch of AXIS_I2S is
 
     signal Tx_AXI               : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0)      := (others => '0');
     signal Ready_AXI            : STD_LOGIC;
-    
+
     signal Tx_Transmitter       : STD_LOGIC_VECTOR(((2 * WIDTH) - 1) downto 0)      := (others => '0');
     signal Ready_Transmitter    : STD_LOGIC;
 

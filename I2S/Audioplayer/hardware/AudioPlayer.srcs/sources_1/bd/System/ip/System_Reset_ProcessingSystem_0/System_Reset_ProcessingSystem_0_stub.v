@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (win64) Build 2729669 Thu Dec  5 04:49:17 MST 2019
-// Date        : Fri Mar 20 16:29:30 2020
+// Date        : Sat Mar 21 23:41:56 2020
 // Host        : PC running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub
-//               G:/Dropbox/Git/VHDL/I2S/Audioplayer/hardware/AudioPlayer.srcs/sources_1/bd/System/ip/System_Reset_ProcessingSystem_0/System_Reset_ProcessingSystem_0_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top System_Reset_ProcessingSystem_0 -prefix
+//               System_Reset_ProcessingSystem_0_ System_Reset_ProcessingSystem_0_stub.v
 // Design      : System_Reset_ProcessingSystem_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z010clg400-1
