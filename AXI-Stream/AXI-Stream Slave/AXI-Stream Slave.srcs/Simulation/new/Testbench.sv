@@ -10,7 +10,7 @@
 // Target Devices: 
 // Tool Versions: 
 // Description:         Testbench for the AXI-Stream Slave project from
-//                      <>
+//                      https://www.kampis-elektroecke.de/2020/04/axi-stream-interface/
 // Dependencies: 
 // 
 // Revision:
@@ -26,7 +26,7 @@ module Testbench();
 
     // Simulation inputs
     bit SimulationClock = 0;
-    bit SimulationResetN = 0;
+    bit nSimulationReset = 0;
     bit[31:0] SimulationData;
 
     // Simulation outputs
@@ -40,7 +40,7 @@ module Testbench();
 
     StreamWriter Writer(
         .ACLK(SimulationClock),
-        .ARESETN(SimulationResetN),
+        .ARESETN(nSimulationReset),
         .TDATA(TDATA),
         .TLAST(TLAST),
         .TREADY(TREADY),
@@ -48,8 +48,8 @@ module Testbench();
     );
 
     Top DUT(
-        .clk(SimulationClock),
-        .resetn(SimulationResetN),
+        .ACLK(SimulationClock),
+        .ARESETN(nSimulationReset),
         .TDATA_RXD(TDATA),
         .TREADY_RXD(TREADY),
         .TVALID_RXD(TVALID),
@@ -95,7 +95,7 @@ module Testbench();
 
         // Wait at least 16 clock cycles after a reset
         #500ns;
-        SimulationResetN <= 1'b1;
+        nSimulationReset <= 1'b1;
 
         // Start the agents
         WriteAgent.start_master();
@@ -105,9 +105,9 @@ module Testbench();
                 SendData(0, 4);
             end
         join_any
-        
+
         Index = 16'h2;
-        
+
         #10000 $finish;
 
     end

@@ -10,7 +10,7 @@
 // Target Devices: 
 // Tool Versions: 
 // Description:     	Testbench for the AXI-Stream Master project from
-//                      <>
+//                      https://www.kampis-elektroecke.de/2020/04/axi-stream-interface/
 // Dependencies: 
 // 
 // Revision:
@@ -26,7 +26,7 @@ module Testbench();
 
     // Simulation inputs
     bit SimulationClock = 0;
-    bit SimulationResetN = 0;
+    bit nSimulationReset = 0;
 
     // Simulation outputs
     bit TREADY;
@@ -38,7 +38,7 @@ module Testbench();
 
     StreamReader Reader(
         .ACLK(SimulationClock),
-        .ARESETN(SimulationResetN),
+        .ARESETN(nSimulationReset),
         .TDATA(TDATA),
         .TLAST(TLAST),
         .TREADY(TREADY),
@@ -46,8 +46,8 @@ module Testbench();
     );
 
     Top DUT(
-        .clk(SimulationClock),
-        .resetn(SimulationResetN),
+        .ACLK(SimulationClock),
+        .ARESETn(nSimulationReset),
         .TDATA_TXD(TDATA),
         .TREADY_TXD(TREADY),
         .TVALID_TXD(TVALID),
@@ -57,31 +57,30 @@ module Testbench();
 
     StreamReader_axi4stream_vip_0_0_slv_t           ReadAgent;
 
-    axi4stream_monitor_transaction                 SlaveMonitor_Transaction;
-    axi4stream_monitor_transaction                 SlaveMonitor_Transaction_Queue[$];
-    xil_axi4stream_uint                            SlaveMonitor_Transaction_QueueSize = 0;
+    axi4stream_monitor_transaction                  SlaveMonitor_Transaction;
+    axi4stream_monitor_transaction                  SlaveMonitor_Transaction_Queue[$];
+    xil_axi4stream_uint                             SlaveMonitor_Transaction_QueueSize = 0;
 
     task SlaveReceive();
-        axi4stream_ready_gen                           ready_gen;
-        ready_gen = ReadAgent.driver.create_ready("ready_gen");
-        ready_gen.set_ready_policy(XIL_AXI4STREAM_READY_GEN_OSC);
-        ready_gen.set_low_time(2);
-        ready_gen.set_high_time(6);
-        ReadAgent.driver.send_tready(ready_gen);
+        axi4stream_ready_gen Ready;
+        Ready = ReadAgent.driver.create_ready("Ready");
+        Ready.set_ready_policy(XIL_AXI4STREAM_READY_GEN_OSC);
+        Ready.set_low_time(2);
+        Ready.set_high_time(6);
+        ReadAgent.driver.send_tready(Ready);
     endtask
 
     // Generate the clock
     always #8 SimulationClock = ~SimulationClock;
 
-   initial begin
-
+    initial begin
         // Create new agent
         ReadAgent = new("Read agent", Reader.StreamReader.inst.IF);
         ReadAgent.vif_proxy.set_dummy_drive_type(XIL_AXI4STREAM_VIF_DRIVE_NONE);
 
         // Wait at least 16 clock cycles after a reset
         #500ns;
-        SimulationResetN <= 1'b1;
+        nSimulationReset <= 1'b1;
 
         // Start the agents
         ReadAgent.start_slave();

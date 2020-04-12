@@ -9,11 +9,11 @@
 -- Target Devices: 
 -- Tool Versions: 		Vivado 2019.2
 -- Description:         AXI-Stream slave implementation from
---                      <>
+--                      https://www.kampis-elektroecke.de/2020/04/axi-stream-interface/
 -- Dependencies: 
 -- 
 -- Revision:
---      Revision 0.01 - File Created
+--  Revision            0.01 - File Created
 --
 -- Additional Comments:
 -- 
@@ -36,13 +36,10 @@ entity Top is
                 );
     Port (  ACLK        : in STD_LOGIC;
             ARESETn     : in STD_LOGIC;
-
-            -- AXI-Stream interface
             TDATA_RXD   : in STD_LOGIC_VECTOR(31 downto 0);
             TREADY_RXD  : out STD_LOGIC;
             TVALID_RXD  : in STD_LOGIC;
             TLAST_RXD   : in STD_LOGIC;
-
             Index       : in STD_LOGIC_VECTOR(4 downto 0);
             DataOut     : out STD_LOGIC_VECTOR(31 downto 0)
             );

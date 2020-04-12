@@ -9,11 +9,11 @@
 -- Target Devices: 
 -- Tool Versions: 		Vivado 2019.2
 -- Description: 		AXI-Stream master implementation from
---                      <>
+--                      https://www.kampis-elektroecke.de/2020/04/axi-stream-interface/
 -- Dependencies: 
 -- 
 -- Revision:
---      Revision 0.01 - File Created
+--  Revision            0.01 - File Created
 --
 -- Additional Comments:
 -- 
@@ -36,10 +36,7 @@ entity Top is
                 );
     Port (  ACLK        : in STD_LOGIC;
             ARESETn     : in STD_LOGIC;
-            
-            Trigger      : in STD_LOGIC;
-
-            -- AXI-Stream interface
+            Trigger     : in STD_LOGIC;
             TDATA_TXD   : out STD_LOGIC_VECTOR(31 downto 0);
             TREADY_TXD  : in STD_LOGIC;
             TVALID_TXD  : out STD_LOGIC;
@@ -52,8 +49,6 @@ architecture Top_Arch of Top is
     type State_t is (Reset, WaitForTriggerHigh, WaitForTriggerLow, WaitForReady, WaitForSlave);
 
     signal TransmitState    : State_t   := Reset;
-    
-    signal IsLast           : STD_LOGIC := '0';
 
     signal Counter          : INTEGER   := 0;
 
