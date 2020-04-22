@@ -78,7 +78,7 @@ begin
                                 CurrentState <= S0;
                             else
                                 CurrentState <= S3;
-                            end if;        
+                            end if;
             end case;
         end if;
        
