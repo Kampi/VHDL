@@ -48,7 +48,7 @@
 
 
 // IP VLNV: xilinx.com:ip:axi4stream_vip:1.1
-// IP Revision: 6
+// IP Revision: 7
 
 `timescale 1ns/1ps
 
@@ -62,7 +62,7 @@ module StreamWriter_axi4stream_vip_0_0 (
   m_axis_tlast
 );
 
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLOCK, ASSOCIATED_BUSIF S_AXIS:M_AXIS, ASSOCIATED_RESET ARESETN, FREQ_HZ 125000000, PHASE 0.000, CLK_DOMAIN StreamWriter_ACLK, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLOCK, ASSOCIATED_BUSIF S_AXIS:M_AXIS, ASSOCIATED_RESET ARESETN, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, PHASE 0.000, CLK_DOMAIN StreamWriter_ACLK, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLOCK CLK" *)
 input wire aclk;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RESET, POLARITY ACTIVE_LOW, INSERT_VIP 0, TYPE INTERCONNECT" *)
@@ -78,7 +78,7 @@ output wire [31 : 0] m_axis_tdata;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TLAST" *)
 output wire [0 : 0] m_axis_tlast;
 
-  axi4stream_vip_v1_1_6_top #(
+  axi4stream_vip_v1_1_7_top #(
     .C_AXI4STREAM_SIGNAL_SET('B00000000000000000000000000010011),
     .C_AXI4STREAM_INTERFACE_MODE(0),
     .C_AXI4STREAM_DATA_WIDTH(32),

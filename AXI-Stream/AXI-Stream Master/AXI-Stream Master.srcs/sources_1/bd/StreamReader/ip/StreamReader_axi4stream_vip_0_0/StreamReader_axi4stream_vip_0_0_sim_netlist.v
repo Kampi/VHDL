@@ -3,38 +3,40 @@
 // Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
 // Date        : Sat Jun 20 20:57:35 2020
 // Host        : PC running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim {g:/Dropbox/Git/VHDL/AXI-Stream/AXI-Stream Slave/AXI-Stream
-//               Slave.srcs/sources_1/bd/StreamWriter/ip/StreamWriter_axi4stream_vip_0_0/StreamWriter_axi4stream_vip_0_0_sim_netlist.v}
-// Design      : StreamWriter_axi4stream_vip_0_0
+// Command     : write_verilog -force -mode funcsim {g:/Dropbox/Git/VHDL/AXI-Stream/AXI-Stream Master/AXI-Stream
+//               Master.srcs/sources_1/bd/StreamReader/ip/StreamReader_axi4stream_vip_0_0/StreamReader_axi4stream_vip_0_0_sim_netlist.v}
+// Design      : StreamReader_axi4stream_vip_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
 // Device      : xc7z010clg400-1
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CHECK_LICENSE_TYPE = "StreamWriter_axi4stream_vip_0_0,axi4stream_vip_v1_1_7_top,{}" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* X_CORE_INFO = "axi4stream_vip_v1_1_7_top,Vivado 2020.1" *) 
+(* CHECK_LICENSE_TYPE = "StreamReader_axi4stream_vip_0_0,axi4stream_vip_v1_1_7_top,{}" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* X_CORE_INFO = "axi4stream_vip_v1_1_7_top,Vivado 2020.1" *) 
 (* NotValidForBitStream *)
-module StreamWriter_axi4stream_vip_0_0
+module StreamReader_axi4stream_vip_0_0
    (aclk,
     aresetn,
-    m_axis_tvalid,
-    m_axis_tready,
-    m_axis_tdata,
-    m_axis_tlast);
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLOCK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLOCK, ASSOCIATED_BUSIF S_AXIS:M_AXIS, ASSOCIATED_RESET ARESETN, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, PHASE 0.000, CLK_DOMAIN StreamWriter_ACLK, INSERT_VIP 0" *) input aclk;
+    s_axis_tvalid,
+    s_axis_tready,
+    s_axis_tdata,
+    s_axis_tlast);
+  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLOCK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLOCK, ASSOCIATED_BUSIF S_AXIS:M_AXIS, ASSOCIATED_RESET ARESETN, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, PHASE 0.000, CLK_DOMAIN StreamReader_ACLK, INSERT_VIP 0" *) input aclk;
   (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RESET RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RESET, POLARITY ACTIVE_LOW, INSERT_VIP 0, TYPE INTERCONNECT" *) input aresetn;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TVALID" *) output [0:0]m_axis_tvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TREADY" *) input [0:0]m_axis_tready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TDATA" *) output [31:0]m_axis_tdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TLAST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M_AXIS, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 125000000, PHASE 0.000, CLK_DOMAIN StreamWriter_ACLK, LAYERED_METADATA undef, INSERT_VIP 0" *) output [0:0]m_axis_tlast;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TVALID" *) input [0:0]s_axis_tvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TREADY" *) output [0:0]s_axis_tready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TDATA" *) input [31:0]s_axis_tdata;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TLAST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S_AXIS, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 125000000, PHASE 0.000, CLK_DOMAIN StreamReader_ACLK, LAYERED_METADATA undef, INSERT_VIP 0" *) input [0:0]s_axis_tlast;
 
   wire aclk;
   wire aresetn;
-  wire [31:0]m_axis_tdata;
-  wire [0:0]m_axis_tlast;
-  wire [0:0]m_axis_tready;
-  wire [0:0]m_axis_tvalid;
-  wire NLW_inst_s_axis_tready_UNCONNECTED;
+  wire [31:0]s_axis_tdata;
+  wire [0:0]s_axis_tlast;
+  wire [0:0]s_axis_tready;
+  wire [0:0]s_axis_tvalid;
+  wire NLW_inst_m_axis_tlast_UNCONNECTED;
+  wire NLW_inst_m_axis_tvalid_UNCONNECTED;
+  wire [31:0]NLW_inst_m_axis_tdata_UNCONNECTED;
   wire [0:0]NLW_inst_m_axis_tdest_UNCONNECTED;
   wire [0:0]NLW_inst_m_axis_tid_UNCONNECTED;
   wire [3:0]NLW_inst_m_axis_tkeep_UNCONNECTED;
@@ -45,40 +47,40 @@ module StreamWriter_axi4stream_vip_0_0
   (* C_AXI4STREAM_DEST_WIDTH = "0" *) 
   (* C_AXI4STREAM_HAS_ARESETN = "1" *) 
   (* C_AXI4STREAM_ID_WIDTH = "0" *) 
-  (* C_AXI4STREAM_INTERFACE_MODE = "0" *) 
+  (* C_AXI4STREAM_INTERFACE_MODE = "2" *) 
   (* C_AXI4STREAM_SIGNAL_SET = "32'b00000000000000000000000000010011" *) 
   (* C_AXI4STREAM_USER_BITS_PER_BYTE = "0" *) 
   (* C_AXI4STREAM_USER_WIDTH = "0" *) 
   (* DowngradeIPIdentifiedWarnings = "yes" *) 
-  StreamWriter_axi4stream_vip_0_0_axi4stream_vip_v1_1_7_top inst
+  StreamReader_axi4stream_vip_0_0_axi4stream_vip_v1_1_7_top inst
        (.aclk(aclk),
         .aclken(1'b1),
         .aresetn(aresetn),
-        .m_axis_tdata(m_axis_tdata),
+        .m_axis_tdata(NLW_inst_m_axis_tdata_UNCONNECTED[31:0]),
         .m_axis_tdest(NLW_inst_m_axis_tdest_UNCONNECTED[0]),
         .m_axis_tid(NLW_inst_m_axis_tid_UNCONNECTED[0]),
         .m_axis_tkeep(NLW_inst_m_axis_tkeep_UNCONNECTED[3:0]),
-        .m_axis_tlast(m_axis_tlast),
-        .m_axis_tready(m_axis_tready),
+        .m_axis_tlast(NLW_inst_m_axis_tlast_UNCONNECTED),
+        .m_axis_tready(1'b0),
         .m_axis_tstrb(NLW_inst_m_axis_tstrb_UNCONNECTED[3:0]),
         .m_axis_tuser(NLW_inst_m_axis_tuser_UNCONNECTED[0]),
-        .m_axis_tvalid(m_axis_tvalid),
-        .s_axis_tdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .m_axis_tvalid(NLW_inst_m_axis_tvalid_UNCONNECTED),
+        .s_axis_tdata(s_axis_tdata),
         .s_axis_tdest(1'b0),
         .s_axis_tid(1'b0),
         .s_axis_tkeep({1'b0,1'b0,1'b0,1'b0}),
-        .s_axis_tlast(1'b0),
-        .s_axis_tready(NLW_inst_s_axis_tready_UNCONNECTED),
+        .s_axis_tlast(s_axis_tlast),
+        .s_axis_tready(s_axis_tready),
         .s_axis_tstrb({1'b0,1'b0,1'b0,1'b0}),
         .s_axis_tuser(1'b0),
-        .s_axis_tvalid(1'b0));
+        .s_axis_tvalid(s_axis_tvalid));
 endmodule
 
 (* C_AXI4STREAM_DATA_WIDTH = "32" *) (* C_AXI4STREAM_DEST_WIDTH = "0" *) (* C_AXI4STREAM_HAS_ARESETN = "1" *) 
-(* C_AXI4STREAM_ID_WIDTH = "0" *) (* C_AXI4STREAM_INTERFACE_MODE = "0" *) (* C_AXI4STREAM_SIGNAL_SET = "32'b00000000000000000000000000010011" *) 
+(* C_AXI4STREAM_ID_WIDTH = "0" *) (* C_AXI4STREAM_INTERFACE_MODE = "2" *) (* C_AXI4STREAM_SIGNAL_SET = "32'b00000000000000000000000000010011" *) 
 (* C_AXI4STREAM_USER_BITS_PER_BYTE = "0" *) (* C_AXI4STREAM_USER_WIDTH = "0" *) (* DowngradeIPIdentifiedWarnings = "yes" *) 
 (* ORIG_REF_NAME = "axi4stream_vip_v1_1_7_top" *) 
-module StreamWriter_axi4stream_vip_0_0_axi4stream_vip_v1_1_7_top
+module StreamReader_axi4stream_vip_0_0_axi4stream_vip_v1_1_7_top
    (aclk,
     aresetn,
     aclken,

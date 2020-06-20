@@ -1,8 +1,8 @@
---Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+--Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
---Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
---Date        : Thu Mar  5 12:02:08 2020
---Host        : 40B0341C1F56 running 64-bit major release  (build 9200)
+--Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
+--Date        : Sat Jun 20 20:56:33 2020
+--Host        : PC running 64-bit major release  (build 9200)
 --Command     : generate_target StreamReader.bd
 --Design      : StreamReader
 --Purpose     : IP block netlist
@@ -46,7 +46,7 @@ architecture STRUCTURE of StreamReader is
   attribute X_INTERFACE_INFO : string;
   attribute X_INTERFACE_INFO of ACLK : signal is "xilinx.com:signal:clock:1.0 CLK.ACLK CLK";
   attribute X_INTERFACE_PARAMETER : string;
-  attribute X_INTERFACE_PARAMETER of ACLK : signal is "XIL_INTERFACENAME CLK.ACLK, ASSOCIATED_RESET ARESETn, CLK_DOMAIN StreamReader_aclk_0, FREQ_HZ 125000000, INSERT_VIP 0, PHASE 0.000";
+  attribute X_INTERFACE_PARAMETER of ACLK : signal is "XIL_INTERFACENAME CLK.ACLK, ASSOCIATED_RESET ARESETn, CLK_DOMAIN StreamReader_ACLK, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.000";
   attribute X_INTERFACE_INFO of ARESETn : signal is "xilinx.com:signal:reset:1.0 RST.ARESETN RST";
   attribute X_INTERFACE_PARAMETER of ARESETn : signal is "XIL_INTERFACENAME RST.ARESETN, INSERT_VIP 0, POLARITY ACTIVE_LOW";
 begin

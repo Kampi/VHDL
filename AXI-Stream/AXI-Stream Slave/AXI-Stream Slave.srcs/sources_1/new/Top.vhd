@@ -2,18 +2,19 @@
 -- Company:             https://www.kampis-elektroecke.de
 -- Engineer:            Daniel Kampert
 -- 
--- Create Date:         04.03.2020 09:00:02
+-- Create Date:         20.06.2020 09:00:02
 -- Design Name: 
 -- Module Name:         Top - Top_Arch
 -- Project Name: 
 -- Target Devices: 
--- Tool Versions: 		Vivado 2019.2
+-- Tool Versions: 		Vivado 2020.1
 -- Description:         AXI-Stream slave implementation from
 --                      https://www.kampis-elektroecke.de/2020/04/axi-stream-interface/
 -- Dependencies: 
 -- 
 -- Revision:
 --  Revision            0.01 - File Created
+--  Revision            0.02 - Migrate to Vivado 2020.1
 --
 -- Additional Comments:
 -- 
@@ -57,40 +58,40 @@ architecture Top_Arch of Top is
 
 begin
 
-    process(ACLK)
+    process
     begin
-        if(rising_edge(ACLK)) then
-            if(ARESETn = '0') then
-                CurrentState <= Reset;
-            else
-                case CurrentState is
-                    when Reset =>
-                        FIFO <= (others => (others => '0'));
+        wait until rising_edge(ACLK);
+
+        if(ARESETn = '0') then
+            CurrentState <= Reset;
+        else
+            case CurrentState is
+                when Reset =>
+                    FIFO <= (others => (others => '0'));
+                    FIFO_Counter <= 0;
+                    CurrentState <= Ready;
+
+            when Ready =>
+                TREADY_RXD <= '1';
+                CurrentState <= WaitForValid;
+
+            when WaitForValid =>
+                if(TVALID_RXD = '1') then
+                    TREADY_RXD <= '0';
+                    FIFO(FIFO_Counter) <= TDATA_RXD;
+                            
+                    if((FIFO_Counter = (FIFO_SIZE - 1)) or (TLAST_RXD = '1')) then
                         FIFO_Counter <= 0;
-                        CurrentState <= Ready;
-
-                    when Ready =>
-                        TREADY_RXD <= '1';
-                        CurrentState <= WaitForValid;
-
-                    when WaitForValid =>
-                        if(TVALID_RXD = '1') then
-                            TREADY_RXD <= '0';
-                            FIFO(FIFO_Counter) <= TDATA_RXD;
+                    else
+                        FIFO_Counter <= FIFO_Counter + 1;
+                    end if;
                             
-                            if((FIFO_Counter = (FIFO_SIZE - 1)) or (TLAST_RXD = '1')) then
-                                FIFO_Counter <= 0;
-                            else
-                                FIFO_Counter <= FIFO_Counter + 1;
-                            end if;
-                            
-                            CurrentState <= Ready;
-                        else
-                            CurrentState <= WaitForValid;
-                        end if;
+                    CurrentState <= Ready;
+                else
+                    CurrentState <= WaitForValid;
+                end if;
 
-                end case;
-            end if;
+            end case;
         end if;
     end process;
 

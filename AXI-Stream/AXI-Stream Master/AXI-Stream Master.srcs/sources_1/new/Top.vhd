@@ -2,18 +2,19 @@
 -- Company:             https://www.kampis-elektroecke.de
 -- Engineer:            Daniel Kampert
 -- 
--- Create Date:         04.03.2020 09:00:02
+-- Create Date:         20.06.2020 09:00:02
 -- Design Name: 
 -- Module Name:         Top - Top_Arch
 -- Project Name: 
 -- Target Devices: 
--- Tool Versions: 		Vivado 2019.2
+-- Tool Versions: 		Vivado 2020.1
 -- Description: 		AXI-Stream master implementation from
 --                      https://www.kampis-elektroecke.de/2020/04/axi-stream-interface/
 -- Dependencies: 
 -- 
 -- Revision:
 --  Revision            0.01 - File Created
+--  Revision            0.02 - Migrate to Vivado 2020.1
 --
 -- Additional Comments:
 -- 
@@ -48,69 +49,69 @@ architecture Top_Arch of Top is
 
     type State_t is (Reset, WaitForTriggerHigh, WaitForTriggerLow, WaitForReady, WaitForSlave);
 
-    signal TransmitState    : State_t   := Reset;
+    signal CurrentState     : State_t   := Reset;
 
     signal Counter          : INTEGER   := 0;
 
 begin
 
-    process(ACLK)
+    process
     begin
-        if(rising_edge(ACLK)) then
-            if(ARESETn = '0') then
-                TransmitState <= Reset;
-            else
-                case TransmitState is
-                    when Reset =>
-                        Counter <= 0;
-                        TDATA_TXD <= (others => '0');
+        wait until rising_edge(ACLK);
+        
+        if(ARESETn = '0') then
+            CurrentState <= Reset;
+        else
+            case CurrentState is
+                when Reset =>
+                    Counter <= 0;
+                    TDATA_TXD <= (others => '0');
+                    TVALID_TXD <= '0';
+                    TLAST_TXD <= '0';
+                    CurrentState <= WaitForTriggerHigh;
+
+                when WaitForTriggerHigh =>
+                    if(Trigger = '1') then
+                        CurrentState <= WaitForTriggerLow;
+                    else
+                        CurrentState <= WaitForTriggerHigh;
+                    end if;
+                   
+                when WaitForTriggerLow =>
+                    if(Trigger = '0') then
+                        CurrentState <= WaitForReady;
+                    else
+                        CurrentState <= WaitForTriggerLow;
+                    end if;                 
+
+                when WaitForReady =>
+                    TDATA_TXD <= std_logic_vector(to_unsigned(Counter, 32));
+                    TVALID_TXD <= '1';
+                        
+                    if(Counter < (LENGTH - 1)) then
+                        TLAST_TXD <= '0';
+                    else
+                        TLAST_TXD <= '1';
+                    end if;
+
+                    CurrentState <= WaitForSlave;
+
+                when WaitForSlave =>
+                    if(TREADY_TXD = '1') then
                         TVALID_TXD <= '0';
                         TLAST_TXD <= '0';
-                        TransmitState <= WaitForTriggerHigh;
-
-                    when WaitForTriggerHigh =>
-                        if(Trigger = '1') then
-                            TransmitState <= WaitForTriggerLow;
-                        else
-                            TransmitState <= WaitForTriggerHigh;
-                        end if;
-                   
-                    when WaitForTriggerLow =>
-                        if(Trigger = '0') then
-                            TransmitState <= WaitForReady;
-                        else
-                            TransmitState <= WaitForTriggerLow;
-                        end if;                 
-
-                    when WaitForReady =>
-                        TDATA_TXD <= std_logic_vector(to_unsigned(Counter, 32));
-                        TVALID_TXD <= '1';
-                        
-                        if(Counter < (LENGTH - 1)) then
-                            TLAST_TXD <= '0';
-                        else
-                            TLAST_TXD <= '1';
-                        end if;
-
-                        TransmitState <= WaitForSlave;
-
-                    when WaitForSlave =>
-                        if(TREADY_TXD = '1') then
-                            TVALID_TXD <= '0';
-                            TLAST_TXD <= '0';
                             
-                            if(Counter < (LENGTH - 1)) then
-                                Counter <= Counter + 1;
-                                TransmitState <= WaitForReady;
-                            else
-                                Counter <= 0;
-                                TransmitState <= WaitForTriggerHigh;
-                            end if;
+                        if(Counter < (LENGTH - 1)) then
+                            Counter <= Counter + 1;
+                            CurrentState <= WaitForReady;
                         else
-                            TransmitState <= WaitForSlave;
+                            Counter <= 0;
+                            CurrentState <= WaitForTriggerHigh;
                         end if;
-                end case;
-            end if;
+                    else
+                        CurrentState <= WaitForSlave;
+                    end if;
+            end case;
         end if;
     end process;
 end Top_Arch;

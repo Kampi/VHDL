@@ -51,37 +51,37 @@
 // IP Revision: 7
 
 (* X_CORE_INFO = "axi4stream_vip_v1_1_7_top,Vivado 2020.1" *)
-(* CHECK_LICENSE_TYPE = "StreamWriter_axi4stream_vip_0_0,axi4stream_vip_v1_1_7_top,{}" *)
-(* CORE_GENERATION_INFO = "StreamWriter_axi4stream_vip_0_0,axi4stream_vip_v1_1_7_top,{x_ipProduct=Vivado 2020.1,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=axi4stream_vip,x_ipVersion=1.1,x_ipCoreRevision=7,x_ipLanguage=VHDL,x_ipSimLanguage=VERILOG,C_AXI4STREAM_SIGNAL_SET=0b00000000000000000000000000010011,C_AXI4STREAM_INTERFACE_MODE=0,C_AXI4STREAM_DATA_WIDTH=32,C_AXI4STREAM_USER_BITS_PER_BYTE=0,C_AXI4STREAM_ID_WIDTH=0,C_AXI4STREAM_DEST_WIDTH=0,C_AXI4STREAM_USER_WIDTH=0,C_AXI4STREAM_HAS_ARESETN=1}" *)
+(* CHECK_LICENSE_TYPE = "StreamReader_axi4stream_vip_0_0,axi4stream_vip_v1_1_7_top,{}" *)
+(* CORE_GENERATION_INFO = "StreamReader_axi4stream_vip_0_0,axi4stream_vip_v1_1_7_top,{x_ipProduct=Vivado 2020.1,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=axi4stream_vip,x_ipVersion=1.1,x_ipCoreRevision=7,x_ipLanguage=VHDL,x_ipSimLanguage=VERILOG,C_AXI4STREAM_SIGNAL_SET=0b00000000000000000000000000010011,C_AXI4STREAM_INTERFACE_MODE=2,C_AXI4STREAM_DATA_WIDTH=32,C_AXI4STREAM_USER_BITS_PER_BYTE=0,C_AXI4STREAM_ID_WIDTH=0,C_AXI4STREAM_DEST_WIDTH=0,C_AXI4STREAM_USER_WIDTH=0,C_AXI4STREAM_HAS_ARESETN=1}" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
-module StreamWriter_axi4stream_vip_0_0 (
+module StreamReader_axi4stream_vip_0_0 (
   aclk,
   aresetn,
-  m_axis_tvalid,
-  m_axis_tready,
-  m_axis_tdata,
-  m_axis_tlast
+  s_axis_tvalid,
+  s_axis_tready,
+  s_axis_tdata,
+  s_axis_tlast
 );
 
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLOCK, ASSOCIATED_BUSIF S_AXIS:M_AXIS, ASSOCIATED_RESET ARESETN, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, PHASE 0.000, CLK_DOMAIN StreamWriter_ACLK, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLOCK, ASSOCIATED_BUSIF S_AXIS:M_AXIS, ASSOCIATED_RESET ARESETN, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, PHASE 0.000, CLK_DOMAIN StreamReader_ACLK, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLOCK CLK" *)
 input wire aclk;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RESET, POLARITY ACTIVE_LOW, INSERT_VIP 0, TYPE INTERCONNECT" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RESET RST" *)
 input wire aresetn;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TVALID" *)
-output wire [0 : 0] m_axis_tvalid;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TREADY" *)
-input wire [0 : 0] m_axis_tready;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TDATA" *)
-output wire [31 : 0] m_axis_tdata;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M_AXIS, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 125000000, PHASE 0.000, CLK_DOMAIN StreamWriter_ACLK, LAYERED_METADATA undef, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TLAST" *)
-output wire [0 : 0] m_axis_tlast;
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TVALID" *)
+input wire [0 : 0] s_axis_tvalid;
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TREADY" *)
+output wire [0 : 0] s_axis_tready;
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TDATA" *)
+input wire [31 : 0] s_axis_tdata;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S_AXIS, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 125000000, PHASE 0.000, CLK_DOMAIN StreamReader_ACLK, LAYERED_METADATA undef, INSERT_VIP 0" *)
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TLAST" *)
+input wire [0 : 0] s_axis_tlast;
 
   axi4stream_vip_v1_1_7_top #(
     .C_AXI4STREAM_SIGNAL_SET('B00000000000000000000000000010011),
-    .C_AXI4STREAM_INTERFACE_MODE(0),
+    .C_AXI4STREAM_INTERFACE_MODE(2),
     .C_AXI4STREAM_DATA_WIDTH(32),
     .C_AXI4STREAM_USER_BITS_PER_BYTE(0),
     .C_AXI4STREAM_ID_WIDTH(0),
@@ -92,21 +92,21 @@ output wire [0 : 0] m_axis_tlast;
     .aclk(aclk),
     .aresetn(aresetn),
     .aclken(1'B1),
-    .s_axis_tvalid(1'B0),
-    .s_axis_tready(),
-    .s_axis_tdata(32'B0),
+    .s_axis_tvalid(s_axis_tvalid),
+    .s_axis_tready(s_axis_tready),
+    .s_axis_tdata(s_axis_tdata),
     .s_axis_tstrb(4'B0),
     .s_axis_tkeep(4'B0),
-    .s_axis_tlast(1'B0),
+    .s_axis_tlast(s_axis_tlast),
     .s_axis_tid(1'B0),
     .s_axis_tdest(1'B0),
     .s_axis_tuser(1'B0),
-    .m_axis_tvalid(m_axis_tvalid),
-    .m_axis_tready(m_axis_tready),
-    .m_axis_tdata(m_axis_tdata),
+    .m_axis_tvalid(),
+    .m_axis_tready(1'B0),
+    .m_axis_tdata(),
     .m_axis_tstrb(),
     .m_axis_tkeep(),
-    .m_axis_tlast(m_axis_tlast),
+    .m_axis_tlast(),
     .m_axis_tid(),
     .m_axis_tdest(),
     .m_axis_tuser()

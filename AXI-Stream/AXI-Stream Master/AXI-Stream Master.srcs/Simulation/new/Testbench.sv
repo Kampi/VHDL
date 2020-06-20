@@ -3,18 +3,20 @@
 // Company:         	https://www.kampis-elektroecke.de
 // Engineer:        	Daniel Kampert
 // 
-// Create           	Date: 05.03.2020 11:44:57
+// Create           	Date: 20.06.2020 11:44:57
 // Design Name: 
 // Module Name:     	Testbench
 // Project Name: 
 // Target Devices: 
-// Tool Versions: 
+// Tool Versions:       Vivado 2020.1
 // Description:     	Testbench for the AXI-Stream Master project from
 //                      https://www.kampis-elektroecke.de/2020/04/axi-stream-interface/
 // Dependencies: 
 // 
 // Revision:
 //  Revision        	0.01 - File Created
+//  Revision            0.02 - Migrate to Vivado 2020.1
+//
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
@@ -99,7 +101,6 @@ module Testbench();
         join_any
         
         #10000ns $finish;
-
     end
 
     initial begin
