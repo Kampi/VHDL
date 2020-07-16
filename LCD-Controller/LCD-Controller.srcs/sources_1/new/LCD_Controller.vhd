@@ -5,11 +5,10 @@
 -- Create Date:         24.01.2020 21:51:49
 -- Design Name: 
 -- Module Name:         LCD_Controller - LCD_Controller_Arch
--- Project Name:        LCD interface for the HD44780 LCD-Interface tutorial from
+-- Target Devices: 		XC7Z010CLG400-1
+-- Tool Versions:   	Vivado 2020.1
+-- Description:         LCD interface for the HD44780 LCD-Interface tutorial from
 --                      https://www.kampis-elektroecke.de/fpga/hd44780-lcd-interface/
--- Target Devices: 
--- Tool Versions:       Vivado 2019.2
--- Description:         LCD-Controller for HD44780 character displays.
 -- 
 -- Dependencies: 
 -- 

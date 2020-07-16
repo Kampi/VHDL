@@ -6,8 +6,8 @@
 -- Design Name: 
 -- Module Name:         Top - Top_Arch
 -- Project Name: 
--- Target Devices: 
--- Tool Versions:       Vivado 2020.1
+-- Target Devices: 		XC7Z010CLG400-1
+-- Tool Versions:   	Vivado 2020.1
 -- Description:         Top design for the hardware implementation of a MAX6817 debounce IC from 
 --                      https://www.kampis-elektroecke.de/fpga/taster-entprellen/
 -- Dependencies: 

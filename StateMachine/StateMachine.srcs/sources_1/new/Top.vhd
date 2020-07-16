@@ -1,20 +1,20 @@
 ----------------------------------------------------------------------------------
--- Company: 		https://www.kampis-elektroecke.de
--- Engineer: 		Daniel Kampert
+-- Company: 			https://www.kampis-elektroecke.de
+-- Engineer: 			Daniel Kampert
 -- 
--- Create Date: 	15.03.2018 17:42:00
+-- Create Date: 		15.03.2018 17:42:00
 -- Design Name: 
--- Module Name: 	Top - Top_Arch
--- Project Name:    State machine implementation from the state machine tutorial from
---                  https://www.kampis-elektroecke.de/fpga/entwurf-zustandsautomat/
--- Target Devices:  XC7Z010CLG400-1
--- Tool Versions:   Vivado 2019.2
--- Description:     Simple VHDL state machine.
+-- Module Name: 		Top - Top_Arch
+-- Project Name:    	State machine implementation from the state machine tutorial from
+--                  	https://www.kampis-elektroecke.de/fpga/entwurf-zustandsautomat/
+-- Target Devices: 		XC7Z010CLG400-1
+-- Tool Versions:   	Vivado 2019.2
+-- Description:     	Simple VHDL state machine.
 -- 
 -- Dependencies: 
 -- 
 -- Revision:
--- 		0.01 - File Created
+--  Revision			0.01 - File Created
 --
 -- Additional Comments:
 -- 

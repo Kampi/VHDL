@@ -6,7 +6,7 @@
 -- Design Name: 
 -- Module Name:         Top - Top_Arch
 -- Project Name: 
--- Target Devices: 
+-- Target Devices:  	XC7Z010CLG400-1
 -- Tool Versions: 		Vivado 2020.1
 -- Description: 		AXI-Stream master implementation from
 --                      https://www.kampis-elektroecke.de/2020/04/axi-stream-interface/

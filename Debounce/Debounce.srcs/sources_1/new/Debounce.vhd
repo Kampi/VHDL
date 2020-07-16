@@ -6,9 +6,8 @@
 -- Design Name: 
 -- Module Name:         Debounce - Behavioral
 -- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Tool Versions:       Vivado 2020.1
+-- Target Devices: 		XC7Z010CLG400-1
+-- Tool Versions:   	Vivado 2020.1
 -- Description:         Debounce module for a MAX6817 debounce IC implementation from 
 --                      https://www.kampis-elektroecke.de/fpga/taster-entprellen/
 -- Dependencies: 

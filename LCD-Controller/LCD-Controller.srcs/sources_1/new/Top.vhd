@@ -5,12 +5,10 @@
 -- Create Date:         25.01.2020 00:37:54
 -- Design Name: 
 -- Module Name:         Top - Top_Arch
--- Project Name:        Design for the HD44780 LCD-Interface tutorial from
+-- Target Devices: 		XC7Z010CLG400-1
+-- Tool Versions:   	Vivado 2020.1
+-- Description: 		Design for the HD44780 LCD-Interface tutorial from
 --                      https://www.kampis-elektroecke.de/fpga/hd44780-lcd-interface/
--- Target Devices: 
--- Tool Versions:       Vivado 2020.1
--- Description: 
--- 
 -- Dependencies: 
 -- 
 -- Revision:
