@@ -18,9 +18,11 @@ This recpository contains the following projects:
 
 | **Example** | **Description** |
 |---|---|
-| LCD_Controller | A simple HD44780 LCD controller to use LCDs with your FPGA from [my HD44780 tutorial](https://www.kampis-elektroecke.de/fpga/hd44780-lcd-interface/). |
+| LCD-Controller | A simple HD44780 LCD controller to use LCDs with your FPGA from [my HD44780 tutorial](https://www.kampis-elektroecke.de/fpga/hd44780-lcd-interface/). |
 | SevenSegmentMultiplexer | Learn how to multiplex several seven segment displays. Based on [my multiplexer tutorial](https://www.kampis-elektroecke.de/fpga/multiplexer-fuer-siebensegmentanzeigen/). |
 | StateMachine | A [brief introduction](https://www.kampis-elektroecke.de/fpga/entwurf-zustandsautomat/) in designing a state machine for your FPGA.
+| AXI-Stream | An example implementation of an AXI-Stream master and an AXI-Stream slave, based on my [tutorial](https://www.kampis-elektroecke.de/2020/04/axi-stream-interface/).
+| Debounce | Basic input debounce circuit for an FPGA. Based on my [tutorial](https://www.kampis-elektroecke.de/fpga/taster-entprellen/).
 
 Check out my [blog](https://www.kampis-elektroecke.de/) for additonal stuff (i. e. some cool AVR tutorials).
 
