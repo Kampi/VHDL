@@ -8,7 +8,7 @@
 -- Project Name:        Design for the HD44780 LCD-Interface tutorial from
 --                      https://www.kampis-elektroecke.de/fpga/hd44780-lcd-interface/
 -- Target Devices: 
--- Tool Versions: 
+-- Tool Versions:       Vivado 2020.1
 -- Description: 
 -- 
 -- Dependencies: 
