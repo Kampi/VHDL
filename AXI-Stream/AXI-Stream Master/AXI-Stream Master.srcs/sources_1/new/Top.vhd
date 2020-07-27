@@ -49,7 +49,7 @@ architecture Top_Arch of Top is
 
     type State_t is (Reset, WaitForTriggerHigh, WaitForTriggerLow, WaitForReady, WaitForSlave);
 
-    signal CurrentState     : State_t   := Reset;
+    signal NextState        : State_t   := Reset;
 
     signal Counter          : INTEGER   := 0;
 
@@ -60,28 +60,28 @@ begin
         wait until rising_edge(ACLK);
         
         if(ARESETn = '0') then
-            CurrentState <= Reset;
+            NextState <= Reset;
         else
-            case CurrentState is
+            case NextState is
                 when Reset =>
                     Counter <= 0;
                     TDATA_TXD <= (others => '0');
                     TVALID_TXD <= '0';
                     TLAST_TXD <= '0';
-                    CurrentState <= WaitForTriggerHigh;
+                    NextState <= WaitForTriggerHigh;
 
                 when WaitForTriggerHigh =>
                     if(Trigger = '1') then
-                        CurrentState <= WaitForTriggerLow;
+                        NextState <= WaitForTriggerLow;
                     else
-                        CurrentState <= WaitForTriggerHigh;
+                        NextState <= WaitForTriggerHigh;
                     end if;
                    
                 when WaitForTriggerLow =>
                     if(Trigger = '0') then
-                        CurrentState <= WaitForReady;
+                        NextState <= WaitForReady;
                     else
-                        CurrentState <= WaitForTriggerLow;
+                        NextState <= WaitForTriggerLow;
                     end if;                 
 
                 when WaitForReady =>
@@ -94,7 +94,7 @@ begin
                         TLAST_TXD <= '1';
                     end if;
 
-                    CurrentState <= WaitForSlave;
+                    NextState <= WaitForSlave;
 
                 when WaitForSlave =>
                     if(TREADY_TXD = '1') then
@@ -103,13 +103,13 @@ begin
                             
                         if(Counter < (LENGTH - 1)) then
                             Counter <= Counter + 1;
-                            CurrentState <= WaitForReady;
+                            NextState <= WaitForReady;
                         else
                             Counter <= 0;
-                            CurrentState <= WaitForTriggerHigh;
+                            NextState <= WaitForTriggerHigh;
                         end if;
                     else
-                        CurrentState <= WaitForSlave;
+                        NextState <= WaitForSlave;
                     end if;
             end case;
         end if;

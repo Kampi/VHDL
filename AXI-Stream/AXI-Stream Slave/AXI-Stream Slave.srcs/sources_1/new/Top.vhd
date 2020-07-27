@@ -51,7 +51,7 @@ architecture Top_Arch of Top is
     type State_t is (Reset, Ready, WaitForValid);
     type FIFO_t is array(0 to (FIFO_SIZE - 1)) of STD_LOGIC_VECTOR(31 downto 0);
 
-    signal CurrentState     : State_t   := Reset;
+    signal NextState        : State_t   := Reset;
 
     signal FIFO             : FIFO_t    := (others => (others => '0'));
     signal FIFO_Counter     : INTEGER   := 0;
@@ -63,17 +63,17 @@ begin
         wait until rising_edge(ACLK);
 
         if(ARESETn = '0') then
-            CurrentState <= Reset;
+            NextState <= Reset;
         else
-            case CurrentState is
+            case NextState is
                 when Reset =>
                     FIFO <= (others => (others => '0'));
                     FIFO_Counter <= 0;
-                    CurrentState <= Ready;
+                    NextState <= Ready;
 
             when Ready =>
                 TREADY_RXD <= '1';
-                CurrentState <= WaitForValid;
+                NextState <= WaitForValid;
 
             when WaitForValid =>
                 if(TVALID_RXD = '1') then
@@ -86,9 +86,9 @@ begin
                         FIFO_Counter <= FIFO_Counter + 1;
                     end if;
                             
-                    CurrentState <= Ready;
+                    NextState <= Ready;
                 else
-                    CurrentState <= WaitForValid;
+                    NextState <= WaitForValid;
                 end if;
 
             end case;
