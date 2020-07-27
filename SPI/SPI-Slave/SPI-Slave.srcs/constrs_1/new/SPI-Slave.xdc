@@ -19,3 +19,16 @@ set_property IOSTANDARD LVCMOS33 [get_ports {DataOut[1]}]
 
 set_property PACKAGE_PIN M14 [get_ports {DataOut[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {DataOut[0]}]
+
+# SPI
+set_property PACKAGE_PIN T20 [get_ports MOSI]
+set_property IOSTANDARD LVCMOS33 [get_ports MOSI]
+
+set_property PACKAGE_PIN U20 [get_ports MISO]
+set_property IOSTANDARD LVCMOS33 [get_ports MISO]
+
+set_property PACKAGE_PIN V20 [get_ports SCLK]
+set_property IOSTANDARD LVCMOS33 [get_ports SCLK]
+
+set_property PACKAGE_PIN W20 [get_ports CS]
+set_property IOSTANDARD LVCMOS33 [get_ports CS]
