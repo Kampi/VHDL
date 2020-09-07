@@ -8,7 +8,7 @@
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
--- Description:         Testbench for the SPI slave implementation
+-- Description:         Testbench for the SPI slave implementation.
 -- 
 -- Dependencies: 
 -- 
@@ -36,20 +36,62 @@ end Top_TB;
 
 architecture Top_TB_Arch of Top_TB is
 
-    -- 1 kHz Clock
-    constant CLOCKPERIODE : TIME := 1 ms;
+    -- 1 MHz Clock
+    constant CLOCKPERIODE   : TIME := 8 ns;
 
-    signal SimulationClock  : STD_LOGIC := '0';
-    signal nSimulationReset : STD_LOGIC := '1';
+    signal SimulationClock  : STD_LOGIC     := '0';
+    signal nSimulationReset : STD_LOGIC     := '1';
+
+    -- SPI signals
+    signal MOSI             : STD_LOGIC     := '0';
+    signal MISO             : STD_LOGIC;
+    signal SCLK             : STD_LOGIC     := '0';
+    signal nSS              : STD_LOGIC     := '1';
+
+    component Top is
+    Port (  Clock   : in STD_LOGIC;
+            nReset  : in STD_LOGIC;
+            SCLK    : in STD_LOGIC;
+            nSS     : in STD_LOGIC;
+            MOSI    : in STD_LOGIC;
+            MISO    : out STD_LOGIC
+            );
+    end component;
 
 begin
 
     -- Clock generation
-    process begin
+    process
+    begin
         wait for (CLOCKPERIODE / 2);
         SimulationClock <= '1';
         wait for (CLOCKPERIODE / 2);
         SimulationClock <= '0';
     end process;
 
+    DUT : Top port map (Clock => SimulationClock,
+                        nReset => nSimulationReset,
+                        SCLK => SCLK,
+                        nSS => nSS,
+                        MOSI => MOSI,
+                        MISO => MISO
+                        );
+
+    Stimulus : process
+    begin
+
+        wait for 1 us;
+
+        nSS <= '0';
+        for I in 0 to 7 loop
+            wait for 500 ns;
+            SCLK <= '1';
+            wait for 500 ns;
+            SCLK <= '0';
+        end loop;
+        nSS <= '1';
+
+        wait for 1 us;
+
+    end process;
 end Top_TB_Arch;
