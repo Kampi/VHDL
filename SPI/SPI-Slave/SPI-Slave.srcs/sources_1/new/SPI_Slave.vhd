@@ -101,9 +101,9 @@ begin
         end if;
     end process;
 
-    -- Busy signal process
+    -- Ready signal process
     -- The slave is busy until all data are send to the master
-    Busy_Proc    : process
+    Ready_Proc : process
     begin
         wait until rising_edge(Clock);
 
@@ -119,7 +119,7 @@ begin
     end process;
 
     -- Data load and shift process
-    Load_Data_Proc: process
+    Load_Data_Proc : process
     begin
         wait until rising_edge(CLock);
 
