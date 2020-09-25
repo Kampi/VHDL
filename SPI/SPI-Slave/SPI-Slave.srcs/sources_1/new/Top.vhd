@@ -52,7 +52,7 @@ architecture Top_Arch of Top is
 
     signal Valid            : STD_LOGIC                             := '0';
     signal Busy             : STD_LOGIC                             := '0';
-    signal Strobe           : STD_LOGIC                             := '0';
+    signal Load             : STD_LOGIC                             := '0';
 
     signal nReset_SR        : STD_LOGIC_VECTOR(1 downto 0)          := (others => '0');
     signal RxBuffer         : STD_LOGIC_VECTOR(7 downto 0)          := (others => '0');
@@ -63,24 +63,13 @@ architecture Top_Arch of Top is
                 nReset  : in STD_LOGIC;
                 Valid   : out STD_LOGIC;
                 Busy    : out STD_LOGIC;
-                Strobe  : in STD_LOGIC;
+                Load    : in STD_LOGIC;
                 Rx      : out STD_LOGIC_VECTOR(7 downto 0);
                 Tx      : in STD_LOGIC_VECTOR(7 downto 0);
                 nSS     : in STD_LOGIC;
                 SCLK    : in STD_LOGIC;
                 MOSI    : in STD_LOGIC;
                 MISO    : out STD_LOGIC
-                );
-    end component;
-
-    component HCSR04 is
-        Port (  Clock           : in STD_LOGIC;
-                nReset          : in STD_LOGIC;
-                Start           : in STD_LOGIC;
-                Busy            : out STD_LOGIC;
-                Echo            : in STD_LOGIC;
-                Trigger         : out STD_LOGIC;
-                SignalTime      : out STD_LOGIC_VECTOR(15 downto 0)
                 );
     end component;
 
@@ -97,7 +86,7 @@ begin
                                 nReset => nReset_SR(1),
                                 Valid => Valid,
                                 Busy => Busy,
-                                Strobe => Strobe,
+                                Load => Load,
                                 Rx => RxBuffer,
                                 Tx => TxBuffer,
                                 nSS => nSS,
@@ -107,6 +96,7 @@ begin
                                 );
 
     State_Machine_Proc : process
+        variable Counter    : INTEGER := 0;
     begin
         wait until rising_edge(Clock);
 
@@ -115,16 +105,17 @@ begin
                 CurrentState <= State_WaitForReady;
 
             when State_WaitForReady =>
-                Strobe <= '0';
+                Load <= '0';
                 if(Busy = '1') then
                     CurrentState <= State_WaitForReady;
                 else
-                    TxBuffer <= x"AB";
+                    Counter := Counter + 1;
+                    TxBuffer <= STD_LOGIC_VECTOR(to_unsigned(Counter, TxBuffer'length));
                     CurrentState <= State_CopyData;
                 end if;
 
             when State_CopyData =>
-                Strobe <= '1';
+                Load <= '1';
                 
                 if(Busy = '1') then
                     CurrentState <= State_WaitForReady;
@@ -136,14 +127,4 @@ begin
 
         end case;
     end process;
-
---    US      : HCSR04 port map ( Clock => Clock1MHz,
---                                nReset => nReset_SR(1),
---                                Echo => Echo,
---                                Trigger => Trigger,
---                                Start => Config(0),
---                                Ready => Ready,
---                                SignalTime => SignalTime
---                                );
-
 end Top_Arch;

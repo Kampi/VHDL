@@ -35,11 +35,14 @@ entity SPI_Slave is
             nReset  : in STD_LOGIC;                             -- Reset signal (active low)
 
             Valid   : out STD_LOGIC;                            -- Received data valid signal
-            Busy    : out STD_LOGIC;                            -- Slave busy signal
-            Strobe  : in STD_LOGIC;                             -- Load new data into the FIFO
+            Load    : in STD_LOGIC;                             -- Load new data into the FIFO
 
-            Rx      : out STD_LOGIC_VECTOR(7 downto 0);
-            Tx      : in STD_LOGIC_VECTOR(7 downto 0);
+            -- Status signals
+            Busy    : out STD_LOGIC;                            -- Slave busy signal
+
+            -- Data in- and outputs
+            Rx      : out STD_LOGIC_VECTOR(7 downto 0);         -- Received data from the master
+            Tx      : in STD_LOGIC_VECTOR(7 downto 0);          -- Data transmitted to the master
 
             -- SPI connections
             nSS     : in STD_LOGIC;                             -- Slave select
@@ -51,35 +54,38 @@ end SPI_Slave;
 
 architecture SPI_Slave_Arch of SPI_Slave is
 
-    signal DataBuffer           : STD_LOGIC_VECTOR(7 downto 0)  := (others => '0');
+    signal Tx_Buffer            : STD_LOGIC_VECTOR(7 downto 0)  := (others => '0');
+    signal Rx_Buffer            : STD_LOGIC_VECTOR(7 downto 0)  := (others => '0');
+    signal SCLK_Reg             : STD_LOGIC_VECTOR(1 downto 0)  := (others => '0');
 
     signal BitCounter           : UNSIGNED(2 downto 0)          := (others => '0');
 
-    signal SlaveReady           : STD_LOGIC                     := '0';
-    signal SlaveDataValid       : STD_LOGIC                     := '0';
-    signal RxLastBit            : STD_LOGIC                     := '0';
-    signal SCLK_Reg             : STD_LOGIC                     := '0';
+    signal Tx_BufferFull        : STD_LOGIC                     := '0';
     signal SCLK_FallingEdge     : STD_LOGIC                     := '0';
     signal SCLK_RisingEdge      : STD_LOGIC                     := '0';
     signal MISO_Out             : STD_LOGIC                     := '0';
 
 begin
 
-    -- Set the valid signal during the next clock edge after the last bit was received
-    SlaveDataValid <= SCLK_FallingEdge and RxLastBit;
+    -- Generate a rising edge for data sampling and a falling edge for data shifting
+    SCLK_FallingEdge <= (not SCLK) and SCLK_Reg(0);
+    SCLK_RisingEdge <= SCLK and (not SCLK_Reg(1));
 
-    -- Sync SCLK with the system clock
-    SCLK_Sync_Proc : process
+    -- Generate the busy signal
+    Busy <= (not nSS) and Tx_BufferFull;
+
+    -- Set MISO to high Z when the slave isn´t selected
+    MISO <= Tx_Buffer(7) when (nSS = '0') else 'Z';
+
+    -- Sync SCLK with the system clock for the edge detection
+    SCLK_Proc : process(Clock)
     begin
-        wait until rising_edge(Clock);
-        SCLK_Reg <= SCLK;
-
-        -- Generate a rising edge for data sampling and a falling edge for data shifting
-        SCLK_FallingEdge <= (not SCLK) and SCLK_Reg;
-        SCLK_RisingEdge <= SCLK and (not SCLK_Reg);
-
         if(nReset = '0') then
-            SCLK_Reg <= '0';
+            SCLK_Reg <= (others => '0');
+        elsif(rising_edge(Clock)) then
+            SCLK_Reg(0) <= SCLK;
+        elsif(falling_edge(Clock)) then
+            SCLK_Reg(1) <= SCLK;
         end if;
     end process;
 
@@ -89,11 +95,13 @@ begin
         wait until rising_edge(Clock);
 
         if(SCLK_FallingEdge = '1' and nSS = '0') then
-            if(BitCounter < 7) then
+            if(Tx_BufferFull = '1') then
                 BitCounter <= BitCounter + 1;
             else
                 BitCounter <= (others => '0');
             end if;
+        elsif(nSS = '1') then
+            BitCounter <= (others => '0');
         end if;
 
         if((nReset = '0') or (nSS = '1')) then
@@ -101,51 +109,44 @@ begin
         end if;
     end process;
 
-    -- Ready signal process
-    -- The slave is busy until all data are send to the master
-    Ready_Proc : process
+    -- Buffer full signal process
+    IsBusy_Proc : process
     begin
         wait until rising_edge(Clock);
 
-        if(Strobe = '1') then
-            SlaveReady <= '0';
-        elsif(SlaveDataValid = '1') then
-            SlaveReady <= '1';
+        if(Load = '1') then
+            Tx_BufferFull <= '1';
+        elsif((BitCounter = 7) and (SCLK_FallingEdge = '1')) then
+            Tx_BufferFull <= '0';
+        elsif(nReset = '0') then
+            Tx_BufferFull <= '0';
         end if;
+    end process;
+
+    -- Use the rising edge to sample the data and store them in the internal buffer
+    Read_Data_Proc : process
+    begin
+        wait until rising_edge(SCLK_RisingEdge);
+
+        Rx_Buffer <= Rx_Buffer(6 downto 0) & MOSI;
 
         if(nReset = '0') then
-            SlaveReady <= '1';
+            Rx_Buffer <= (others => '0');
         end if;
     end process;
 
-    -- Data load and shift process
+    -- Load new data and use the falling edge to shift out the data from the internal buffer
     Load_Data_Proc : process
-    begin
-        wait until rising_edge(CLock);
-
-        if((SlaveReady = '1') and (Strobe = '1')) then
-            DataBuffer <= Tx;
-        elsif((SCLK_RisingEdge = '1') and (nSS = '0')) then
-            DataBuffer <= DataBuffer(6 downto 0) & '0';
-        end if;
-    end process;
-
-    -- Data output process
-    -- Use the falling edge to shift out the data from the internal buffer
-    SPI_MISO_Proc : process
     begin
         wait until rising_edge(Clock);
 
-        if(Strobe = '1') then
-            MISO_Out <= Tx(7);
-        elsif((SCLK_RisingEdge = '1') and (nSS = '0')) then
-            MISO_Out <= DataBuffer(7);
+        if((Tx_BufferFull = '0') and (Load = '1')) then
+            Tx_Buffer <= Tx;
+        elsif(SCLK_FallingEdge = '1') then
+            Tx_Buffer <= Tx_Buffer(6 downto 0) & '0';
+        elsif(nReset = '0') then
+            Tx_Buffer <= (others => '0');
         end if;
     end process;
-
-    Busy <= (not nSS) and (not SlaveReady);
-    Valid <= SlaveDataValid;
-    
-    MISO <= MISO_Out when (nSS = '0') else 'Z';
 
 end SPI_Slave_Arch;
