@@ -64,11 +64,12 @@ architecture SPI_Slave_Arch of SPI_Slave is
     signal SCLK_FallingEdge     : STD_LOGIC                     := '0';
     signal SCLK_RisingEdge      : STD_LOGIC                     := '0';
     signal MISO_Out             : STD_LOGIC                     := '0';
+    signal MOSI_Reg             : STD_LOGIC;
 
 begin
 
     -- Generate a rising edge for data sampling and a falling edge for data shifting
-    SCLK_FallingEdge <= (not SCLK) and SCLK_Reg(0);
+    SCLK_FallingEdge <= (not SCLK) and SCLK_Reg(1);
     SCLK_RisingEdge <= SCLK and (not SCLK_Reg(1));
 
     -- Generate the busy signal
@@ -80,13 +81,24 @@ begin
     -- Sync SCLK with the system clock for the edge detection
     SCLK_Proc : process(Clock)
     begin
+        SCLK_Reg(0) <= SCLK;
+        SCLK_Reg(1) <= SCLK_Reg(0);
+
         if(nReset = '0') then
             SCLK_Reg <= (others => '0');
-        elsif(rising_edge(Clock)) then
-            SCLK_Reg(0) <= SCLK;
-        elsif(falling_edge(Clock)) then
-            SCLK_Reg(1) <= SCLK;
         end if;
+    end process;
+
+    -- Sync MOSI with the system clock
+    MOSI_Proc : process
+    begin
+        wait until rising_edge(Clock);
+
+        MOSI_Reg <= MOSI;
+
+        if(nReset = '0') then
+            MOSI_Reg <= '0';
+        end if;    
     end process;
 
     -- Bit counter process
@@ -126,9 +138,11 @@ begin
     -- Use the rising edge to sample the data and store them in the internal buffer
     Read_Data_Proc : process
     begin
-        wait until rising_edge(SCLK_RisingEdge);
+        wait until falling_edge(Clock);
 
-        Rx_Buffer <= Rx_Buffer(6 downto 0) & MOSI;
+        if(SCLK_RisingEdge = '1') then
+            Rx_Buffer <= Rx_Buffer(6 downto 0) & MOSI_Reg;
+        end if;
 
         if(nReset = '0') then
             Rx_Buffer <= (others => '0');
