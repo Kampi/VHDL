@@ -140,7 +140,7 @@ begin
     -- Use the rising edge to sample the data and store them in the internal buffer
     Read_Data_Proc : process
     begin
-        wait until falling_edge(Clock);
+        wait until rising_edge(Clock);
 
         if(SCLK_RisingEdge = '1') then
             Rx_Buffer <= Rx_Buffer(6 downto 0) & MOSI_Reg;
