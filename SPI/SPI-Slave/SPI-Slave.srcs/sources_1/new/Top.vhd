@@ -110,7 +110,6 @@ begin
                     CurrentState <= State_WaitForReady;
                 else
                     Counter := Counter + 1;
-                    TxBuffer <= STD_LOGIC_VECTOR(to_unsigned(Counter, TxBuffer'length));
                     CurrentState <= State_CopyData;
                 end if;
 

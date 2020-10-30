@@ -79,8 +79,10 @@ begin
     MISO <= Tx_Buffer(7) when (nSS = '0') else 'Z';
 
     -- Sync SCLK with the system clock for the edge detection
-    SCLK_Proc : process(Clock)
+    SCLK_Proc : process
     begin
+        wait until rising_edge(Clock);
+    
         SCLK_Reg(0) <= SCLK;
         SCLK_Reg(1) <= SCLK_Reg(0);
 
