@@ -69,7 +69,7 @@ architecture SPI_Slave_Arch of SPI_Slave is
 begin
 
     -- Generate a rising edge for data sampling and a falling edge for data shifting
-    SCLK_FallingEdge <= (not SCLK) and SCLK_Reg(1);
+    SCLK_FallingEdge <= (not SCLK) and SCLK_Reg(0);
     SCLK_RisingEdge <= SCLK and (not SCLK_Reg(1));
 
     -- Generate the busy signal
@@ -140,7 +140,7 @@ begin
     -- Use the rising edge to sample the data and store them in the internal buffer
     Read_Data_Proc : process
     begin
-        wait until falling_edge(Clock);
+        wait until rising_edge(Clock);
 
         if(SCLK_RisingEdge = '1') then
             Rx_Buffer <= Rx_Buffer(6 downto 0) & MOSI_Reg;
