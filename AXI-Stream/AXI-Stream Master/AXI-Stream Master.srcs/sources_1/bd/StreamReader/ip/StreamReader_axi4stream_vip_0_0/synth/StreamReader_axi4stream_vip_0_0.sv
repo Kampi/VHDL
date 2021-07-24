@@ -1,4 +1,4 @@
-// (c) Copyright 1995-2020 Xilinx, Inc. All rights reserved.
+// (c) Copyright 1995-2021 Xilinx, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -48,11 +48,11 @@
 
 
 // IP VLNV: xilinx.com:ip:axi4stream_vip:1.1
-// IP Revision: 7
+// IP Revision: 8
 
-(* X_CORE_INFO = "axi4stream_vip_v1_1_7_top,Vivado 2020.1" *)
-(* CHECK_LICENSE_TYPE = "StreamReader_axi4stream_vip_0_0,axi4stream_vip_v1_1_7_top,{}" *)
-(* CORE_GENERATION_INFO = "StreamReader_axi4stream_vip_0_0,axi4stream_vip_v1_1_7_top,{x_ipProduct=Vivado 2020.1,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=axi4stream_vip,x_ipVersion=1.1,x_ipCoreRevision=7,x_ipLanguage=VHDL,x_ipSimLanguage=VERILOG,C_AXI4STREAM_SIGNAL_SET=0b00000000000000000000000000010011,C_AXI4STREAM_INTERFACE_MODE=2,C_AXI4STREAM_DATA_WIDTH=32,C_AXI4STREAM_USER_BITS_PER_BYTE=0,C_AXI4STREAM_ID_WIDTH=0,C_AXI4STREAM_DEST_WIDTH=0,C_AXI4STREAM_USER_WIDTH=0,C_AXI4STREAM_HAS_ARESETN=1}" *)
+(* X_CORE_INFO = "axi4stream_vip_v1_1_8_top,Vivado 2020.2" *)
+(* CHECK_LICENSE_TYPE = "StreamReader_axi4stream_vip_0_0,axi4stream_vip_v1_1_8_top,{}" *)
+(* CORE_GENERATION_INFO = "StreamReader_axi4stream_vip_0_0,axi4stream_vip_v1_1_8_top,{x_ipProduct=Vivado 2020.2,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=axi4stream_vip,x_ipVersion=1.1,x_ipCoreRevision=8,x_ipLanguage=VHDL,x_ipSimLanguage=VERILOG,C_AXI4STREAM_SIGNAL_SET=0b00000000000000000000000000010011,C_AXI4STREAM_INTERFACE_MODE=2,C_AXI4STREAM_DATA_WIDTH=32,C_AXI4STREAM_USER_BITS_PER_BYTE=0,C_AXI4STREAM_ID_WIDTH=0,C_AXI4STREAM_DEST_WIDTH=0,C_AXI4STREAM_USER_WIDTH=0,C_AXI4STREAM_HAS_ARESETN=1}" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module StreamReader_axi4stream_vip_0_0 (
   aclk,
@@ -79,8 +79,8 @@ input wire [31 : 0] s_axis_tdata;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TLAST" *)
 input wire [0 : 0] s_axis_tlast;
 
-  axi4stream_vip_v1_1_7_top #(
-    .C_AXI4STREAM_SIGNAL_SET('B00000000000000000000000000010011),
+  axi4stream_vip_v1_1_8_top #(
+    .C_AXI4STREAM_SIGNAL_SET(32'B00000000000000000000000000010011),
     .C_AXI4STREAM_INTERFACE_MODE(2),
     .C_AXI4STREAM_DATA_WIDTH(32),
     .C_AXI4STREAM_USER_BITS_PER_BYTE(0),

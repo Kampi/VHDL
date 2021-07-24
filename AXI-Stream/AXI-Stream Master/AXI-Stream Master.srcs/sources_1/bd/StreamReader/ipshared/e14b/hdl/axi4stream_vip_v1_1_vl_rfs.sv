@@ -48,7 +48,7 @@
 `timescale 1ps/1ps
 
 (* DowngradeIPIdentifiedWarnings="yes" *) 
-module axi4stream_vip_v1_1_7_top #
+module axi4stream_vip_v1_1_8_top #
   (
    parameter [31:0]  C_AXI4STREAM_SIGNAL_SET         = 32'h03,
    parameter integer C_AXI4STREAM_INTERFACE_MODE     = 1,  //master, slave and bypass
@@ -268,6 +268,6 @@ module axi4stream_vip_v1_1_7_top #
   endfunction : clr_fatal_to_warnings
   //synthesis translate_on
 
-endmodule : axi4stream_vip_v1_1_7_top
+endmodule : axi4stream_vip_v1_1_8_top
 
 
