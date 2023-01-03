@@ -88,7 +88,7 @@ architecture Top_TB_Arch of Top_TB is
     end procedure;
 
     -- 125 MHz Clock
-    constant CLOCKPERIODE : TIME := 8 ns;
+    constant CLOCKPERIODE 	: TIME 							:= 8 ns;
 
     signal SimulationClock  : STD_LOGIC                     := '0';
     signal SimulationResetN : STD_LOGIC                     := '1';

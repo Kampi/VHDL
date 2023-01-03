@@ -24,6 +24,7 @@ This recpository contains the following projects:
 | AXI-Stream | An example implementation of an AXI-Stream master and an AXI-Stream slave, based on my [tutorial](https://www.kampis-elektroecke.de/2020/04/axi-stream-interface/).
 | Debounce | Basic input debounce circuit for an FPGA. Based on my [tutorial](https://www.kampis-elektroecke.de/fpga/taster-entprellen/).
 | PS2-Controller | PS/2 keyboard interface for an FPGA. Based on my [tutorial](https://www.kampis-elektroecke.de/fpga/anschluss-einer-ps2-tastatur/).
+| NEC-IR | Receiver for IR remote controls that uses the [NEC IR protocol](https://techdocs.altium.com/display/FPGA/NEC+Infrared+Transmission+Protocol).
 
 Check out my [blog](https://www.kampis-elektroecke.de/) for additonal stuff (i. e. some cool AVR tutorials).
 
